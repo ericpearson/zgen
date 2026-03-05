@@ -1,0 +1,15 @@
+# Copyright (C) 2026 pagefault
+# SPDX-License-Identifier: GPL-3.0-only
+
+# Commercial / private ROMs and local binary artifacts that must never ship to
+# the public mirror.
+SpriteRom.bin
+pong.smd
+sonic1.bin
+sonic2.bin
+test.bin
+
+# Safety net in case build output is ever accidentally tracked.
+build/
+build-native-opt/
+build-vulkan/
