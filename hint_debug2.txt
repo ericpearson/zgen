@@ -1,0 +1,20 @@
+OpenGL 4.1 Metal - 89.4
+Audio stream: 48000 Hz input, 2 channels, device 48000 Hz, 1024 sample buffer
+Genesis reset complete. Starting execution at PC=FFFFFFFF
+ROM loaded successfully: 1048576 bytes
+
+=== ROM Information ===
+System: SEGA GENESIS    
+Copyright: (C)SEGA 1992.SEP
+Game (JP): SONIC THE             HEDGEHOG 2                
+Game (US): SONIC THE             HEDGEHOG 2                
+Serial: GM 00001051-01
+Checksum: D951
+ROM: 00000000 - 000FFFFF (1024 KB)
+Region: Japan USA Europe 
+=======================
+
+Genesis reset complete. Starting execution at PC=00000206
+Failed to load save state: /.genesis/saves/Sonic The Hedgehog 2 (World) (Rev A).ss0
+Starting emulation...
+Emulation stopped after 1849 frames

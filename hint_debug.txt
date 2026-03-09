@@ -1,0 +1,2097 @@
+[REG07] ln=95 cyc=440 px=320 val=20 old=20 dispEn=1 rendPx=320
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=70
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=65
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=65
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=64
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=62
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=412 newCyc=420 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=420 mask=6 pendInt=-1 budgetLeft=63
+[INLOOP-HINT] ln=107 lineCyc=432 mask=6 pendInt=4 budgetLeft=51
+[INLOOP-HINT] ln=107 lineCyc=436 mask=6 pendInt=4 budgetLeft=47
+[INLOOP-HINT] ln=107 lineCyc=440 mask=6 pendInt=4 budgetLeft=43
+[INLOOP-HINT] ln=107 lineCyc=450 mask=6 pendInt=4 budgetLeft=33
+[INLOOP-HINT] ln=107 lineCyc=454 mask=6 pendInt=4 budgetLeft=29
+[INLOOP-HINT] ln=107 lineCyc=458 mask=6 pendInt=4 budgetLeft=25
+[INLOOP-HINT] ln=107 lineCyc=472 mask=6 pendInt=4 budgetLeft=11
+[INLOOP-HINT] ln=107 lineCyc=482 mask=6 pendInt=4 budgetLeft=1
+[INLOOP-HINT] ln=107 lineCyc=486 mask=6 pendInt=4 budgetLeft=-3
+[PRELOOP-HINT] ln=108 mask=6 pendInt=4 debt=-3
+[INLOOP-HINT] ln=108 lineCyc=4 mask=6 pendInt=4 budgetLeft=482
+[INLOOP-HINT] ln=108 lineCyc=8 mask=6 pendInt=4 budgetLeft=478
+[INLOOP-HINT] ln=108 lineCyc=28 mask=6 pendInt=4 budgetLeft=458
+[INLOOP-HINT] ln=108 lineCyc=36 mask=6 pendInt=4 budgetLeft=450
+[INLOOP-HINT] ln=108 lineCyc=44 mask=6 pendInt=4 budgetLeft=442
+[INLOOP-HINT] ln=108 lineCyc=52 mask=6 pendInt=4 budgetLeft=434
+[INLOOP-HINT] ln=108 lineCyc=56 mask=6 pendInt=4 budgetLeft=430
+[INLOOP-HINT] ln=108 lineCyc=70 mask=6 pendInt=4 budgetLeft=416
+[INLOOP-HINT] ln=108 lineCyc=74 mask=6 pendInt=4 budgetLeft=412
+[INLOOP-HINT] ln=108 lineCyc=78 mask=6 pendInt=4 budgetLeft=408
+[INLOOP-HINT] ln=108 lineCyc=86 mask=6 pendInt=4 budgetLeft=400
+[INLOOP-HINT] ln=108 lineCyc=96 mask=6 pendInt=4 budgetLeft=390
+[INLOOP-HINT] ln=108 lineCyc=110 mask=6 pendInt=4 budgetLeft=376
+[INLOOP-HINT] ln=108 lineCyc=114 mask=6 pendInt=4 budgetLeft=372
+[INLOOP-HINT] ln=108 lineCyc=122 mask=6 pendInt=4 budgetLeft=364
+[INLOOP-HINT] ln=108 lineCyc=130 mask=6 pendInt=4 budgetLeft=356
+[INLOOP-HINT] ln=108 lineCyc=144 mask=6 pendInt=4 budgetLeft=342
+[INLOOP-HINT] ln=108 lineCyc=160 mask=6 pendInt=4 budgetLeft=326
+[INLOOP-HINT] ln=108 lineCyc=164 mask=6 pendInt=4 budgetLeft=322
+[INLOOP-HINT] ln=108 lineCyc=168 mask=6 pendInt=4 budgetLeft=318
+[INLOOP-HINT] ln=108 lineCyc=178 mask=6 pendInt=4 budgetLeft=308
+[INLOOP-HINT] ln=108 lineCyc=188 mask=6 pendInt=4 budgetLeft=298
+[INLOOP-HINT] ln=108 lineCyc=204 mask=6 pendInt=4 budgetLeft=282
+[INLOOP-HINT] ln=108 lineCyc=208 mask=6 pendInt=4 budgetLeft=278
+[INLOOP-HINT] ln=108 lineCyc=212 mask=6 pendInt=4 budgetLeft=274
+[INLOOP-HINT] ln=108 lineCyc=222 mask=6 pendInt=4 budgetLeft=264
+[INLOOP-HINT] ln=108 lineCyc=232 mask=6 pendInt=4 budgetLeft=254
+[INLOOP-HINT] ln=108 lineCyc=248 mask=6 pendInt=4 budgetLeft=238
+[INLOOP-HINT] ln=108 lineCyc=252 mask=6 pendInt=4 budgetLeft=234
+[INLOOP-HINT] ln=108 lineCyc=256 mask=6 pendInt=4 budgetLeft=230
+[INLOOP-HINT] ln=108 lineCyc=266 mask=6 pendInt=4 budgetLeft=220
+[INLOOP-HINT] ln=108 lineCyc=280 mask=6 pendInt=4 budgetLeft=206
+[INLOOP-HINT] ln=108 lineCyc=290 mask=6 pendInt=4 budgetLeft=196
+[INLOOP-HINT] ln=108 lineCyc=294 mask=6 pendInt=4 budgetLeft=192
+[INLOOP-HINT] ln=108 lineCyc=298 mask=6 pendInt=4 budgetLeft=188
+[INLOOP-HINT] ln=108 lineCyc=302 mask=6 pendInt=4 budgetLeft=184
+[INLOOP-HINT] ln=108 lineCyc=312 mask=6 pendInt=4 budgetLeft=174
+[INLOOP-HINT] ln=108 lineCyc=320 mask=6 pendInt=4 budgetLeft=166
+[INLOOP-HINT] ln=108 lineCyc=328 mask=6 pendInt=4 budgetLeft=158
+[INLOOP-HINT] ln=108 lineCyc=336 mask=6 pendInt=4 budgetLeft=150
+[INLOOP-HINT] ln=108 lineCyc=340 mask=6 pendInt=4 budgetLeft=146
+[INLOOP-HINT] ln=108 lineCyc=354 mask=6 pendInt=4 budgetLeft=132
+[INLOOP-HINT] ln=108 lineCyc=358 mask=6 pendInt=4 budgetLeft=128
+[INLOOP-HINT] ln=108 lineCyc=362 mask=6 pendInt=4 budgetLeft=124
+[INLOOP-HINT] ln=108 lineCyc=370 mask=6 pendInt=4 budgetLeft=116
+[INLOOP-HINT] ln=108 lineCyc=378 mask=6 pendInt=4 budgetLeft=108
+[INLOOP-HINT] ln=108 lineCyc=382 mask=6 pendInt=4 budgetLeft=104
+[INLOOP-HINT] ln=108 lineCyc=404 mask=6 pendInt=4 budgetLeft=82
+[INLOOP-HINT] ln=108 lineCyc=412 mask=6 pendInt=4 budgetLeft=74
+[INLOOP-HINT] ln=108 lineCyc=426 mask=6 pendInt=4 budgetLeft=60
+[INLOOP-HINT] ln=108 lineCyc=430 mask=6 pendInt=4 budgetLeft=56
+[INLOOP-HINT] ln=108 lineCyc=438 mask=6 pendInt=4 budgetLeft=48
+[INLOOP-HINT] ln=108 lineCyc=446 mask=6 pendInt=4 budgetLeft=40
+[INLOOP-HINT] ln=108 lineCyc=460 mask=6 pendInt=4 budgetLeft=26
+[INLOOP-HINT] ln=108 lineCyc=476 mask=6 pendInt=4 budgetLeft=10
+[INLOOP-HINT] ln=108 lineCyc=480 mask=6 pendInt=4 budgetLeft=6
+[INLOOP-HINT] ln=108 lineCyc=484 mask=6 pendInt=4 budgetLeft=2
+[INLOOP-HINT] ln=108 lineCyc=488 mask=6 pendInt=4 budgetLeft=-8
+[PRELOOP-HINT] ln=109 mask=6 pendInt=4 debt=-8
+[INLOOP-HINT] ln=109 lineCyc=14 mask=6 pendInt=4 budgetLeft=467
+[INLOOP-HINT] ln=109 lineCyc=24 mask=6 pendInt=4 budgetLeft=457
+[INLOOP-HINT] ln=109 lineCyc=28 mask=6 pendInt=4 budgetLeft=453
+[INLOOP-HINT] ln=109 lineCyc=32 mask=6 pendInt=4 budgetLeft=449
+[INLOOP-HINT] ln=109 lineCyc=36 mask=6 pendInt=4 budgetLeft=445
+[INLOOP-HINT] ln=109 lineCyc=56 mask=6 pendInt=4 budgetLeft=425
+[INLOOP-HINT] ln=109 lineCyc=64 mask=6 pendInt=4 budgetLeft=417
+[INLOOP-HINT] ln=109 lineCyc=72 mask=6 pendInt=4 budgetLeft=409
+[INLOOP-HINT] ln=109 lineCyc=80 mask=6 pendInt=4 budgetLeft=401
+[INLOOP-HINT] ln=109 lineCyc=84 mask=6 pendInt=4 budgetLeft=397
+[INLOOP-HINT] ln=109 lineCyc=98 mask=6 pendInt=4 budgetLeft=383
+[INLOOP-HINT] ln=109 lineCyc=102 mask=6 pendInt=4 budgetLeft=379
+[INLOOP-HINT] ln=109 lineCyc=106 mask=6 pendInt=4 budgetLeft=375
+[INLOOP-HINT] ln=109 lineCyc=114 mask=6 pendInt=4 budgetLeft=367
+[INLOOP-HINT] ln=109 lineCyc=124 mask=6 pendInt=4 budgetLeft=357
+[INLOOP-HINT] ln=109 lineCyc=138 mask=6 pendInt=4 budgetLeft=343
+[INLOOP-HINT] ln=109 lineCyc=142 mask=6 pendInt=4 budgetLeft=339
+[INLOOP-HINT] ln=109 lineCyc=150 mask=6 pendInt=4 budgetLeft=331
+[INLOOP-HINT] ln=109 lineCyc=158 mask=6 pendInt=4 budgetLeft=323
+[INLOOP-HINT] ln=109 lineCyc=172 mask=6 pendInt=4 budgetLeft=309
+[INLOOP-HINT] ln=109 lineCyc=188 mask=6 pendInt=4 budgetLeft=293
+[INLOOP-HINT] ln=109 lineCyc=192 mask=6 pendInt=4 budgetLeft=289
+[INLOOP-HINT] ln=109 lineCyc=196 mask=6 pendInt=4 budgetLeft=285
+[INLOOP-HINT] ln=109 lineCyc=206 mask=6 pendInt=4 budgetLeft=275
+[INLOOP-HINT] ln=109 lineCyc=220 mask=6 pendInt=4 budgetLeft=261
+[INLOOP-HINT] ln=109 lineCyc=230 mask=6 pendInt=4 budgetLeft=251
+[INLOOP-HINT] ln=109 lineCyc=234 mask=6 pendInt=4 budgetLeft=247
+[INLOOP-HINT] ln=109 lineCyc=238 mask=6 pendInt=4 budgetLeft=243
+[INLOOP-HINT] ln=109 lineCyc=242 mask=6 pendInt=4 budgetLeft=239
+[INLOOP-HINT] ln=109 lineCyc=258 mask=6 pendInt=4 budgetLeft=223
+[INLOOP-HINT] ln=109 lineCyc=266 mask=6 pendInt=4 budgetLeft=215
+[INLOOP-HINT] ln=109 lineCyc=274 mask=6 pendInt=4 budgetLeft=207
+[INLOOP-HINT] ln=109 lineCyc=282 mask=6 pendInt=4 budgetLeft=199
+[INLOOP-HINT] ln=109 lineCyc=286 mask=6 pendInt=4 budgetLeft=195
+[INLOOP-HINT] ln=109 lineCyc=300 mask=6 pendInt=4 budgetLeft=181
+[INLOOP-HINT] ln=109 lineCyc=304 mask=6 pendInt=4 budgetLeft=177
+[INLOOP-HINT] ln=109 lineCyc=308 mask=6 pendInt=4 budgetLeft=173
+[INLOOP-HINT] ln=109 lineCyc=316 mask=6 pendInt=4 budgetLeft=165
+[INLOOP-HINT] ln=109 lineCyc=326 mask=6 pendInt=4 budgetLeft=155
+[INLOOP-HINT] ln=109 lineCyc=340 mask=6 pendInt=4 budgetLeft=141
+[INLOOP-HINT] ln=109 lineCyc=344 mask=6 pendInt=4 budgetLeft=137
+[INLOOP-HINT] ln=109 lineCyc=352 mask=6 pendInt=4 budgetLeft=129
+[INLOOP-HINT] ln=109 lineCyc=360 mask=6 pendInt=4 budgetLeft=121
+[INLOOP-HINT] ln=109 lineCyc=374 mask=6 pendInt=4 budgetLeft=107
+[INLOOP-HINT] ln=109 lineCyc=390 mask=6 pendInt=4 budgetLeft=91
+[INLOOP-HINT] ln=109 lineCyc=394 mask=6 pendInt=4 budgetLeft=87
+[INLOOP-HINT] ln=109 lineCyc=398 mask=6 pendInt=4 budgetLeft=83
+[INLOOP-HINT] ln=109 lineCyc=408 mask=6 pendInt=4 budgetLeft=73
+[INLOOP-HINT] ln=109 lineCyc=422 mask=6 pendInt=4 budgetLeft=59
+[INLOOP-HINT] ln=109 lineCyc=432 mask=6 pendInt=4 budgetLeft=49
+[INLOOP-HINT] ln=109 lineCyc=436 mask=6 pendInt=4 budgetLeft=45
+[INLOOP-HINT] ln=109 lineCyc=440 mask=6 pendInt=4 budgetLeft=41
+[INLOOP-HINT] ln=109 lineCyc=444 mask=6 pendInt=4 budgetLeft=37
+[INLOOP-HINT] ln=109 lineCyc=454 mask=6 pendInt=4 budgetLeft=27
+[INLOOP-HINT] ln=109 lineCyc=462 mask=6 pendInt=4 budgetLeft=19
+[INLOOP-HINT] ln=109 lineCyc=470 mask=6 pendInt=4 budgetLeft=11
+[INLOOP-HINT] ln=109 lineCyc=478 mask=6 pendInt=4 budgetLeft=3
+[INLOOP-HINT] ln=109 lineCyc=482 mask=6 pendInt=4 budgetLeft=-1
+[PRELOOP-HINT] ln=110 mask=6 pendInt=4 debt=-1
+[INLOOP-HINT] ln=110 lineCyc=14 mask=6 pendInt=4 budgetLeft=473
+[INLOOP-HINT] ln=110 lineCyc=18 mask=6 pendInt=4 budgetLeft=469
+[INLOOP-HINT] ln=110 lineCyc=22 mask=6 pendInt=4 budgetLeft=465
+[INLOOP-HINT] ln=110 lineCyc=30 mask=6 pendInt=4 budgetLeft=457
+[INLOOP-HINT] ln=110 lineCyc=38 mask=6 pendInt=4 budgetLeft=449
+[INLOOP-HINT] ln=110 lineCyc=42 mask=6 pendInt=4 budgetLeft=445
+[INLOOP-HINT] ln=110 lineCyc=64 mask=6 pendInt=4 budgetLeft=423
+[INLOOP-HINT] ln=110 lineCyc=72 mask=6 pendInt=4 budgetLeft=415
+[INLOOP-HINT] ln=110 lineCyc=86 mask=6 pendInt=4 budgetLeft=401
+[INLOOP-HINT] ln=110 lineCyc=90 mask=6 pendInt=4 budgetLeft=397
+[INLOOP-HINT] ln=110 lineCyc=98 mask=6 pendInt=4 budgetLeft=389
+[INLOOP-HINT] ln=110 lineCyc=106 mask=6 pendInt=4 budgetLeft=381
+[INLOOP-HINT] ln=110 lineCyc=120 mask=6 pendInt=4 budgetLeft=367
+[INLOOP-HINT] ln=110 lineCyc=136 mask=6 pendInt=4 budgetLeft=351
+[INLOOP-HINT] ln=110 lineCyc=140 mask=6 pendInt=4 budgetLeft=347
+[INLOOP-HINT] ln=110 lineCyc=144 mask=6 pendInt=4 budgetLeft=343
+[INLOOP-HINT] ln=110 lineCyc=154 mask=6 pendInt=4 budgetLeft=333
+[INLOOP-HINT] ln=110 lineCyc=168 mask=6 pendInt=4 budgetLeft=319
+[INLOOP-HINT] ln=110 lineCyc=178 mask=6 pendInt=4 budgetLeft=309
+[INLOOP-HINT] ln=110 lineCyc=182 mask=6 pendInt=4 budgetLeft=305
+[INLOOP-HINT] ln=110 lineCyc=186 mask=6 pendInt=4 budgetLeft=301
+[INLOOP-HINT] ln=110 lineCyc=190 mask=6 pendInt=4 budgetLeft=297
+[INLOOP-HINT] ln=110 lineCyc=212 mask=6 pendInt=4 budgetLeft=275
+[INLOOP-HINT] ln=110 lineCyc=220 mask=6 pendInt=4 budgetLeft=267
+[INLOOP-HINT] ln=110 lineCyc=228 mask=6 pendInt=4 budgetLeft=259
+[INLOOP-HINT] ln=110 lineCyc=236 mask=6 pendInt=4 budgetLeft=251
+[INLOOP-HINT] ln=110 lineCyc=240 mask=6 pendInt=4 budgetLeft=247
+[INLOOP-HINT] ln=110 lineCyc=254 mask=6 pendInt=4 budgetLeft=233
+[INLOOP-HINT] ln=110 lineCyc=258 mask=6 pendInt=4 budgetLeft=229
+[INLOOP-HINT] ln=110 lineCyc=262 mask=6 pendInt=4 budgetLeft=225
+[INLOOP-HINT] ln=110 lineCyc=270 mask=6 pendInt=4 budgetLeft=217
+[INLOOP-HINT] ln=110 lineCyc=280 mask=6 pendInt=4 budgetLeft=207
+[INLOOP-HINT] ln=110 lineCyc=294 mask=6 pendInt=4 budgetLeft=193
+[INLOOP-HINT] ln=110 lineCyc=298 mask=6 pendInt=4 budgetLeft=189
+[INLOOP-HINT] ln=110 lineCyc=306 mask=6 pendInt=4 budgetLeft=181
+[INLOOP-HINT] ln=110 lineCyc=314 mask=6 pendInt=4 budgetLeft=173
+[INLOOP-HINT] ln=110 lineCyc=328 mask=6 pendInt=4 budgetLeft=159
+[INLOOP-HINT] ln=110 lineCyc=344 mask=6 pendInt=4 budgetLeft=143
+[INLOOP-HINT] ln=110 lineCyc=348 mask=6 pendInt=4 budgetLeft=139
+[INLOOP-HINT] ln=110 lineCyc=352 mask=6 pendInt=4 budgetLeft=135
+[INLOOP-HINT] ln=110 lineCyc=360 mask=6 pendInt=4 budgetLeft=127
+[INLOOP-HINT] ln=110 lineCyc=368 mask=6 pendInt=4 budgetLeft=119
+[INLOOP-HINT] ln=110 lineCyc=380 mask=6 pendInt=4 budgetLeft=107
+[INLOOP-HINT] ln=110 lineCyc=384 mask=6 pendInt=4 budgetLeft=103
+[INLOOP-HINT] ln=110 lineCyc=388 mask=6 pendInt=4 budgetLeft=99
+[INLOOP-HINT] ln=110 lineCyc=398 mask=6 pendInt=4 budgetLeft=89
+[INLOOP-HINT] ln=110 lineCyc=402 mask=6 pendInt=4 budgetLeft=85
+[INLOOP-HINT] ln=110 lineCyc=406 mask=6 pendInt=4 budgetLeft=81
+[INLOOP-HINT] ln=110 lineCyc=420 mask=6 pendInt=4 budgetLeft=67
+[INLOOP-HINT] ln=110 lineCyc=430 mask=6 pendInt=4 budgetLeft=57
+[INLOOP-HINT] ln=110 lineCyc=434 mask=6 pendInt=4 budgetLeft=53
+[INLOOP-HINT] ln=110 lineCyc=438 mask=6 pendInt=4 budgetLeft=49
+[INLOOP-HINT] ln=110 lineCyc=442 mask=6 pendInt=4 budgetLeft=45
+[INLOOP-HINT] ln=110 lineCyc=458 mask=6 pendInt=4 budgetLeft=29
+[INLOOP-HINT] ln=110 lineCyc=466 mask=6 pendInt=4 budgetLeft=21
+[INLOOP-HINT] ln=110 lineCyc=474 mask=6 pendInt=4 budgetLeft=13
+[INLOOP-HINT] ln=110 lineCyc=482 mask=6 pendInt=4 budgetLeft=5
+[INLOOP-HINT] ln=110 lineCyc=486 mask=6 pendInt=4 budgetLeft=1
+[INLOOP-HINT] ln=110 lineCyc=488 mask=6 pendInt=4 budgetLeft=-13
+[PRELOOP-HINT] ln=111 mask=6 pendInt=4 debt=-13
+[INLOOP-HINT] ln=111 lineCyc=4 mask=6 pendInt=4 budgetLeft=472
+[INLOOP-HINT] ln=111 lineCyc=8 mask=6 pendInt=4 budgetLeft=468
+[INLOOP-HINT] ln=111 lineCyc=16 mask=6 pendInt=4 budgetLeft=460
+[INLOOP-HINT] ln=111 lineCyc=24 mask=6 pendInt=4 budgetLeft=452
+[INLOOP-HINT] ln=111 lineCyc=28 mask=6 pendInt=4 budgetLeft=448
+[INLOOP-HINT] ln=111 lineCyc=50 mask=6 pendInt=4 budgetLeft=426
+[INLOOP-HINT] ln=111 lineCyc=58 mask=6 pendInt=4 budgetLeft=418
+[INLOOP-HINT] ln=111 lineCyc=72 mask=6 pendInt=4 budgetLeft=404
+[INLOOP-HINT] ln=111 lineCyc=76 mask=6 pendInt=4 budgetLeft=400
+[INLOOP-HINT] ln=111 lineCyc=84 mask=6 pendInt=4 budgetLeft=392
+[INLOOP-HINT] ln=111 lineCyc=92 mask=6 pendInt=4 budgetLeft=384
+[INLOOP-HINT] ln=111 lineCyc=106 mask=6 pendInt=4 budgetLeft=370
+[INLOOP-HINT] ln=111 lineCyc=122 mask=6 pendInt=4 budgetLeft=354
+[INLOOP-HINT] ln=111 lineCyc=126 mask=6 pendInt=4 budgetLeft=350
+[INLOOP-HINT] ln=111 lineCyc=130 mask=6 pendInt=4 budgetLeft=346
+[INLOOP-HINT] ln=111 lineCyc=140 mask=6 pendInt=4 budgetLeft=336
+[INLOOP-HINT] ln=111 lineCyc=150 mask=6 pendInt=4 budgetLeft=326
+[INLOOP-HINT] ln=111 lineCyc=166 mask=6 pendInt=4 budgetLeft=310
+[INLOOP-HINT] ln=111 lineCyc=170 mask=6 pendInt=4 budgetLeft=306
+[INLOOP-HINT] ln=111 lineCyc=174 mask=6 pendInt=4 budgetLeft=302
+[INLOOP-HINT] ln=111 lineCyc=184 mask=6 pendInt=4 budgetLeft=292
+[INLOOP-HINT] ln=111 lineCyc=194 mask=6 pendInt=4 budgetLeft=282
+[INLOOP-HINT] ln=111 lineCyc=210 mask=6 pendInt=4 budgetLeft=266
+[INLOOP-HINT] ln=111 lineCyc=214 mask=6 pendInt=4 budgetLeft=262
+[INLOOP-HINT] ln=111 lineCyc=218 mask=6 pendInt=4 budgetLeft=258
+[INLOOP-HINT] ln=111 lineCyc=228 mask=6 pendInt=4 budgetLeft=248
+[INLOOP-HINT] ln=111 lineCyc=238 mask=6 pendInt=4 budgetLeft=238
+[INLOOP-HINT] ln=111 lineCyc=254 mask=6 pendInt=4 budgetLeft=222
+[INLOOP-HINT] ln=111 lineCyc=258 mask=6 pendInt=4 budgetLeft=218
+[INLOOP-HINT] ln=111 lineCyc=262 mask=6 pendInt=4 budgetLeft=214
+[INLOOP-HINT] ln=111 lineCyc=272 mask=6 pendInt=4 budgetLeft=204
+[INLOOP-HINT] ln=111 lineCyc=282 mask=6 pendInt=4 budgetLeft=194
+[INLOOP-HINT] ln=111 lineCyc=298 mask=6 pendInt=4 budgetLeft=178
+[INLOOP-HINT] ln=111 lineCyc=302 mask=6 pendInt=4 budgetLeft=174
+[INLOOP-HINT] ln=111 lineCyc=306 mask=6 pendInt=4 budgetLeft=170
+[INLOOP-HINT] ln=111 lineCyc=316 mask=6 pendInt=4 budgetLeft=160
+[INLOOP-HINT] ln=111 lineCyc=330 mask=6 pendInt=4 budgetLeft=146
+[INLOOP-HINT] ln=111 lineCyc=340 mask=6 pendInt=4 budgetLeft=136
+[INLOOP-HINT] ln=111 lineCyc=344 mask=6 pendInt=4 budgetLeft=132
+[INLOOP-HINT] ln=111 lineCyc=348 mask=6 pendInt=4 budgetLeft=128
+[INLOOP-HINT] ln=111 lineCyc=352 mask=6 pendInt=4 budgetLeft=124
+[INLOOP-HINT] ln=111 lineCyc=368 mask=6 pendInt=4 budgetLeft=108
+[INLOOP-HINT] ln=111 lineCyc=376 mask=6 pendInt=4 budgetLeft=100
+[INLOOP-HINT] ln=111 lineCyc=386 mask=6 pendInt=4 budgetLeft=90
+[INLOOP-HINT] ln=111 lineCyc=390 mask=6 pendInt=4 budgetLeft=86
+[INLOOP-HINT] ln=111 lineCyc=398 mask=6 pendInt=4 budgetLeft=78
+[INLOOP-HINT] ln=111 lineCyc=406 mask=6 pendInt=4 budgetLeft=70
+[INLOOP-HINT] ln=111 lineCyc=410 mask=6 pendInt=4 budgetLeft=66
+[INLOOP-HINT] ln=111 lineCyc=432 mask=6 pendInt=4 budgetLeft=44
+[INLOOP-HINT] ln=111 lineCyc=440 mask=6 pendInt=4 budgetLeft=36
+[INLOOP-HINT] ln=111 lineCyc=444 mask=6 pendInt=4 budgetLeft=32
+[INLOOP-HINT] ln=111 lineCyc=448 mask=6 pendInt=4 budgetLeft=28
+[INLOOP-HINT] ln=111 lineCyc=470 mask=6 pendInt=4 budgetLeft=6
+[INLOOP-HINT] ln=111 lineCyc=474 mask=6 pendInt=4 budgetLeft=2
+[INLOOP-HINT] ln=111 lineCyc=482 mask=6 pendInt=4 budgetLeft=-6
+[PRELOOP-HINT] ln=112 mask=6 pendInt=4 debt=-6
+[INLOOP-HINT] ln=112 lineCyc=8 mask=6 pendInt=4 budgetLeft=474
+[INLOOP-HINT] ln=112 lineCyc=16 mask=6 pendInt=4 budgetLeft=466
+[INLOOP-HINT] ln=112 lineCyc=24 mask=6 pendInt=4 budgetLeft=458
+[INLOOP-HINT] ln=112 lineCyc=28 mask=6 pendInt=4 budgetLeft=454
+[INLOOP-HINT] ln=112 lineCyc=50 mask=6 pendInt=4 budgetLeft=432
+[INLOOP-HINT] ln=112 lineCyc=58 mask=6 pendInt=4 budgetLeft=424
+[INLOOP-HINT] ln=112 lineCyc=68 mask=6 pendInt=4 budgetLeft=414
+[INLOOP-HINT] ln=112 lineCyc=82 mask=6 pendInt=4 budgetLeft=400
+[INLOOP-HINT] ln=112 lineCyc=98 mask=6 pendInt=4 budgetLeft=384
+[INLOOP-HINT] ln=112 lineCyc=102 mask=6 pendInt=4 budgetLeft=380
+[INLOOP-HINT] ln=112 lineCyc=106 mask=6 pendInt=4 budgetLeft=376
+[INLOOP-HINT] ln=112 lineCyc=116 mask=6 pendInt=4 budgetLeft=366
+[INLOOP-HINT] ln=112 lineCyc=126 mask=6 pendInt=4 budgetLeft=356
+[INLOOP-HINT] ln=112 lineCyc=142 mask=6 pendInt=4 budgetLeft=340
+[INLOOP-HINT] ln=112 lineCyc=146 mask=6 pendInt=4 budgetLeft=336
+[INLOOP-HINT] ln=112 lineCyc=150 mask=6 pendInt=4 budgetLeft=332
+[INLOOP-HINT] ln=112 lineCyc=160 mask=6 pendInt=4 budgetLeft=322
+[INLOOP-HINT] ln=112 lineCyc=170 mask=6 pendInt=4 budgetLeft=312
+[INLOOP-HINT] ln=112 lineCyc=186 mask=6 pendInt=4 budgetLeft=296
+[INLOOP-HINT] ln=112 lineCyc=190 mask=6 pendInt=4 budgetLeft=292
+[INLOOP-HINT] ln=112 lineCyc=194 mask=6 pendInt=4 budgetLeft=288
+[INLOOP-HINT] ln=112 lineCyc=202 mask=6 pendInt=4 budgetLeft=280
+[INLOOP-HINT] ln=112 lineCyc=210 mask=6 pendInt=4 budgetLeft=272
+[INLOOP-HINT] ln=112 lineCyc=222 mask=6 pendInt=4 budgetLeft=260
+[INLOOP-HINT] ln=112 lineCyc=226 mask=6 pendInt=4 budgetLeft=256
+[INLOOP-HINT] ln=112 lineCyc=230 mask=6 pendInt=4 budgetLeft=252
+[INLOOP-HINT] ln=112 lineCyc=238 mask=6 pendInt=4 budgetLeft=244
+[INLOOP-HINT] ln=112 lineCyc=254 mask=6 pendInt=4 budgetLeft=228
+[INLOOP-HINT] ln=112 lineCyc=266 mask=6 pendInt=4 budgetLeft=216
+[INLOOP-HINT] ln=112 lineCyc=274 mask=6 pendInt=4 budgetLeft=208
+[INLOOP-HINT] ln=112 lineCyc=286 mask=6 pendInt=4 budgetLeft=196
+[INLOOP-HINT] ln=112 lineCyc=294 mask=6 pendInt=4 budgetLeft=188
+[INLOOP-HINT] ln=112 lineCyc=310 mask=6 pendInt=4 budgetLeft=172
+[INLOOP-HINT] ln=112 lineCyc=326 mask=6 pendInt=4 budgetLeft=156
+[INLOOP-HINT] ln=112 lineCyc=342 mask=6 pendInt=4 budgetLeft=140
+[INLOOP-HINT] ln=112 lineCyc=358 mask=6 pendInt=4 budgetLeft=124
+[INLOOP-HINT] ln=112 lineCyc=374 mask=6 pendInt=4 budgetLeft=108
+[INLOOP-HINT] ln=112 lineCyc=390 mask=6 pendInt=4 budgetLeft=92
+[INLOOP-HINT] ln=112 lineCyc=406 mask=6 pendInt=4 budgetLeft=76
+[INLOOP-HINT] ln=112 lineCyc=422 mask=6 pendInt=4 budgetLeft=60
+[INLOOP-HINT] ln=112 lineCyc=438 mask=6 pendInt=4 budgetLeft=44
+[INLOOP-HINT] ln=112 lineCyc=454 mask=6 pendInt=4 budgetLeft=28
+[INLOOP-HINT] ln=112 lineCyc=488 mask=6 pendInt=4 budgetLeft=-100
+[PRELOOP-HINT] ln=113 mask=6 pendInt=4 debt=-100
+[INLOOP-HINT] ln=113 lineCyc=20 mask=3 pendInt=4 budgetLeft=369
+[FAILSAFE] ln=113 lineCyc=396 hbStartCyc=414 ctr=102 hbEn=1
+[REG01] ln=114 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=121 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=61
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=113 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=68
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=62
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=113 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=69
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=67
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=412 newCyc=422 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=422 mask=3 pendInt=-1 budgetLeft=64
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=62
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=113 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=64
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=68
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=69
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=70
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=71
+[REG01] ln=108 cyc=466 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=117 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=64
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[FAILSAFE] ln=99 lineCyc=388 hbStartCyc=414 ctr=8 hbEn=1
+[HINT] ln=107 cyc=410 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=66
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=60
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=113 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=62
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=70
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=67
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=412 newCyc=420 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=420 mask=6 pendInt=-1 budgetLeft=68
+[INLOOP-HINT] ln=107 lineCyc=434 mask=6 pendInt=4 budgetLeft=54
+[INLOOP-HINT] ln=107 lineCyc=438 mask=6 pendInt=4 budgetLeft=50
+[INLOOP-HINT] ln=107 lineCyc=446 mask=6 pendInt=4 budgetLeft=42
+[INLOOP-HINT] ln=107 lineCyc=454 mask=6 pendInt=4 budgetLeft=34
+[INLOOP-HINT] ln=107 lineCyc=468 mask=6 pendInt=4 budgetLeft=20
+[INLOOP-HINT] ln=107 lineCyc=484 mask=6 pendInt=4 budgetLeft=4
+[INLOOP-HINT] ln=107 lineCyc=488 mask=6 pendInt=4 budgetLeft=0
+[PRELOOP-HINT] ln=108 mask=6 pendInt=4 debt=0
+[INLOOP-HINT] ln=108 lineCyc=4 mask=6 pendInt=4 budgetLeft=485
+[INLOOP-HINT] ln=108 lineCyc=14 mask=6 pendInt=4 budgetLeft=475
+[INLOOP-HINT] ln=108 lineCyc=24 mask=6 pendInt=4 budgetLeft=465
+[INLOOP-HINT] ln=108 lineCyc=40 mask=6 pendInt=4 budgetLeft=449
+[INLOOP-HINT] ln=108 lineCyc=44 mask=6 pendInt=4 budgetLeft=445
+[INLOOP-HINT] ln=108 lineCyc=48 mask=6 pendInt=4 budgetLeft=441
+[INLOOP-HINT] ln=108 lineCyc=58 mask=6 pendInt=4 budgetLeft=431
+[INLOOP-HINT] ln=108 lineCyc=68 mask=6 pendInt=4 budgetLeft=421
+[INLOOP-HINT] ln=108 lineCyc=84 mask=6 pendInt=4 budgetLeft=405
+[INLOOP-HINT] ln=108 lineCyc=88 mask=6 pendInt=4 budgetLeft=401
+[INLOOP-HINT] ln=108 lineCyc=92 mask=6 pendInt=4 budgetLeft=397
+[INLOOP-HINT] ln=108 lineCyc=102 mask=6 pendInt=4 budgetLeft=387
+[INLOOP-HINT] ln=108 lineCyc=112 mask=6 pendInt=4 budgetLeft=377
+[INLOOP-HINT] ln=108 lineCyc=128 mask=6 pendInt=4 budgetLeft=361
+[INLOOP-HINT] ln=108 lineCyc=132 mask=6 pendInt=4 budgetLeft=357
+[INLOOP-HINT] ln=108 lineCyc=136 mask=6 pendInt=4 budgetLeft=353
+[INLOOP-HINT] ln=108 lineCyc=146 mask=6 pendInt=4 budgetLeft=343
+[INLOOP-HINT] ln=108 lineCyc=156 mask=6 pendInt=4 budgetLeft=333
+[INLOOP-HINT] ln=108 lineCyc=172 mask=6 pendInt=4 budgetLeft=317
+[INLOOP-HINT] ln=108 lineCyc=176 mask=6 pendInt=4 budgetLeft=313
+[INLOOP-HINT] ln=108 lineCyc=180 mask=6 pendInt=4 budgetLeft=309
+[INLOOP-HINT] ln=108 lineCyc=190 mask=6 pendInt=4 budgetLeft=299
+[INLOOP-HINT] ln=108 lineCyc=204 mask=6 pendInt=4 budgetLeft=285
+[INLOOP-HINT] ln=108 lineCyc=214 mask=6 pendInt=4 budgetLeft=275
+[INLOOP-HINT] ln=108 lineCyc=218 mask=6 pendInt=4 budgetLeft=271
+[INLOOP-HINT] ln=108 lineCyc=222 mask=6 pendInt=4 budgetLeft=267
+[INLOOP-HINT] ln=108 lineCyc=226 mask=6 pendInt=4 budgetLeft=263
+[INLOOP-HINT] ln=108 lineCyc=242 mask=6 pendInt=4 budgetLeft=247
+[INLOOP-HINT] ln=108 lineCyc=250 mask=6 pendInt=4 budgetLeft=239
+[INLOOP-HINT] ln=108 lineCyc=258 mask=6 pendInt=4 budgetLeft=231
+[INLOOP-HINT] ln=108 lineCyc=266 mask=6 pendInt=4 budgetLeft=223
+[INLOOP-HINT] ln=108 lineCyc=270 mask=6 pendInt=4 budgetLeft=219
+[INLOOP-HINT] ln=108 lineCyc=284 mask=6 pendInt=4 budgetLeft=205
+[INLOOP-HINT] ln=108 lineCyc=288 mask=6 pendInt=4 budgetLeft=201
+[INLOOP-HINT] ln=108 lineCyc=292 mask=6 pendInt=4 budgetLeft=197
+[INLOOP-HINT] ln=108 lineCyc=300 mask=6 pendInt=4 budgetLeft=189
+[INLOOP-HINT] ln=108 lineCyc=310 mask=6 pendInt=4 budgetLeft=179
+[INLOOP-HINT] ln=108 lineCyc=324 mask=6 pendInt=4 budgetLeft=165
+[INLOOP-HINT] ln=108 lineCyc=328 mask=6 pendInt=4 budgetLeft=161
+[INLOOP-HINT] ln=108 lineCyc=336 mask=6 pendInt=4 budgetLeft=153
+[INLOOP-HINT] ln=108 lineCyc=344 mask=6 pendInt=4 budgetLeft=145
+[INLOOP-HINT] ln=108 lineCyc=358 mask=6 pendInt=4 budgetLeft=131
+[INLOOP-HINT] ln=108 lineCyc=374 mask=6 pendInt=4 budgetLeft=115
+[INLOOP-HINT] ln=108 lineCyc=378 mask=6 pendInt=4 budgetLeft=111
+[INLOOP-HINT] ln=108 lineCyc=382 mask=6 pendInt=4 budgetLeft=107
+[INLOOP-HINT] ln=108 lineCyc=392 mask=6 pendInt=4 budgetLeft=97
+[INLOOP-HINT] ln=108 lineCyc=406 mask=6 pendInt=4 budgetLeft=83
+[INLOOP-HINT] ln=108 lineCyc=416 mask=6 pendInt=4 budgetLeft=73
+[INLOOP-HINT] ln=108 lineCyc=420 mask=6 pendInt=4 budgetLeft=69
+[INLOOP-HINT] ln=108 lineCyc=424 mask=6 pendInt=4 budgetLeft=65
+[INLOOP-HINT] ln=108 lineCyc=428 mask=6 pendInt=4 budgetLeft=61
+[INLOOP-HINT] ln=108 lineCyc=436 mask=6 pendInt=4 budgetLeft=53
+[INLOOP-HINT] ln=108 lineCyc=444 mask=6 pendInt=4 budgetLeft=45
+[INLOOP-HINT] ln=108 lineCyc=452 mask=6 pendInt=4 budgetLeft=37
+[INLOOP-HINT] ln=108 lineCyc=460 mask=6 pendInt=4 budgetLeft=29
+[INLOOP-HINT] ln=108 lineCyc=464 mask=6 pendInt=4 budgetLeft=25
+[INLOOP-HINT] ln=108 lineCyc=478 mask=6 pendInt=4 budgetLeft=11
+[INLOOP-HINT] ln=108 lineCyc=482 mask=6 pendInt=4 budgetLeft=7
+[INLOOP-HINT] ln=108 lineCyc=486 mask=6 pendInt=4 budgetLeft=3
+[INLOOP-HINT] ln=108 lineCyc=488 mask=6 pendInt=4 budgetLeft=-5
+[PRELOOP-HINT] ln=109 mask=6 pendInt=4 debt=-5
+[INLOOP-HINT] ln=109 lineCyc=8 mask=6 pendInt=4 budgetLeft=475
+[INLOOP-HINT] ln=109 lineCyc=12 mask=6 pendInt=4 budgetLeft=471
+[INLOOP-HINT] ln=109 lineCyc=34 mask=6 pendInt=4 budgetLeft=449
+[INLOOP-HINT] ln=109 lineCyc=42 mask=6 pendInt=4 budgetLeft=441
+[INLOOP-HINT] ln=109 lineCyc=56 mask=6 pendInt=4 budgetLeft=427
+[INLOOP-HINT] ln=109 lineCyc=60 mask=6 pendInt=4 budgetLeft=423
+[INLOOP-HINT] ln=109 lineCyc=68 mask=6 pendInt=4 budgetLeft=415
+[INLOOP-HINT] ln=109 lineCyc=76 mask=6 pendInt=4 budgetLeft=407
+[INLOOP-HINT] ln=109 lineCyc=90 mask=6 pendInt=4 budgetLeft=393
+[INLOOP-HINT] ln=109 lineCyc=106 mask=6 pendInt=4 budgetLeft=377
+[INLOOP-HINT] ln=109 lineCyc=110 mask=6 pendInt=4 budgetLeft=373
+[INLOOP-HINT] ln=109 lineCyc=114 mask=6 pendInt=4 budgetLeft=369
+[INLOOP-HINT] ln=109 lineCyc=124 mask=6 pendInt=4 budgetLeft=359
+[INLOOP-HINT] ln=109 lineCyc=138 mask=6 pendInt=4 budgetLeft=345
+[INLOOP-HINT] ln=109 lineCyc=148 mask=6 pendInt=4 budgetLeft=335
+[INLOOP-HINT] ln=109 lineCyc=152 mask=6 pendInt=4 budgetLeft=331
+[INLOOP-HINT] ln=109 lineCyc=156 mask=6 pendInt=4 budgetLeft=327
+[INLOOP-HINT] ln=109 lineCyc=160 mask=6 pendInt=4 budgetLeft=323
+[INLOOP-HINT] ln=109 lineCyc=174 mask=6 pendInt=4 budgetLeft=309
+[INLOOP-HINT] ln=109 lineCyc=182 mask=6 pendInt=4 budgetLeft=301
+[INLOOP-HINT] ln=109 lineCyc=190 mask=6 pendInt=4 budgetLeft=293
+[INLOOP-HINT] ln=109 lineCyc=198 mask=6 pendInt=4 budgetLeft=285
+[INLOOP-HINT] ln=109 lineCyc=202 mask=6 pendInt=4 budgetLeft=281
+[INLOOP-HINT] ln=109 lineCyc=216 mask=6 pendInt=4 budgetLeft=267
+[INLOOP-HINT] ln=109 lineCyc=220 mask=6 pendInt=4 budgetLeft=263
+[INLOOP-HINT] ln=109 lineCyc=224 mask=6 pendInt=4 budgetLeft=259
+[INLOOP-HINT] ln=109 lineCyc=232 mask=6 pendInt=4 budgetLeft=251
+[INLOOP-HINT] ln=109 lineCyc=240 mask=6 pendInt=4 budgetLeft=243
+[INLOOP-HINT] ln=109 lineCyc=244 mask=6 pendInt=4 budgetLeft=239
+[INLOOP-HINT] ln=109 lineCyc=266 mask=6 pendInt=4 budgetLeft=217
+[INLOOP-HINT] ln=109 lineCyc=274 mask=6 pendInt=4 budgetLeft=209
+[INLOOP-HINT] ln=109 lineCyc=288 mask=6 pendInt=4 budgetLeft=195
+[INLOOP-HINT] ln=109 lineCyc=292 mask=6 pendInt=4 budgetLeft=191
+[INLOOP-HINT] ln=109 lineCyc=300 mask=6 pendInt=4 budgetLeft=183
+[INLOOP-HINT] ln=109 lineCyc=308 mask=6 pendInt=4 budgetLeft=175
+[INLOOP-HINT] ln=109 lineCyc=322 mask=6 pendInt=4 budgetLeft=161
+[INLOOP-HINT] ln=109 lineCyc=338 mask=6 pendInt=4 budgetLeft=145
+[INLOOP-HINT] ln=109 lineCyc=342 mask=6 pendInt=4 budgetLeft=141
+[INLOOP-HINT] ln=109 lineCyc=346 mask=6 pendInt=4 budgetLeft=137
+[INLOOP-HINT] ln=109 lineCyc=354 mask=6 pendInt=4 budgetLeft=129
+[INLOOP-HINT] ln=109 lineCyc=362 mask=6 pendInt=4 budgetLeft=121
+[INLOOP-HINT] ln=109 lineCyc=370 mask=6 pendInt=4 budgetLeft=113
+[INLOOP-HINT] ln=109 lineCyc=382 mask=6 pendInt=4 budgetLeft=101
+[INLOOP-HINT] ln=109 lineCyc=386 mask=6 pendInt=4 budgetLeft=97
+[INLOOP-HINT] ln=109 lineCyc=390 mask=6 pendInt=4 budgetLeft=93
+[INLOOP-HINT] ln=109 lineCyc=398 mask=6 pendInt=4 budgetLeft=85
+[INLOOP-HINT] ln=109 lineCyc=414 mask=6 pendInt=4 budgetLeft=69
+[INLOOP-HINT] ln=109 lineCyc=426 mask=6 pendInt=4 budgetLeft=57
+[INLOOP-HINT] ln=109 lineCyc=434 mask=6 pendInt=4 budgetLeft=49
+[INLOOP-HINT] ln=109 lineCyc=446 mask=6 pendInt=4 budgetLeft=37
+[INLOOP-HINT] ln=109 lineCyc=454 mask=6 pendInt=4 budgetLeft=29
+[INLOOP-HINT] ln=109 lineCyc=470 mask=6 pendInt=4 budgetLeft=13
+[INLOOP-HINT] ln=109 lineCyc=486 mask=6 pendInt=4 budgetLeft=-3
+[PRELOOP-HINT] ln=110 mask=6 pendInt=4 debt=-3
+[INLOOP-HINT] ln=110 lineCyc=16 mask=6 pendInt=4 budgetLeft=470
+[INLOOP-HINT] ln=110 lineCyc=32 mask=6 pendInt=4 budgetLeft=454
+[INLOOP-HINT] ln=110 lineCyc=48 mask=6 pendInt=4 budgetLeft=438
+[INLOOP-HINT] ln=110 lineCyc=64 mask=6 pendInt=4 budgetLeft=422
+[INLOOP-HINT] ln=110 lineCyc=80 mask=6 pendInt=4 budgetLeft=406
+[INLOOP-HINT] ln=110 lineCyc=96 mask=6 pendInt=4 budgetLeft=390
+[INLOOP-HINT] ln=110 lineCyc=112 mask=6 pendInt=4 budgetLeft=374
+[INLOOP-HINT] ln=110 lineCyc=128 mask=6 pendInt=4 budgetLeft=358
+[INLOOP-HINT] ln=110 lineCyc=256 mask=6 pendInt=4 budgetLeft=230
+[INLOOP-HINT] ln=110 lineCyc=276 mask=3 pendInt=4 budgetLeft=210
+[REG01] ln=110 cyc=484 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=424 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=424 mask=6 pendInt=-1 budgetLeft=62
+[INLOOP-HINT] ln=107 lineCyc=428 mask=6 pendInt=4 budgetLeft=58
+[INLOOP-HINT] ln=107 lineCyc=432 mask=6 pendInt=4 budgetLeft=54
+[INLOOP-HINT] ln=107 lineCyc=442 mask=6 pendInt=4 budgetLeft=44
+[INLOOP-HINT] ln=107 lineCyc=456 mask=6 pendInt=4 budgetLeft=30
+[INLOOP-HINT] ln=107 lineCyc=466 mask=6 pendInt=4 budgetLeft=20
+[INLOOP-HINT] ln=107 lineCyc=470 mask=6 pendInt=4 budgetLeft=16
+[INLOOP-HINT] ln=107 lineCyc=474 mask=6 pendInt=4 budgetLeft=12
+[INLOOP-HINT] ln=107 lineCyc=478 mask=6 pendInt=4 budgetLeft=8
+[INLOOP-HINT] ln=107 lineCyc=486 mask=6 pendInt=4 budgetLeft=0
+[PRELOOP-HINT] ln=108 mask=6 pendInt=4 debt=0
+[INLOOP-HINT] ln=108 lineCyc=8 mask=6 pendInt=4 budgetLeft=480
+[INLOOP-HINT] ln=108 lineCyc=16 mask=6 pendInt=4 budgetLeft=472
+[INLOOP-HINT] ln=108 lineCyc=24 mask=6 pendInt=4 budgetLeft=464
+[INLOOP-HINT] ln=108 lineCyc=28 mask=6 pendInt=4 budgetLeft=460
+[INLOOP-HINT] ln=108 lineCyc=42 mask=6 pendInt=4 budgetLeft=446
+[INLOOP-HINT] ln=108 lineCyc=46 mask=6 pendInt=4 budgetLeft=442
+[INLOOP-HINT] ln=108 lineCyc=50 mask=6 pendInt=4 budgetLeft=438
+[INLOOP-HINT] ln=108 lineCyc=58 mask=6 pendInt=4 budgetLeft=430
+[INLOOP-HINT] ln=108 lineCyc=66 mask=6 pendInt=4 budgetLeft=422
+[INLOOP-HINT] ln=108 lineCyc=70 mask=6 pendInt=4 budgetLeft=418
+[INLOOP-HINT] ln=108 lineCyc=92 mask=6 pendInt=4 budgetLeft=396
+[INLOOP-HINT] ln=108 lineCyc=100 mask=6 pendInt=4 budgetLeft=388
+[INLOOP-HINT] ln=108 lineCyc=114 mask=6 pendInt=4 budgetLeft=374
+[INLOOP-HINT] ln=108 lineCyc=118 mask=6 pendInt=4 budgetLeft=370
+[INLOOP-HINT] ln=108 lineCyc=126 mask=6 pendInt=4 budgetLeft=362
+[INLOOP-HINT] ln=108 lineCyc=134 mask=6 pendInt=4 budgetLeft=354
+[INLOOP-HINT] ln=108 lineCyc=148 mask=6 pendInt=4 budgetLeft=340
+[INLOOP-HINT] ln=108 lineCyc=164 mask=6 pendInt=4 budgetLeft=324
+[INLOOP-HINT] ln=108 lineCyc=168 mask=6 pendInt=4 budgetLeft=320
+[INLOOP-HINT] ln=108 lineCyc=172 mask=6 pendInt=4 budgetLeft=316
+[INLOOP-HINT] ln=108 lineCyc=182 mask=6 pendInt=4 budgetLeft=306
+[INLOOP-HINT] ln=108 lineCyc=196 mask=6 pendInt=4 budgetLeft=292
+[INLOOP-HINT] ln=108 lineCyc=206 mask=6 pendInt=4 budgetLeft=282
+[INLOOP-HINT] ln=108 lineCyc=210 mask=6 pendInt=4 budgetLeft=278
+[INLOOP-HINT] ln=108 lineCyc=214 mask=6 pendInt=4 budgetLeft=274
+[INLOOP-HINT] ln=108 lineCyc=218 mask=6 pendInt=4 budgetLeft=270
+[INLOOP-HINT] ln=108 lineCyc=234 mask=6 pendInt=4 budgetLeft=254
+[INLOOP-HINT] ln=108 lineCyc=242 mask=6 pendInt=4 budgetLeft=246
+[INLOOP-HINT] ln=108 lineCyc=250 mask=6 pendInt=4 budgetLeft=238
+[INLOOP-HINT] ln=108 lineCyc=258 mask=6 pendInt=4 budgetLeft=230
+[INLOOP-HINT] ln=108 lineCyc=262 mask=6 pendInt=4 budgetLeft=226
+[INLOOP-HINT] ln=108 lineCyc=276 mask=6 pendInt=4 budgetLeft=212
+[INLOOP-HINT] ln=108 lineCyc=280 mask=6 pendInt=4 budgetLeft=208
+[INLOOP-HINT] ln=108 lineCyc=284 mask=6 pendInt=4 budgetLeft=204
+[INLOOP-HINT] ln=108 lineCyc=292 mask=6 pendInt=4 budgetLeft=196
+[INLOOP-HINT] ln=108 lineCyc=300 mask=6 pendInt=4 budgetLeft=188
+[INLOOP-HINT] ln=108 lineCyc=304 mask=6 pendInt=4 budgetLeft=184
+[INLOOP-HINT] ln=108 lineCyc=326 mask=6 pendInt=4 budgetLeft=162
+[INLOOP-HINT] ln=108 lineCyc=334 mask=6 pendInt=4 budgetLeft=154
+[INLOOP-HINT] ln=108 lineCyc=348 mask=6 pendInt=4 budgetLeft=140
+[INLOOP-HINT] ln=108 lineCyc=352 mask=6 pendInt=4 budgetLeft=136
+[INLOOP-HINT] ln=108 lineCyc=360 mask=6 pendInt=4 budgetLeft=128
+[INLOOP-HINT] ln=108 lineCyc=368 mask=6 pendInt=4 budgetLeft=120
+[INLOOP-HINT] ln=108 lineCyc=382 mask=6 pendInt=4 budgetLeft=106
+[INLOOP-HINT] ln=108 lineCyc=398 mask=6 pendInt=4 budgetLeft=90
+[INLOOP-HINT] ln=108 lineCyc=402 mask=6 pendInt=4 budgetLeft=86
+[INLOOP-HINT] ln=108 lineCyc=406 mask=6 pendInt=4 budgetLeft=82
+[INLOOP-HINT] ln=108 lineCyc=416 mask=6 pendInt=4 budgetLeft=72
+[INLOOP-HINT] ln=108 lineCyc=430 mask=6 pendInt=4 budgetLeft=58
+[INLOOP-HINT] ln=108 lineCyc=440 mask=6 pendInt=4 budgetLeft=48
+[INLOOP-HINT] ln=108 lineCyc=444 mask=6 pendInt=4 budgetLeft=44
+[INLOOP-HINT] ln=108 lineCyc=448 mask=6 pendInt=4 budgetLeft=40
+[INLOOP-HINT] ln=108 lineCyc=452 mask=6 pendInt=4 budgetLeft=36
+[INLOOP-HINT] ln=108 lineCyc=474 mask=6 pendInt=4 budgetLeft=14
+[INLOOP-HINT] ln=108 lineCyc=482 mask=6 pendInt=4 budgetLeft=6
+[INLOOP-HINT] ln=108 lineCyc=488 mask=6 pendInt=4 budgetLeft=-2
+[PRELOOP-HINT] ln=109 mask=6 pendInt=4 debt=-2
+[INLOOP-HINT] ln=109 lineCyc=8 mask=6 pendInt=4 budgetLeft=479
+[INLOOP-HINT] ln=109 lineCyc=12 mask=6 pendInt=4 budgetLeft=475
+[INLOOP-HINT] ln=109 lineCyc=26 mask=6 pendInt=4 budgetLeft=461
+[INLOOP-HINT] ln=109 lineCyc=30 mask=6 pendInt=4 budgetLeft=457
+[INLOOP-HINT] ln=109 lineCyc=34 mask=6 pendInt=4 budgetLeft=453
+[INLOOP-HINT] ln=109 lineCyc=42 mask=6 pendInt=4 budgetLeft=445
+[INLOOP-HINT] ln=109 lineCyc=52 mask=6 pendInt=4 budgetLeft=435
+[INLOOP-HINT] ln=109 lineCyc=66 mask=6 pendInt=4 budgetLeft=421
+[INLOOP-HINT] ln=109 lineCyc=70 mask=6 pendInt=4 budgetLeft=417
+[INLOOP-HINT] ln=109 lineCyc=78 mask=6 pendInt=4 budgetLeft=409
+[INLOOP-HINT] ln=109 lineCyc=86 mask=6 pendInt=4 budgetLeft=401
+[INLOOP-HINT] ln=109 lineCyc=100 mask=6 pendInt=4 budgetLeft=387
+[INLOOP-HINT] ln=109 lineCyc=116 mask=6 pendInt=4 budgetLeft=371
+[INLOOP-HINT] ln=109 lineCyc=120 mask=6 pendInt=4 budgetLeft=367
+[INLOOP-HINT] ln=109 lineCyc=124 mask=6 pendInt=4 budgetLeft=363
+[INLOOP-HINT] ln=109 lineCyc=132 mask=6 pendInt=4 budgetLeft=355
+[INLOOP-HINT] ln=109 lineCyc=140 mask=6 pendInt=4 budgetLeft=347
+[INLOOP-HINT] ln=109 lineCyc=148 mask=6 pendInt=4 budgetLeft=339
+[INLOOP-HINT] ln=109 lineCyc=160 mask=6 pendInt=4 budgetLeft=327
+[INLOOP-HINT] ln=109 lineCyc=164 mask=6 pendInt=4 budgetLeft=323
+[INLOOP-HINT] ln=109 lineCyc=168 mask=6 pendInt=4 budgetLeft=319
+[INLOOP-HINT] ln=109 lineCyc=178 mask=6 pendInt=4 budgetLeft=309
+[INLOOP-HINT] ln=109 lineCyc=182 mask=6 pendInt=4 budgetLeft=305
+[INLOOP-HINT] ln=109 lineCyc=186 mask=6 pendInt=4 budgetLeft=301
+[INLOOP-HINT] ln=109 lineCyc=196 mask=6 pendInt=4 budgetLeft=291
+[INLOOP-HINT] ln=109 lineCyc=212 mask=6 pendInt=4 budgetLeft=275
+[INLOOP-HINT] ln=109 lineCyc=216 mask=6 pendInt=4 budgetLeft=271
+[INLOOP-HINT] ln=109 lineCyc=220 mask=6 pendInt=4 budgetLeft=267
+[INLOOP-HINT] ln=109 lineCyc=230 mask=6 pendInt=4 budgetLeft=257
+[INLOOP-HINT] ln=109 lineCyc=240 mask=6 pendInt=4 budgetLeft=247
+[INLOOP-HINT] ln=109 lineCyc=256 mask=6 pendInt=4 budgetLeft=231
+[INLOOP-HINT] ln=109 lineCyc=260 mask=6 pendInt=4 budgetLeft=227
+[INLOOP-HINT] ln=109 lineCyc=264 mask=6 pendInt=4 budgetLeft=223
+[INLOOP-HINT] ln=109 lineCyc=274 mask=6 pendInt=4 budgetLeft=213
+[INLOOP-HINT] ln=109 lineCyc=284 mask=6 pendInt=4 budgetLeft=203
+[INLOOP-HINT] ln=109 lineCyc=300 mask=6 pendInt=4 budgetLeft=187
+[INLOOP-HINT] ln=109 lineCyc=304 mask=6 pendInt=4 budgetLeft=183
+[INLOOP-HINT] ln=109 lineCyc=308 mask=6 pendInt=4 budgetLeft=179
+[INLOOP-HINT] ln=109 lineCyc=318 mask=6 pendInt=4 budgetLeft=169
+[INLOOP-HINT] ln=109 lineCyc=328 mask=6 pendInt=4 budgetLeft=159
+[INLOOP-HINT] ln=109 lineCyc=344 mask=6 pendInt=4 budgetLeft=143
+[INLOOP-HINT] ln=109 lineCyc=348 mask=6 pendInt=4 budgetLeft=139
+[INLOOP-HINT] ln=109 lineCyc=352 mask=6 pendInt=4 budgetLeft=135
+[INLOOP-HINT] ln=109 lineCyc=362 mask=6 pendInt=4 budgetLeft=125
+[INLOOP-HINT] ln=109 lineCyc=372 mask=6 pendInt=4 budgetLeft=115
+[INLOOP-HINT] ln=109 lineCyc=388 mask=6 pendInt=4 budgetLeft=99
+[INLOOP-HINT] ln=109 lineCyc=392 mask=6 pendInt=4 budgetLeft=95
+[INLOOP-HINT] ln=109 lineCyc=396 mask=6 pendInt=4 budgetLeft=91
+[INLOOP-HINT] ln=109 lineCyc=406 mask=6 pendInt=4 budgetLeft=81
+[INLOOP-HINT] ln=109 lineCyc=416 mask=6 pendInt=4 budgetLeft=71
+[INLOOP-HINT] ln=109 lineCyc=432 mask=6 pendInt=4 budgetLeft=55
+[INLOOP-HINT] ln=109 lineCyc=436 mask=6 pendInt=4 budgetLeft=51
+[INLOOP-HINT] ln=109 lineCyc=440 mask=6 pendInt=4 budgetLeft=47
+[INLOOP-HINT] ln=109 lineCyc=450 mask=6 pendInt=4 budgetLeft=37
+[INLOOP-HINT] ln=109 lineCyc=460 mask=6 pendInt=4 budgetLeft=27
+[INLOOP-HINT] ln=109 lineCyc=476 mask=6 pendInt=4 budgetLeft=11
+[INLOOP-HINT] ln=109 lineCyc=480 mask=6 pendInt=4 budgetLeft=7
+[INLOOP-HINT] ln=109 lineCyc=484 mask=6 pendInt=4 budgetLeft=3
+[INLOOP-HINT] ln=109 lineCyc=488 mask=6 pendInt=4 budgetLeft=-7
+[PRELOOP-HINT] ln=110 mask=6 pendInt=4 debt=-7
+[INLOOP-HINT] ln=110 lineCyc=14 mask=6 pendInt=4 budgetLeft=467
+[INLOOP-HINT] ln=110 lineCyc=24 mask=6 pendInt=4 budgetLeft=457
+[INLOOP-HINT] ln=110 lineCyc=28 mask=6 pendInt=4 budgetLeft=453
+[INLOOP-HINT] ln=110 lineCyc=32 mask=6 pendInt=4 budgetLeft=449
+[INLOOP-HINT] ln=110 lineCyc=36 mask=6 pendInt=4 budgetLeft=445
+[INLOOP-HINT] ln=110 lineCyc=48 mask=6 pendInt=4 budgetLeft=433
+[INLOOP-HINT] ln=110 lineCyc=56 mask=6 pendInt=4 budgetLeft=425
+[INLOOP-HINT] ln=110 lineCyc=64 mask=6 pendInt=4 budgetLeft=417
+[INLOOP-HINT] ln=110 lineCyc=72 mask=6 pendInt=4 budgetLeft=409
+[INLOOP-HINT] ln=110 lineCyc=76 mask=6 pendInt=4 budgetLeft=405
+[INLOOP-HINT] ln=110 lineCyc=90 mask=6 pendInt=4 budgetLeft=391
+[INLOOP-HINT] ln=110 lineCyc=94 mask=6 pendInt=4 budgetLeft=387
+[INLOOP-HINT] ln=110 lineCyc=98 mask=6 pendInt=4 budgetLeft=383
+[INLOOP-HINT] ln=110 lineCyc=106 mask=6 pendInt=4 budgetLeft=375
+[INLOOP-HINT] ln=110 lineCyc=114 mask=6 pendInt=4 budgetLeft=367
+[INLOOP-HINT] ln=110 lineCyc=118 mask=6 pendInt=4 budgetLeft=363
+[INLOOP-HINT] ln=110 lineCyc=140 mask=6 pendInt=4 budgetLeft=341
+[INLOOP-HINT] ln=110 lineCyc=148 mask=6 pendInt=4 budgetLeft=333
+[INLOOP-HINT] ln=110 lineCyc=162 mask=6 pendInt=4 budgetLeft=319
+[INLOOP-HINT] ln=110 lineCyc=166 mask=6 pendInt=4 budgetLeft=315
+[INLOOP-HINT] ln=110 lineCyc=174 mask=6 pendInt=4 budgetLeft=307
+[INLOOP-HINT] ln=110 lineCyc=182 mask=6 pendInt=4 budgetLeft=299
+[INLOOP-HINT] ln=110 lineCyc=196 mask=6 pendInt=4 budgetLeft=285
+[INLOOP-HINT] ln=110 lineCyc=212 mask=6 pendInt=4 budgetLeft=269
+[INLOOP-HINT] ln=110 lineCyc=216 mask=6 pendInt=4 budgetLeft=265
+[INLOOP-HINT] ln=110 lineCyc=220 mask=6 pendInt=4 budgetLeft=261
+[INLOOP-HINT] ln=110 lineCyc=228 mask=6 pendInt=4 budgetLeft=253
+[INLOOP-HINT] ln=110 lineCyc=236 mask=6 pendInt=4 budgetLeft=245
+[INLOOP-HINT] ln=110 lineCyc=244 mask=6 pendInt=4 budgetLeft=237
+[INLOOP-HINT] ln=110 lineCyc=256 mask=6 pendInt=4 budgetLeft=225
+[INLOOP-HINT] ln=110 lineCyc=260 mask=6 pendInt=4 budgetLeft=221
+[INLOOP-HINT] ln=110 lineCyc=264 mask=6 pendInt=4 budgetLeft=217
+[INLOOP-HINT] ln=110 lineCyc=272 mask=6 pendInt=4 budgetLeft=209
+[INLOOP-HINT] ln=110 lineCyc=288 mask=6 pendInt=4 budgetLeft=193
+[INLOOP-HINT] ln=110 lineCyc=300 mask=6 pendInt=4 budgetLeft=181
+[INLOOP-HINT] ln=110 lineCyc=308 mask=6 pendInt=4 budgetLeft=173
+[INLOOP-HINT] ln=110 lineCyc=320 mask=6 pendInt=4 budgetLeft=161
+[INLOOP-HINT] ln=110 lineCyc=328 mask=6 pendInt=4 budgetLeft=153
+[INLOOP-HINT] ln=110 lineCyc=344 mask=6 pendInt=4 budgetLeft=137
+[INLOOP-HINT] ln=110 lineCyc=360 mask=6 pendInt=4 budgetLeft=121
+[INLOOP-HINT] ln=110 lineCyc=376 mask=6 pendInt=4 budgetLeft=105
+[INLOOP-HINT] ln=110 lineCyc=392 mask=6 pendInt=4 budgetLeft=89
+[INLOOP-HINT] ln=110 lineCyc=408 mask=6 pendInt=4 budgetLeft=73
+[INLOOP-HINT] ln=110 lineCyc=424 mask=6 pendInt=4 budgetLeft=57
+[INLOOP-HINT] ln=110 lineCyc=440 mask=6 pendInt=4 budgetLeft=41
+[INLOOP-HINT] ln=110 lineCyc=456 mask=6 pendInt=4 budgetLeft=25
+[INLOOP-HINT] ln=110 lineCyc=472 mask=6 pendInt=4 budgetLeft=9
+[INLOOP-HINT] ln=110 lineCyc=488 mask=6 pendInt=4 budgetLeft=-7
+[PRELOOP-HINT] ln=111 mask=6 pendInt=4 debt=-7
+[INLOOP-HINT] ln=111 lineCyc=128 mask=6 pendInt=4 budgetLeft=354
+[INLOOP-HINT] ln=111 lineCyc=148 mask=3 pendInt=4 budgetLeft=334
+[REG01] ln=112 cyc=8 px=0 val=34 old=74 dispEn=1 rendPx=0
+[REG01] ln=118 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=61
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=113 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=424 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=424 mask=6 pendInt=-1 budgetLeft=62
+[INLOOP-HINT] ln=107 lineCyc=440 mask=6 pendInt=4 budgetLeft=46
+[INLOOP-HINT] ln=107 lineCyc=456 mask=6 pendInt=4 budgetLeft=30
+[INLOOP-HINT] ln=107 lineCyc=472 mask=6 pendInt=4 budgetLeft=14
+[INLOOP-HINT] ln=107 lineCyc=488 mask=6 pendInt=4 budgetLeft=-2
+[PRELOOP-HINT] ln=108 mask=6 pendInt=4 debt=-2
+[INLOOP-HINT] ln=108 lineCyc=16 mask=6 pendInt=4 budgetLeft=471
+[INLOOP-HINT] ln=108 lineCyc=144 mask=6 pendInt=4 budgetLeft=343
+[INLOOP-HINT] ln=108 lineCyc=164 mask=3 pendInt=4 budgetLeft=323
+[REG01] ln=108 cyc=474 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=117 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=68
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=69
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=64
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=71
+[REG01] ln=108 cyc=466 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=117 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=65
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=414 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=414 mask=3 pendInt=-1 budgetLeft=72
+[REG01] ln=108 cyc=466 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=64
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=68
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=69
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=68
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=70
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=63
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=62
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=113 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=70
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=66
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=62
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=113 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=65
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=64
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=70
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=60
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=113 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=69
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=71
+[REG01] ln=108 cyc=466 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=117 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=64
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=69
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=70
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=71
+[REG01] ln=108 cyc=466 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=117 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=416 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=416 mask=3 pendInt=-1 budgetLeft=64
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=416 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=416 mask=3 pendInt=-1 budgetLeft=68
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=416 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=416 mask=3 pendInt=-1 budgetLeft=67
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=402 newCyc=414 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=414 mask=3 pendInt=-1 budgetLeft=74
+[REG01] ln=108 cyc=466 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=117 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=414 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=414 mask=3 pendInt=-1 budgetLeft=74
+[REG01] ln=108 cyc=466 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=117 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=412 newCyc=416 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=416 mask=3 pendInt=-1 budgetLeft=65
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=412 newCyc=422 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=422 mask=3 pendInt=-1 budgetLeft=59
+[REG01] ln=109 cyc=0 px=0 val=34 old=74 dispEn=1 rendPx=0
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=402 newCyc=416 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=416 mask=3 pendInt=-1 budgetLeft=66
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=414 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=414 mask=3 pendInt=-1 budgetLeft=67
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=416 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=416 mask=3 pendInt=-1 budgetLeft=70
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=402 newCyc=416 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=416 mask=3 pendInt=-1 budgetLeft=70
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=402 newCyc=416 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=416 mask=3 pendInt=-1 budgetLeft=65
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=412 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=63
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=410 newCyc=420 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=420 mask=3 pendInt=-1 budgetLeft=57
+[REG01] ln=109 cyc=0 px=0 val=34 old=74 dispEn=1 rendPx=0
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=412 newCyc=422 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=422 mask=3 pendInt=-1 budgetLeft=57
+[REG01] ln=109 cyc=0 px=0 val=34 old=74 dispEn=1 rendPx=0
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=70
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=67
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=68
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=67
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=67
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=68
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=69
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=414 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=414 mask=3 pendInt=-1 budgetLeft=67
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=416 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=416 mask=3 pendInt=-1 budgetLeft=67
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=69
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=414 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=414 mask=3 pendInt=-1 budgetLeft=74
+[REG01] ln=108 cyc=466 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=117 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=410 newCyc=414 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=414 mask=3 pendInt=-1 budgetLeft=74
+[REG01] ln=108 cyc=466 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=117 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=412 newCyc=422 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=422 mask=3 pendInt=-1 budgetLeft=67
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=422 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=422 mask=3 pendInt=-1 budgetLeft=65
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=63
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=416 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=416 mask=3 pendInt=-1 budgetLeft=66
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=412 newCyc=420 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=420 mask=3 pendInt=-1 budgetLeft=66
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=410 newCyc=420 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=420 mask=3 pendInt=-1 budgetLeft=67
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=404 newCyc=414 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=414 mask=3 pendInt=-1 budgetLeft=74
+[REG01] ln=108 cyc=466 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=117 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=410 newCyc=414 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=414 mask=3 pendInt=-1 budgetLeft=67
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=402 newCyc=416 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=416 mask=3 pendInt=-1 budgetLeft=68
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=404 newCyc=416 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=416 mask=3 pendInt=-1 budgetLeft=71
+[REG01] ln=108 cyc=466 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=117 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=410 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=63
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=404 newCyc=414 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=414 mask=3 pendInt=-1 budgetLeft=68
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=398 newCyc=414 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=414 mask=3 pendInt=-1 budgetLeft=61
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=113 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=420 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=420 mask=3 pendInt=-1 budgetLeft=62
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=422 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=422 mask=3 pendInt=-1 budgetLeft=65
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=416 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=416 mask=3 pendInt=-1 budgetLeft=69
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=402 newCyc=416 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=416 mask=3 pendInt=-1 budgetLeft=59
+[REG01] ln=109 cyc=0 px=0 val=34 old=74 dispEn=1 rendPx=0
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=404 newCyc=422 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=422 mask=7 pendInt=-1 budgetLeft=62
+[INLOOP-HINT] ln=107 lineCyc=430 mask=7 pendInt=4 budgetLeft=54
+[INLOOP-HINT] ln=107 lineCyc=438 mask=7 pendInt=4 budgetLeft=46
+[INLOOP-HINT] ln=107 lineCyc=446 mask=7 pendInt=4 budgetLeft=38
+[INLOOP-HINT] ln=107 lineCyc=454 mask=7 pendInt=4 budgetLeft=30
+[INLOOP-HINT] ln=107 lineCyc=474 mask=7 pendInt=4 budgetLeft=10
+[INLOOP-HINT] ln=107 lineCyc=488 mask=7 pendInt=4 budgetLeft=-6
+[PRELOOP-HINT] ln=108 mask=7 pendInt=4 debt=-6
+[INLOOP-HINT] ln=108 lineCyc=4 mask=7 pendInt=4 budgetLeft=478
+[INLOOP-HINT] ln=108 lineCyc=8 mask=7 pendInt=4 budgetLeft=474
+[INLOOP-HINT] ln=108 lineCyc=18 mask=7 pendInt=4 budgetLeft=464
+[INLOOP-HINT] ln=108 lineCyc=26 mask=7 pendInt=4 budgetLeft=456
+[INLOOP-HINT] ln=108 lineCyc=30 mask=7 pendInt=4 budgetLeft=452
+[INLOOP-HINT] ln=108 lineCyc=38 mask=7 pendInt=4 budgetLeft=444
+[INLOOP-HINT] ln=108 lineCyc=48 mask=7 pendInt=4 budgetLeft=434
+[INLOOP-HINT] ln=108 lineCyc=58 mask=7 pendInt=4 budgetLeft=424
+[INLOOP-HINT] ln=108 lineCyc=66 mask=7 pendInt=4 budgetLeft=416
+[INLOOP-HINT] ln=108 lineCyc=74 mask=7 pendInt=4 budgetLeft=408
+[INLOOP-HINT] ln=108 lineCyc=86 mask=7 pendInt=4 budgetLeft=396
+[INLOOP-HINT] ln=108 lineCyc=98 mask=7 pendInt=4 budgetLeft=384
+[INLOOP-HINT] ln=108 lineCyc=106 mask=7 pendInt=4 budgetLeft=376
+[INLOOP-HINT] ln=108 lineCyc=124 mask=7 pendInt=4 budgetLeft=358
+[INLOOP-HINT] ln=108 lineCyc=132 mask=7 pendInt=4 budgetLeft=350
+[INLOOP-HINT] ln=108 lineCyc=140 mask=7 pendInt=4 budgetLeft=342
+[INLOOP-HINT] ln=108 lineCyc=148 mask=7 pendInt=4 budgetLeft=334
+[INLOOP-HINT] ln=108 lineCyc=156 mask=7 pendInt=4 budgetLeft=326
+[INLOOP-HINT] ln=108 lineCyc=176 mask=7 pendInt=4 budgetLeft=306
+[INLOOP-HINT] ln=108 lineCyc=192 mask=7 pendInt=4 budgetLeft=290
+[INLOOP-HINT] ln=108 lineCyc=196 mask=7 pendInt=4 budgetLeft=286
+[INLOOP-HINT] ln=108 lineCyc=200 mask=7 pendInt=4 budgetLeft=282
+[INLOOP-HINT] ln=108 lineCyc=210 mask=7 pendInt=4 budgetLeft=272
+[INLOOP-HINT] ln=108 lineCyc=218 mask=7 pendInt=4 budgetLeft=264
+[INLOOP-HINT] ln=108 lineCyc=222 mask=7 pendInt=4 budgetLeft=260
+[INLOOP-HINT] ln=108 lineCyc=230 mask=7 pendInt=4 budgetLeft=252
+[INLOOP-HINT] ln=108 lineCyc=240 mask=7 pendInt=4 budgetLeft=242
+[INLOOP-HINT] ln=108 lineCyc=250 mask=7 pendInt=4 budgetLeft=232
+[INLOOP-HINT] ln=108 lineCyc=258 mask=7 pendInt=4 budgetLeft=224
+[INLOOP-HINT] ln=108 lineCyc=266 mask=7 pendInt=4 budgetLeft=216
+[INLOOP-HINT] ln=108 lineCyc=278 mask=7 pendInt=4 budgetLeft=204
+[INLOOP-HINT] ln=108 lineCyc=290 mask=7 pendInt=4 budgetLeft=192
+[INLOOP-HINT] ln=108 lineCyc=298 mask=7 pendInt=4 budgetLeft=184
+[INLOOP-HINT] ln=108 lineCyc=316 mask=7 pendInt=4 budgetLeft=166
+[INLOOP-HINT] ln=108 lineCyc=324 mask=7 pendInt=4 budgetLeft=158
+[INLOOP-HINT] ln=108 lineCyc=332 mask=7 pendInt=4 budgetLeft=150
+[INLOOP-HINT] ln=108 lineCyc=340 mask=7 pendInt=4 budgetLeft=142
+[INLOOP-HINT] ln=108 lineCyc=348 mask=7 pendInt=4 budgetLeft=134
+[INLOOP-HINT] ln=108 lineCyc=368 mask=7 pendInt=4 budgetLeft=114
+[INLOOP-HINT] ln=108 lineCyc=384 mask=7 pendInt=4 budgetLeft=98
+[INLOOP-HINT] ln=108 lineCyc=388 mask=7 pendInt=4 budgetLeft=94
+[INLOOP-HINT] ln=108 lineCyc=392 mask=7 pendInt=4 budgetLeft=90
+[INLOOP-HINT] ln=108 lineCyc=402 mask=7 pendInt=4 budgetLeft=80
+[INLOOP-HINT] ln=108 lineCyc=410 mask=7 pendInt=4 budgetLeft=72
+[INLOOP-HINT] ln=108 lineCyc=414 mask=7 pendInt=4 budgetLeft=68
+[INLOOP-HINT] ln=108 lineCyc=422 mask=7 pendInt=4 budgetLeft=60
+[INLOOP-HINT] ln=108 lineCyc=432 mask=7 pendInt=4 budgetLeft=50
+[INLOOP-HINT] ln=108 lineCyc=442 mask=7 pendInt=4 budgetLeft=40
+[INLOOP-HINT] ln=108 lineCyc=450 mask=7 pendInt=4 budgetLeft=32
+[INLOOP-HINT] ln=108 lineCyc=458 mask=7 pendInt=4 budgetLeft=24
+[INLOOP-HINT] ln=108 lineCyc=470 mask=7 pendInt=4 budgetLeft=12
+[INLOOP-HINT] ln=108 lineCyc=482 mask=7 pendInt=4 budgetLeft=0
+[PRELOOP-HINT] ln=109 mask=7 pendInt=4 debt=0
+[INLOOP-HINT] ln=109 lineCyc=8 mask=7 pendInt=4 budgetLeft=481
+[INLOOP-HINT] ln=109 lineCyc=26 mask=7 pendInt=4 budgetLeft=463
+[INLOOP-HINT] ln=109 lineCyc=34 mask=7 pendInt=4 budgetLeft=455
+[INLOOP-HINT] ln=109 lineCyc=42 mask=7 pendInt=4 budgetLeft=447
+[INLOOP-HINT] ln=109 lineCyc=50 mask=7 pendInt=4 budgetLeft=439
+[INLOOP-HINT] ln=109 lineCyc=58 mask=7 pendInt=4 budgetLeft=431
+[INLOOP-HINT] ln=109 lineCyc=78 mask=7 pendInt=4 budgetLeft=411
+[INLOOP-HINT] ln=109 lineCyc=94 mask=7 pendInt=4 budgetLeft=395
+[INLOOP-HINT] ln=109 lineCyc=98 mask=7 pendInt=4 budgetLeft=391
+[INLOOP-HINT] ln=109 lineCyc=102 mask=7 pendInt=4 budgetLeft=387
+[INLOOP-HINT] ln=109 lineCyc=112 mask=7 pendInt=4 budgetLeft=377
+[INLOOP-HINT] ln=109 lineCyc=120 mask=7 pendInt=4 budgetLeft=369
+[INLOOP-HINT] ln=109 lineCyc=124 mask=7 pendInt=4 budgetLeft=365
+[INLOOP-HINT] ln=109 lineCyc=132 mask=7 pendInt=4 budgetLeft=357
+[INLOOP-HINT] ln=109 lineCyc=142 mask=7 pendInt=4 budgetLeft=347
+[INLOOP-HINT] ln=109 lineCyc=152 mask=7 pendInt=4 budgetLeft=337
+[INLOOP-HINT] ln=109 lineCyc=160 mask=7 pendInt=4 budgetLeft=329
+[INLOOP-HINT] ln=109 lineCyc=168 mask=7 pendInt=4 budgetLeft=321
+[INLOOP-HINT] ln=109 lineCyc=180 mask=7 pendInt=4 budgetLeft=309
+[INLOOP-HINT] ln=109 lineCyc=192 mask=7 pendInt=4 budgetLeft=297
+[INLOOP-HINT] ln=109 lineCyc=200 mask=7 pendInt=4 budgetLeft=289
+[INLOOP-HINT] ln=109 lineCyc=218 mask=7 pendInt=4 budgetLeft=271
+[INLOOP-HINT] ln=109 lineCyc=226 mask=7 pendInt=4 budgetLeft=263
+[INLOOP-HINT] ln=109 lineCyc=234 mask=7 pendInt=4 budgetLeft=255
+[INLOOP-HINT] ln=109 lineCyc=242 mask=7 pendInt=4 budgetLeft=247
+[INLOOP-HINT] ln=109 lineCyc=250 mask=7 pendInt=4 budgetLeft=239
+[INLOOP-HINT] ln=109 lineCyc=270 mask=7 pendInt=4 budgetLeft=219
+[INLOOP-HINT] ln=109 lineCyc=286 mask=7 pendInt=4 budgetLeft=203
+[INLOOP-HINT] ln=109 lineCyc=290 mask=7 pendInt=4 budgetLeft=199
+[INLOOP-HINT] ln=109 lineCyc=294 mask=7 pendInt=4 budgetLeft=195
+[INLOOP-HINT] ln=109 lineCyc=304 mask=7 pendInt=4 budgetLeft=185
+[INLOOP-HINT] ln=109 lineCyc=312 mask=7 pendInt=4 budgetLeft=177
+[INLOOP-HINT] ln=109 lineCyc=316 mask=7 pendInt=4 budgetLeft=173
+[INLOOP-HINT] ln=109 lineCyc=324 mask=7 pendInt=4 budgetLeft=165
+[INLOOP-HINT] ln=109 lineCyc=334 mask=7 pendInt=4 budgetLeft=155
+[INLOOP-HINT] ln=109 lineCyc=344 mask=7 pendInt=4 budgetLeft=145
+[INLOOP-HINT] ln=109 lineCyc=352 mask=7 pendInt=4 budgetLeft=137
+[INLOOP-HINT] ln=109 lineCyc=360 mask=7 pendInt=4 budgetLeft=129
+[INLOOP-HINT] ln=109 lineCyc=372 mask=7 pendInt=4 budgetLeft=117
+[INLOOP-HINT] ln=109 lineCyc=384 mask=7 pendInt=4 budgetLeft=105
+[INLOOP-HINT] ln=109 lineCyc=392 mask=7 pendInt=4 budgetLeft=97
+[INLOOP-HINT] ln=109 lineCyc=410 mask=7 pendInt=4 budgetLeft=79
+[INLOOP-HINT] ln=109 lineCyc=418 mask=7 pendInt=4 budgetLeft=71
+[INLOOP-HINT] ln=109 lineCyc=426 mask=7 pendInt=4 budgetLeft=63
+[INLOOP-HINT] ln=109 lineCyc=434 mask=7 pendInt=4 budgetLeft=55
+[INLOOP-HINT] ln=109 lineCyc=442 mask=7 pendInt=4 budgetLeft=47
+[INLOOP-HINT] ln=109 lineCyc=462 mask=7 pendInt=4 budgetLeft=27
+[INLOOP-HINT] ln=109 lineCyc=478 mask=7 pendInt=4 budgetLeft=11
+[INLOOP-HINT] ln=109 lineCyc=482 mask=7 pendInt=4 budgetLeft=7
+[INLOOP-HINT] ln=109 lineCyc=486 mask=7 pendInt=4 budgetLeft=3
+[INLOOP-HINT] ln=109 lineCyc=488 mask=7 pendInt=4 budgetLeft=-7
+[PRELOOP-HINT] ln=110 mask=7 pendInt=4 debt=-7
+[INLOOP-HINT] ln=110 lineCyc=8 mask=7 pendInt=4 budgetLeft=474
+[INLOOP-HINT] ln=110 lineCyc=12 mask=7 pendInt=4 budgetLeft=470
+[INLOOP-HINT] ln=110 lineCyc=20 mask=7 pendInt=4 budgetLeft=462
+[INLOOP-HINT] ln=110 lineCyc=28 mask=7 pendInt=4 budgetLeft=454
+[INLOOP-HINT] ln=110 lineCyc=46 mask=7 pendInt=4 budgetLeft=436
+[INLOOP-HINT] ln=110 lineCyc=70 mask=7 pendInt=4 budgetLeft=412
+[INLOOP-HINT] ln=110 lineCyc=74 mask=7 pendInt=4 budgetLeft=408
+[INLOOP-HINT] ln=110 lineCyc=78 mask=7 pendInt=4 budgetLeft=404
+[INLOOP-HINT] ln=110 lineCyc=86 mask=7 pendInt=4 budgetLeft=396
+[INLOOP-HINT] ln=110 lineCyc=98 mask=7 pendInt=4 budgetLeft=384
+[INLOOP-HINT] ln=110 lineCyc=102 mask=7 pendInt=4 budgetLeft=380
+[INLOOP-HINT] ln=110 lineCyc=116 mask=7 pendInt=4 budgetLeft=366
+[INLOOP-HINT] ln=110 lineCyc=124 mask=7 pendInt=4 budgetLeft=358
+[INLOOP-HINT] ln=110 lineCyc=128 mask=7 pendInt=4 budgetLeft=354
+[INLOOP-HINT] ln=110 lineCyc=132 mask=7 pendInt=4 budgetLeft=350
+[INLOOP-HINT] ln=110 lineCyc=136 mask=7 pendInt=4 budgetLeft=346
+[INLOOP-HINT] ln=110 lineCyc=150 mask=7 pendInt=4 budgetLeft=332
+[INLOOP-HINT] ln=110 lineCyc=170 mask=7 pendInt=4 budgetLeft=312
+[INLOOP-HINT] ln=110 lineCyc=178 mask=7 pendInt=4 budgetLeft=304
+[INLOOP-HINT] ln=110 lineCyc=186 mask=7 pendInt=4 budgetLeft=296
+[INLOOP-HINT] ln=110 lineCyc=190 mask=7 pendInt=4 budgetLeft=292
+[INLOOP-HINT] ln=110 lineCyc=194 mask=7 pendInt=4 budgetLeft=288
+[INLOOP-HINT] ln=110 lineCyc=198 mask=7 pendInt=4 budgetLeft=284
+[INLOOP-HINT] ln=110 lineCyc=222 mask=7 pendInt=4 budgetLeft=260
+[INLOOP-HINT] ln=110 lineCyc=238 mask=7 pendInt=4 budgetLeft=244
+[INLOOP-HINT] ln=110 lineCyc=248 mask=7 pendInt=4 budgetLeft=234
+[INLOOP-HINT] ln=110 lineCyc=256 mask=7 pendInt=4 budgetLeft=226
+[INLOOP-HINT] ln=110 lineCyc=264 mask=7 pendInt=4 budgetLeft=218
+[INLOOP-HINT] ln=110 lineCyc=276 mask=7 pendInt=4 budgetLeft=206
+[INLOOP-HINT] ln=110 lineCyc=288 mask=7 pendInt=4 budgetLeft=194
+[INLOOP-HINT] ln=110 lineCyc=296 mask=7 pendInt=4 budgetLeft=186
+[INLOOP-HINT] ln=110 lineCyc=314 mask=7 pendInt=4 budgetLeft=168
+[INLOOP-HINT] ln=110 lineCyc=322 mask=7 pendInt=4 budgetLeft=160
+[INLOOP-HINT] ln=110 lineCyc=330 mask=7 pendInt=4 budgetLeft=152
+[INLOOP-HINT] ln=110 lineCyc=338 mask=7 pendInt=4 budgetLeft=144
+[INLOOP-HINT] ln=110 lineCyc=346 mask=7 pendInt=4 budgetLeft=136
+[INLOOP-HINT] ln=110 lineCyc=366 mask=7 pendInt=4 budgetLeft=116
+[INLOOP-HINT] ln=110 lineCyc=382 mask=7 pendInt=4 budgetLeft=100
+[INLOOP-HINT] ln=110 lineCyc=386 mask=7 pendInt=4 budgetLeft=96
+[INLOOP-HINT] ln=110 lineCyc=390 mask=7 pendInt=4 budgetLeft=92
+[INLOOP-HINT] ln=110 lineCyc=400 mask=7 pendInt=4 budgetLeft=82
+[INLOOP-HINT] ln=110 lineCyc=408 mask=7 pendInt=4 budgetLeft=74
+[INLOOP-HINT] ln=110 lineCyc=412 mask=7 pendInt=4 budgetLeft=70
+[INLOOP-HINT] ln=110 lineCyc=420 mask=7 pendInt=4 budgetLeft=62
+[INLOOP-HINT] ln=110 lineCyc=430 mask=7 pendInt=4 budgetLeft=52
+[INLOOP-HINT] ln=110 lineCyc=440 mask=7 pendInt=4 budgetLeft=42
+[INLOOP-HINT] ln=110 lineCyc=448 mask=7 pendInt=4 budgetLeft=34
+[INLOOP-HINT] ln=110 lineCyc=456 mask=7 pendInt=4 budgetLeft=26
+[INLOOP-HINT] ln=110 lineCyc=468 mask=7 pendInt=4 budgetLeft=14
+[INLOOP-HINT] ln=110 lineCyc=480 mask=7 pendInt=4 budgetLeft=2
+[INLOOP-HINT] ln=110 lineCyc=488 mask=7 pendInt=4 budgetLeft=-6
+[PRELOOP-HINT] ln=111 mask=7 pendInt=4 debt=-6
+[INLOOP-HINT] ln=111 lineCyc=18 mask=7 pendInt=4 budgetLeft=464
+[INLOOP-HINT] ln=111 lineCyc=26 mask=7 pendInt=4 budgetLeft=456
+[INLOOP-HINT] ln=111 lineCyc=34 mask=7 pendInt=4 budgetLeft=448
+[INLOOP-HINT] ln=111 lineCyc=42 mask=7 pendInt=4 budgetLeft=440
+[INLOOP-HINT] ln=111 lineCyc=50 mask=7 pendInt=4 budgetLeft=432
+[INLOOP-HINT] ln=111 lineCyc=70 mask=7 pendInt=4 budgetLeft=412
+[INLOOP-HINT] ln=111 lineCyc=86 mask=7 pendInt=4 budgetLeft=396
+[INLOOP-HINT] ln=111 lineCyc=90 mask=7 pendInt=4 budgetLeft=392
+[INLOOP-HINT] ln=111 lineCyc=94 mask=7 pendInt=4 budgetLeft=388
+[INLOOP-HINT] ln=111 lineCyc=104 mask=7 pendInt=4 budgetLeft=378
+[INLOOP-HINT] ln=111 lineCyc=112 mask=7 pendInt=4 budgetLeft=370
+[INLOOP-HINT] ln=111 lineCyc=116 mask=7 pendInt=4 budgetLeft=366
+[INLOOP-HINT] ln=111 lineCyc=124 mask=7 pendInt=4 budgetLeft=358
+[INLOOP-HINT] ln=111 lineCyc=134 mask=7 pendInt=4 budgetLeft=348
+[INLOOP-HINT] ln=111 lineCyc=144 mask=7 pendInt=4 budgetLeft=338
+[INLOOP-HINT] ln=111 lineCyc=152 mask=7 pendInt=4 budgetLeft=330
+[INLOOP-HINT] ln=111 lineCyc=160 mask=7 pendInt=4 budgetLeft=322
+[INLOOP-HINT] ln=111 lineCyc=172 mask=7 pendInt=4 budgetLeft=310
+[INLOOP-HINT] ln=111 lineCyc=184 mask=7 pendInt=4 budgetLeft=298
+[INLOOP-HINT] ln=111 lineCyc=192 mask=7 pendInt=4 budgetLeft=290
+[INLOOP-HINT] ln=111 lineCyc=210 mask=7 pendInt=4 budgetLeft=272
+[INLOOP-HINT] ln=111 lineCyc=218 mask=7 pendInt=4 budgetLeft=264
+[INLOOP-HINT] ln=111 lineCyc=226 mask=7 pendInt=4 budgetLeft=256
+[INLOOP-HINT] ln=111 lineCyc=234 mask=7 pendInt=4 budgetLeft=248
+[INLOOP-HINT] ln=111 lineCyc=242 mask=7 pendInt=4 budgetLeft=240
+[INLOOP-HINT] ln=111 lineCyc=262 mask=7 pendInt=4 budgetLeft=220
+[INLOOP-HINT] ln=111 lineCyc=278 mask=7 pendInt=4 budgetLeft=204
+[INLOOP-HINT] ln=111 lineCyc=282 mask=7 pendInt=4 budgetLeft=200
+[INLOOP-HINT] ln=111 lineCyc=286 mask=7 pendInt=4 budgetLeft=196
+[INLOOP-HINT] ln=111 lineCyc=296 mask=7 pendInt=4 budgetLeft=186
+[INLOOP-HINT] ln=111 lineCyc=304 mask=7 pendInt=4 budgetLeft=178
+[INLOOP-HINT] ln=111 lineCyc=308 mask=7 pendInt=4 budgetLeft=174
+[INLOOP-HINT] ln=111 lineCyc=316 mask=7 pendInt=4 budgetLeft=166
+[INLOOP-HINT] ln=111 lineCyc=326 mask=7 pendInt=4 budgetLeft=156
+[INLOOP-HINT] ln=111 lineCyc=336 mask=7 pendInt=4 budgetLeft=146
+[INLOOP-HINT] ln=111 lineCyc=344 mask=7 pendInt=4 budgetLeft=138
+[INLOOP-HINT] ln=111 lineCyc=352 mask=7 pendInt=4 budgetLeft=130
+[INLOOP-HINT] ln=111 lineCyc=364 mask=7 pendInt=4 budgetLeft=118
+[INLOOP-HINT] ln=111 lineCyc=376 mask=7 pendInt=4 budgetLeft=106
+[INLOOP-HINT] ln=111 lineCyc=384 mask=7 pendInt=4 budgetLeft=98
+[INLOOP-HINT] ln=111 lineCyc=402 mask=7 pendInt=4 budgetLeft=80
+[INLOOP-HINT] ln=111 lineCyc=410 mask=7 pendInt=4 budgetLeft=72
+[INLOOP-HINT] ln=111 lineCyc=418 mask=7 pendInt=4 budgetLeft=64
+[INLOOP-HINT] ln=111 lineCyc=426 mask=7 pendInt=4 budgetLeft=56
+[INLOOP-HINT] ln=111 lineCyc=434 mask=7 pendInt=4 budgetLeft=48
+[INLOOP-HINT] ln=111 lineCyc=454 mask=7 pendInt=4 budgetLeft=28
+[INLOOP-HINT] ln=111 lineCyc=470 mask=7 pendInt=4 budgetLeft=12
+[INLOOP-HINT] ln=111 lineCyc=474 mask=7 pendInt=4 budgetLeft=8
+[INLOOP-HINT] ln=111 lineCyc=478 mask=7 pendInt=4 budgetLeft=4
+[INLOOP-HINT] ln=111 lineCyc=488 mask=7 pendInt=4 budgetLeft=-6
+[PRELOOP-HINT] ln=112 mask=7 pendInt=4 debt=-6
+[INLOOP-HINT] ln=112 lineCyc=8 mask=7 pendInt=4 budgetLeft=475
+[INLOOP-HINT] ln=112 lineCyc=12 mask=7 pendInt=4 budgetLeft=471
+[INLOOP-HINT] ln=112 lineCyc=20 mask=7 pendInt=4 budgetLeft=463
+[INLOOP-HINT] ln=112 lineCyc=30 mask=7 pendInt=4 budgetLeft=453
+[INLOOP-HINT] ln=112 lineCyc=40 mask=7 pendInt=4 budgetLeft=443
+[INLOOP-HINT] ln=112 lineCyc=48 mask=7 pendInt=4 budgetLeft=435
+[INLOOP-HINT] ln=112 lineCyc=56 mask=7 pendInt=4 budgetLeft=427
+[INLOOP-HINT] ln=112 lineCyc=68 mask=7 pendInt=4 budgetLeft=415
+[INLOOP-HINT] ln=112 lineCyc=80 mask=7 pendInt=4 budgetLeft=403
+[INLOOP-HINT] ln=112 lineCyc=88 mask=7 pendInt=4 budgetLeft=395
+[INLOOP-HINT] ln=112 lineCyc=106 mask=7 pendInt=4 budgetLeft=377
+[INLOOP-HINT] ln=112 lineCyc=114 mask=7 pendInt=4 budgetLeft=369
+[INLOOP-HINT] ln=112 lineCyc=122 mask=7 pendInt=4 budgetLeft=361
+[INLOOP-HINT] ln=112 lineCyc=130 mask=7 pendInt=4 budgetLeft=353
+[INLOOP-HINT] ln=112 lineCyc=138 mask=7 pendInt=4 budgetLeft=345
+[INLOOP-HINT] ln=112 lineCyc=158 mask=7 pendInt=4 budgetLeft=325
+[INLOOP-HINT] ln=112 lineCyc=174 mask=7 pendInt=4 budgetLeft=309
+[INLOOP-HINT] ln=112 lineCyc=178 mask=7 pendInt=4 budgetLeft=305
+[INLOOP-HINT] ln=112 lineCyc=182 mask=7 pendInt=4 budgetLeft=301
+[INLOOP-HINT] ln=112 lineCyc=192 mask=7 pendInt=4 budgetLeft=291
+[INLOOP-HINT] ln=112 lineCyc=200 mask=7 pendInt=4 budgetLeft=283
+[INLOOP-HINT] ln=112 lineCyc=204 mask=7 pendInt=4 budgetLeft=279
+[INLOOP-HINT] ln=112 lineCyc=212 mask=7 pendInt=4 budgetLeft=271
+[INLOOP-HINT] ln=112 lineCyc=222 mask=7 pendInt=4 budgetLeft=261
+[INLOOP-HINT] ln=112 lineCyc=232 mask=7 pendInt=4 budgetLeft=251
+[INLOOP-HINT] ln=112 lineCyc=240 mask=7 pendInt=4 budgetLeft=243
+[INLOOP-HINT] ln=112 lineCyc=248 mask=7 pendInt=4 budgetLeft=235
+[INLOOP-HINT] ln=112 lineCyc=260 mask=7 pendInt=4 budgetLeft=223
+[INLOOP-HINT] ln=112 lineCyc=272 mask=7 pendInt=4 budgetLeft=211
+[INLOOP-HINT] ln=112 lineCyc=280 mask=7 pendInt=4 budgetLeft=203
+[INLOOP-HINT] ln=112 lineCyc=298 mask=7 pendInt=4 budgetLeft=185
+[INLOOP-HINT] ln=112 lineCyc=306 mask=7 pendInt=4 budgetLeft=177
+[INLOOP-HINT] ln=112 lineCyc=314 mask=7 pendInt=4 budgetLeft=169
+[INLOOP-HINT] ln=112 lineCyc=322 mask=7 pendInt=4 budgetLeft=161
+[INLOOP-HINT] ln=112 lineCyc=330 mask=7 pendInt=4 budgetLeft=153
+[INLOOP-HINT] ln=112 lineCyc=350 mask=7 pendInt=4 budgetLeft=133
+[INLOOP-HINT] ln=112 lineCyc=366 mask=7 pendInt=4 budgetLeft=117
+[INLOOP-HINT] ln=112 lineCyc=370 mask=7 pendInt=4 budgetLeft=113
+[INLOOP-HINT] ln=112 lineCyc=374 mask=7 pendInt=4 budgetLeft=109
+[INLOOP-HINT] ln=112 lineCyc=384 mask=7 pendInt=4 budgetLeft=99
+[INLOOP-HINT] ln=112 lineCyc=392 mask=7 pendInt=4 budgetLeft=91
+[INLOOP-HINT] ln=112 lineCyc=396 mask=7 pendInt=4 budgetLeft=87
+[INLOOP-HINT] ln=112 lineCyc=404 mask=7 pendInt=4 budgetLeft=79
+[INLOOP-HINT] ln=112 lineCyc=414 mask=7 pendInt=4 budgetLeft=69
+[INLOOP-HINT] ln=112 lineCyc=424 mask=7 pendInt=4 budgetLeft=59
+[INLOOP-HINT] ln=112 lineCyc=432 mask=7 pendInt=4 budgetLeft=51
+[INLOOP-HINT] ln=112 lineCyc=440 mask=7 pendInt=4 budgetLeft=43
+[INLOOP-HINT] ln=112 lineCyc=452 mask=7 pendInt=4 budgetLeft=31
+[INLOOP-HINT] ln=112 lineCyc=464 mask=7 pendInt=4 budgetLeft=19
+[INLOOP-HINT] ln=112 lineCyc=472 mask=7 pendInt=4 budgetLeft=11
+[INLOOP-HINT] ln=112 lineCyc=488 mask=7 pendInt=4 budgetLeft=-7
+[PRELOOP-HINT] ln=113 mask=7 pendInt=4 debt=-7
+[INLOOP-HINT] ln=113 lineCyc=8 mask=7 pendInt=4 budgetLeft=473
+[INLOOP-HINT] ln=113 lineCyc=16 mask=7 pendInt=4 budgetLeft=465
+[INLOOP-HINT] ln=113 lineCyc=24 mask=7 pendInt=4 budgetLeft=457
+[INLOOP-HINT] ln=113 lineCyc=32 mask=7 pendInt=4 budgetLeft=449
+[INLOOP-HINT] ln=113 lineCyc=52 mask=7 pendInt=4 budgetLeft=429
+[INLOOP-HINT] ln=113 lineCyc=68 mask=7 pendInt=4 budgetLeft=413
+[INLOOP-HINT] ln=113 lineCyc=72 mask=7 pendInt=4 budgetLeft=409
+[INLOOP-HINT] ln=113 lineCyc=76 mask=7 pendInt=4 budgetLeft=405
+[INLOOP-HINT] ln=113 lineCyc=86 mask=7 pendInt=4 budgetLeft=395
+[INLOOP-HINT] ln=113 lineCyc=94 mask=7 pendInt=4 budgetLeft=387
+[INLOOP-HINT] ln=113 lineCyc=98 mask=7 pendInt=4 budgetLeft=383
+[INLOOP-HINT] ln=113 lineCyc=106 mask=7 pendInt=4 budgetLeft=375
+[INLOOP-HINT] ln=113 lineCyc=116 mask=7 pendInt=4 budgetLeft=365
+[INLOOP-HINT] ln=113 lineCyc=126 mask=7 pendInt=4 budgetLeft=355
+[INLOOP-HINT] ln=113 lineCyc=134 mask=7 pendInt=4 budgetLeft=347
+[INLOOP-HINT] ln=113 lineCyc=142 mask=7 pendInt=4 budgetLeft=339
+[INLOOP-HINT] ln=113 lineCyc=154 mask=7 pendInt=4 budgetLeft=327
+[INLOOP-HINT] ln=113 lineCyc=166 mask=7 pendInt=4 budgetLeft=315
+[INLOOP-HINT] ln=113 lineCyc=174 mask=7 pendInt=4 budgetLeft=307
+[INLOOP-HINT] ln=113 lineCyc=192 mask=7 pendInt=4 budgetLeft=289
+[INLOOP-HINT] ln=113 lineCyc=200 mask=7 pendInt=4 budgetLeft=281
+[INLOOP-HINT] ln=113 lineCyc=208 mask=7 pendInt=4 budgetLeft=273
+[INLOOP-HINT] ln=113 lineCyc=216 mask=7 pendInt=4 budgetLeft=265
+[INLOOP-HINT] ln=113 lineCyc=224 mask=7 pendInt=4 budgetLeft=257
+[INLOOP-HINT] ln=113 lineCyc=244 mask=7 pendInt=4 budgetLeft=237
+[INLOOP-HINT] ln=113 lineCyc=260 mask=7 pendInt=4 budgetLeft=221
+[INLOOP-HINT] ln=113 lineCyc=264 mask=7 pendInt=4 budgetLeft=217
+[INLOOP-HINT] ln=113 lineCyc=268 mask=7 pendInt=4 budgetLeft=213
+[INLOOP-HINT] ln=113 lineCyc=278 mask=7 pendInt=4 budgetLeft=203
+[INLOOP-HINT] ln=113 lineCyc=286 mask=7 pendInt=4 budgetLeft=195
+[INLOOP-HINT] ln=113 lineCyc=290 mask=7 pendInt=4 budgetLeft=191
+[INLOOP-HINT] ln=113 lineCyc=298 mask=7 pendInt=4 budgetLeft=183
+[INLOOP-HINT] ln=113 lineCyc=306 mask=7 pendInt=4 budgetLeft=175
+[INLOOP-HINT] ln=113 lineCyc=324 mask=7 pendInt=4 budgetLeft=157
+[INLOOP-HINT] ln=113 lineCyc=348 mask=7 pendInt=4 budgetLeft=133
+[INLOOP-HINT] ln=113 lineCyc=352 mask=7 pendInt=4 budgetLeft=129
+[INLOOP-HINT] ln=113 lineCyc=356 mask=7 pendInt=4 budgetLeft=125
+[INLOOP-HINT] ln=113 lineCyc=364 mask=7 pendInt=4 budgetLeft=117
+[INLOOP-HINT] ln=113 lineCyc=376 mask=7 pendInt=4 budgetLeft=105
+[INLOOP-HINT] ln=113 lineCyc=380 mask=7 pendInt=4 budgetLeft=101
+[INLOOP-HINT] ln=113 lineCyc=394 mask=7 pendInt=4 budgetLeft=87
+[INLOOP-HINT] ln=113 lineCyc=402 mask=7 pendInt=4 budgetLeft=79
+[INLOOP-HINT] ln=113 lineCyc=406 mask=7 pendInt=4 budgetLeft=75
+[INLOOP-HINT] ln=113 lineCyc=410 mask=7 pendInt=4 budgetLeft=71
+[INLOOP-HINT] ln=113 lineCyc=414 mask=7 pendInt=4 budgetLeft=67
+[INLOOP-HINT] ln=113 lineCyc=428 mask=7 pendInt=4 budgetLeft=53
+[INLOOP-HINT] ln=113 lineCyc=448 mask=7 pendInt=4 budgetLeft=33
+[INLOOP-HINT] ln=113 lineCyc=456 mask=7 pendInt=4 budgetLeft=25
+[INLOOP-HINT] ln=113 lineCyc=464 mask=7 pendInt=4 budgetLeft=17
+[INLOOP-HINT] ln=113 lineCyc=468 mask=7 pendInt=4 budgetLeft=13
+[INLOOP-HINT] ln=113 lineCyc=472 mask=7 pendInt=4 budgetLeft=9
+[INLOOP-HINT] ln=113 lineCyc=476 mask=7 pendInt=4 budgetLeft=5
+[INLOOP-HINT] ln=113 lineCyc=488 mask=7 pendInt=4 budgetLeft=-19
+[PRELOOP-HINT] ln=114 mask=7 pendInt=4 debt=-19
+[INLOOP-HINT] ln=114 lineCyc=16 mask=7 pendInt=4 budgetLeft=454
+[INLOOP-HINT] ln=114 lineCyc=26 mask=7 pendInt=4 budgetLeft=444
+[INLOOP-HINT] ln=114 lineCyc=34 mask=7 pendInt=4 budgetLeft=436
+[INLOOP-HINT] ln=114 lineCyc=42 mask=7 pendInt=4 budgetLeft=428
+[INLOOP-HINT] ln=114 lineCyc=54 mask=7 pendInt=4 budgetLeft=416
+[INLOOP-HINT] ln=114 lineCyc=66 mask=7 pendInt=4 budgetLeft=404
+[INLOOP-HINT] ln=114 lineCyc=74 mask=7 pendInt=4 budgetLeft=396
+[INLOOP-HINT] ln=114 lineCyc=92 mask=7 pendInt=4 budgetLeft=378
+[INLOOP-HINT] ln=114 lineCyc=100 mask=7 pendInt=4 budgetLeft=370
+[INLOOP-HINT] ln=114 lineCyc=108 mask=7 pendInt=4 budgetLeft=362
+[INLOOP-HINT] ln=114 lineCyc=116 mask=7 pendInt=4 budgetLeft=354
+[INLOOP-HINT] ln=114 lineCyc=124 mask=7 pendInt=4 budgetLeft=346
+[INLOOP-HINT] ln=114 lineCyc=144 mask=7 pendInt=4 budgetLeft=326
+[INLOOP-HINT] ln=114 lineCyc=160 mask=7 pendInt=4 budgetLeft=310
+[INLOOP-HINT] ln=114 lineCyc=164 mask=7 pendInt=4 budgetLeft=306
+[INLOOP-HINT] ln=114 lineCyc=168 mask=7 pendInt=4 budgetLeft=302
+[INLOOP-HINT] ln=114 lineCyc=178 mask=7 pendInt=4 budgetLeft=292
+[INLOOP-HINT] ln=114 lineCyc=186 mask=7 pendInt=4 budgetLeft=284
+[INLOOP-HINT] ln=114 lineCyc=190 mask=7 pendInt=4 budgetLeft=280
+[INLOOP-HINT] ln=114 lineCyc=198 mask=7 pendInt=4 budgetLeft=272
+[INLOOP-HINT] ln=114 lineCyc=208 mask=7 pendInt=4 budgetLeft=262
+[INLOOP-HINT] ln=114 lineCyc=218 mask=7 pendInt=4 budgetLeft=252
+[INLOOP-HINT] ln=114 lineCyc=226 mask=7 pendInt=4 budgetLeft=244
+[INLOOP-HINT] ln=114 lineCyc=234 mask=7 pendInt=4 budgetLeft=236
+[INLOOP-HINT] ln=114 lineCyc=246 mask=7 pendInt=4 budgetLeft=224
+[INLOOP-HINT] ln=114 lineCyc=258 mask=7 pendInt=4 budgetLeft=212
+[INLOOP-HINT] ln=114 lineCyc=266 mask=7 pendInt=4 budgetLeft=204
+[INLOOP-HINT] ln=114 lineCyc=284 mask=7 pendInt=4 budgetLeft=186
+[INLOOP-HINT] ln=114 lineCyc=292 mask=7 pendInt=4 budgetLeft=178
+[INLOOP-HINT] ln=114 lineCyc=300 mask=7 pendInt=4 budgetLeft=170
+[INLOOP-HINT] ln=114 lineCyc=308 mask=7 pendInt=4 budgetLeft=162
+[INLOOP-HINT] ln=114 lineCyc=316 mask=7 pendInt=4 budgetLeft=154
+[INLOOP-HINT] ln=114 lineCyc=336 mask=7 pendInt=4 budgetLeft=134
+[INLOOP-HINT] ln=114 lineCyc=352 mask=7 pendInt=4 budgetLeft=118
+[INLOOP-HINT] ln=114 lineCyc=356 mask=7 pendInt=4 budgetLeft=114
+[INLOOP-HINT] ln=114 lineCyc=360 mask=7 pendInt=4 budgetLeft=110
+[INLOOP-HINT] ln=114 lineCyc=370 mask=7 pendInt=4 budgetLeft=100
+[INLOOP-HINT] ln=114 lineCyc=378 mask=7 pendInt=4 budgetLeft=92
+[INLOOP-HINT] ln=114 lineCyc=382 mask=7 pendInt=4 budgetLeft=88
+[INLOOP-HINT] ln=114 lineCyc=390 mask=7 pendInt=4 budgetLeft=80
+[INLOOP-HINT] ln=114 lineCyc=400 mask=7 pendInt=4 budgetLeft=70
+[INLOOP-HINT] ln=114 lineCyc=410 mask=7 pendInt=4 budgetLeft=60
+[INLOOP-HINT] ln=114 lineCyc=418 mask=7 pendInt=4 budgetLeft=52
+[INLOOP-HINT] ln=114 lineCyc=426 mask=7 pendInt=4 budgetLeft=44
+[INLOOP-HINT] ln=114 lineCyc=438 mask=7 pendInt=4 budgetLeft=32
+[INLOOP-HINT] ln=114 lineCyc=450 mask=7 pendInt=4 budgetLeft=20
+[INLOOP-HINT] ln=114 lineCyc=458 mask=7 pendInt=4 budgetLeft=12
+[INLOOP-HINT] ln=114 lineCyc=476 mask=7 pendInt=4 budgetLeft=-6
+[PRELOOP-HINT] ln=115 mask=7 pendInt=4 debt=-6
+[INLOOP-HINT] ln=115 lineCyc=8 mask=7 pendInt=4 budgetLeft=474
+[INLOOP-HINT] ln=115 lineCyc=16 mask=7 pendInt=4 budgetLeft=466
+[INLOOP-HINT] ln=115 lineCyc=24 mask=7 pendInt=4 budgetLeft=458
+[INLOOP-HINT] ln=115 lineCyc=32 mask=7 pendInt=4 budgetLeft=450
+[INLOOP-HINT] ln=115 lineCyc=52 mask=7 pendInt=4 budgetLeft=430
+[INLOOP-HINT] ln=115 lineCyc=68 mask=7 pendInt=4 budgetLeft=414
+[INLOOP-HINT] ln=115 lineCyc=72 mask=7 pendInt=4 budgetLeft=410
+[INLOOP-HINT] ln=115 lineCyc=76 mask=7 pendInt=4 budgetLeft=406
+[INLOOP-HINT] ln=115 lineCyc=86 mask=7 pendInt=4 budgetLeft=396
+[INLOOP-HINT] ln=115 lineCyc=94 mask=7 pendInt=4 budgetLeft=388
+[INLOOP-HINT] ln=115 lineCyc=98 mask=7 pendInt=4 budgetLeft=384
+[INLOOP-HINT] ln=115 lineCyc=106 mask=7 pendInt=4 budgetLeft=376
+[INLOOP-HINT] ln=115 lineCyc=116 mask=7 pendInt=4 budgetLeft=366
+[INLOOP-HINT] ln=115 lineCyc=126 mask=7 pendInt=4 budgetLeft=356
+[INLOOP-HINT] ln=115 lineCyc=134 mask=7 pendInt=4 budgetLeft=348
+[INLOOP-HINT] ln=115 lineCyc=142 mask=7 pendInt=4 budgetLeft=340
+[INLOOP-HINT] ln=115 lineCyc=154 mask=7 pendInt=4 budgetLeft=328
+[INLOOP-HINT] ln=115 lineCyc=166 mask=7 pendInt=4 budgetLeft=316
+[INLOOP-HINT] ln=115 lineCyc=174 mask=7 pendInt=4 budgetLeft=308
+[INLOOP-HINT] ln=115 lineCyc=192 mask=7 pendInt=4 budgetLeft=290
+[INLOOP-HINT] ln=115 lineCyc=200 mask=7 pendInt=4 budgetLeft=282
+[INLOOP-HINT] ln=115 lineCyc=208 mask=7 pendInt=4 budgetLeft=274
+[INLOOP-HINT] ln=115 lineCyc=216 mask=7 pendInt=4 budgetLeft=266
+[INLOOP-HINT] ln=115 lineCyc=224 mask=7 pendInt=4 budgetLeft=258
+[INLOOP-HINT] ln=115 lineCyc=244 mask=7 pendInt=4 budgetLeft=238
+[INLOOP-HINT] ln=115 lineCyc=260 mask=7 pendInt=4 budgetLeft=222
+[INLOOP-HINT] ln=115 lineCyc=264 mask=7 pendInt=4 budgetLeft=218
+[INLOOP-HINT] ln=115 lineCyc=268 mask=7 pendInt=4 budgetLeft=214
+[INLOOP-HINT] ln=115 lineCyc=278 mask=7 pendInt=4 budgetLeft=204
+[INLOOP-HINT] ln=115 lineCyc=286 mask=7 pendInt=4 budgetLeft=196
+[INLOOP-HINT] ln=115 lineCyc=290 mask=7 pendInt=4 budgetLeft=192
+[INLOOP-HINT] ln=115 lineCyc=298 mask=7 pendInt=4 budgetLeft=184
+[INLOOP-HINT] ln=115 lineCyc=308 mask=7 pendInt=4 budgetLeft=174
+[INLOOP-HINT] ln=115 lineCyc=318 mask=7 pendInt=4 budgetLeft=164
+[INLOOP-HINT] ln=115 lineCyc=326 mask=7 pendInt=4 budgetLeft=156
+[INLOOP-HINT] ln=115 lineCyc=334 mask=7 pendInt=4 budgetLeft=148
+[INLOOP-HINT] ln=115 lineCyc=346 mask=7 pendInt=4 budgetLeft=136
+[INLOOP-HINT] ln=115 lineCyc=358 mask=7 pendInt=4 budgetLeft=124
+[INLOOP-HINT] ln=115 lineCyc=366 mask=7 pendInt=4 budgetLeft=116
+[INLOOP-HINT] ln=115 lineCyc=384 mask=7 pendInt=4 budgetLeft=98
+[INLOOP-HINT] ln=115 lineCyc=392 mask=7 pendInt=4 budgetLeft=90
+[INLOOP-HINT] ln=115 lineCyc=400 mask=7 pendInt=4 budgetLeft=82
+[INLOOP-HINT] ln=115 lineCyc=408 mask=7 pendInt=4 budgetLeft=74
+[INLOOP-HINT] ln=115 lineCyc=416 mask=7 pendInt=4 budgetLeft=66
+[INLOOP-HINT] ln=115 lineCyc=436 mask=7 pendInt=4 budgetLeft=46
+[INLOOP-HINT] ln=115 lineCyc=452 mask=7 pendInt=4 budgetLeft=30
+[INLOOP-HINT] ln=115 lineCyc=456 mask=7 pendInt=4 budgetLeft=26
+[INLOOP-HINT] ln=115 lineCyc=460 mask=7 pendInt=4 budgetLeft=22
+[INLOOP-HINT] ln=115 lineCyc=470 mask=7 pendInt=4 budgetLeft=12
+[INLOOP-HINT] ln=115 lineCyc=478 mask=7 pendInt=4 budgetLeft=4
+[INLOOP-HINT] ln=115 lineCyc=482 mask=7 pendInt=4 budgetLeft=0
+[PRELOOP-HINT] ln=116 mask=7 pendInt=4 debt=0
+[INLOOP-HINT] ln=116 lineCyc=8 mask=7 pendInt=4 budgetLeft=481
+[INLOOP-HINT] ln=116 lineCyc=18 mask=7 pendInt=4 budgetLeft=471
+[INLOOP-HINT] ln=116 lineCyc=28 mask=7 pendInt=4 budgetLeft=461
+[INLOOP-HINT] ln=116 lineCyc=36 mask=7 pendInt=4 budgetLeft=453
+[INLOOP-HINT] ln=116 lineCyc=44 mask=7 pendInt=4 budgetLeft=445
+[INLOOP-HINT] ln=116 lineCyc=56 mask=7 pendInt=4 budgetLeft=433
+[INLOOP-HINT] ln=116 lineCyc=68 mask=7 pendInt=4 budgetLeft=421
+[INLOOP-HINT] ln=116 lineCyc=76 mask=7 pendInt=4 budgetLeft=413
+[INLOOP-HINT] ln=116 lineCyc=94 mask=7 pendInt=4 budgetLeft=395
+[INLOOP-HINT] ln=116 lineCyc=102 mask=7 pendInt=4 budgetLeft=387
+[INLOOP-HINT] ln=116 lineCyc=110 mask=7 pendInt=4 budgetLeft=379
+[INLOOP-HINT] ln=116 lineCyc=118 mask=7 pendInt=4 budgetLeft=371
+[INLOOP-HINT] ln=116 lineCyc=126 mask=7 pendInt=4 budgetLeft=363
+[INLOOP-HINT] ln=116 lineCyc=146 mask=7 pendInt=4 budgetLeft=343
+[INLOOP-HINT] ln=116 lineCyc=162 mask=7 pendInt=4 budgetLeft=327
+[INLOOP-HINT] ln=116 lineCyc=166 mask=7 pendInt=4 budgetLeft=323
+[INLOOP-HINT] ln=116 lineCyc=170 mask=7 pendInt=4 budgetLeft=319
+[INLOOP-HINT] ln=116 lineCyc=180 mask=7 pendInt=4 budgetLeft=309
+[INLOOP-HINT] ln=116 lineCyc=188 mask=7 pendInt=4 budgetLeft=301
+[INLOOP-HINT] ln=116 lineCyc=192 mask=7 pendInt=4 budgetLeft=297
+[INLOOP-HINT] ln=116 lineCyc=200 mask=7 pendInt=4 budgetLeft=289
+[INLOOP-HINT] ln=116 lineCyc=210 mask=7 pendInt=4 budgetLeft=279
+[INLOOP-HINT] ln=116 lineCyc=220 mask=7 pendInt=4 budgetLeft=269
+[INLOOP-HINT] ln=116 lineCyc=228 mask=7 pendInt=4 budgetLeft=261
+[INLOOP-HINT] ln=116 lineCyc=236 mask=7 pendInt=4 budgetLeft=253
+[INLOOP-HINT] ln=116 lineCyc=248 mask=7 pendInt=4 budgetLeft=241
+[INLOOP-HINT] ln=116 lineCyc=260 mask=7 pendInt=4 budgetLeft=229
+[INLOOP-HINT] ln=116 lineCyc=268 mask=7 pendInt=4 budgetLeft=221
+[INLOOP-HINT] ln=116 lineCyc=286 mask=7 pendInt=4 budgetLeft=203
+[INLOOP-HINT] ln=116 lineCyc=294 mask=7 pendInt=4 budgetLeft=195
+[INLOOP-HINT] ln=116 lineCyc=302 mask=7 pendInt=4 budgetLeft=187
+[INLOOP-HINT] ln=116 lineCyc=310 mask=7 pendInt=4 budgetLeft=179
+[INLOOP-HINT] ln=116 lineCyc=318 mask=7 pendInt=4 budgetLeft=171
+[INLOOP-HINT] ln=116 lineCyc=338 mask=7 pendInt=4 budgetLeft=151
+[INLOOP-HINT] ln=116 lineCyc=354 mask=7 pendInt=4 budgetLeft=135
+[INLOOP-HINT] ln=116 lineCyc=358 mask=7 pendInt=4 budgetLeft=131
+[INLOOP-HINT] ln=116 lineCyc=362 mask=7 pendInt=4 budgetLeft=127
+[INLOOP-HINT] ln=116 lineCyc=372 mask=7 pendInt=4 budgetLeft=117
+[INLOOP-HINT] ln=116 lineCyc=380 mask=7 pendInt=4 budgetLeft=109
+[INLOOP-HINT] ln=116 lineCyc=384 mask=7 pendInt=4 budgetLeft=105
+[INLOOP-HINT] ln=116 lineCyc=392 mask=7 pendInt=4 budgetLeft=97
+[INLOOP-HINT] ln=116 lineCyc=402 mask=7 pendInt=4 budgetLeft=87
+[INLOOP-HINT] ln=116 lineCyc=412 mask=7 pendInt=4 budgetLeft=77
+[INLOOP-HINT] ln=116 lineCyc=420 mask=7 pendInt=4 budgetLeft=69
+[INLOOP-HINT] ln=116 lineCyc=428 mask=7 pendInt=4 budgetLeft=61
+[INLOOP-HINT] ln=116 lineCyc=440 mask=7 pendInt=4 budgetLeft=49
+[INLOOP-HINT] ln=116 lineCyc=452 mask=7 pendInt=4 budgetLeft=37
+[INLOOP-HINT] ln=116 lineCyc=460 mask=7 pendInt=4 budgetLeft=29
+[INLOOP-HINT] ln=116 lineCyc=478 mask=7 pendInt=4 budgetLeft=11
+[INLOOP-HINT] ln=116 lineCyc=486 mask=7 pendInt=4 budgetLeft=3
+[INLOOP-HINT] ln=116 lineCyc=488 mask=7 pendInt=4 budgetLeft=-5
+[PRELOOP-HINT] ln=117 mask=7 pendInt=4 debt=-5
+[INLOOP-HINT] ln=117 lineCyc=8 mask=7 pendInt=4 budgetLeft=476
+[INLOOP-HINT] ln=117 lineCyc=16 mask=7 pendInt=4 budgetLeft=468
+[INLOOP-HINT] ln=117 lineCyc=36 mask=7 pendInt=4 budgetLeft=448
+[INLOOP-HINT] ln=117 lineCyc=52 mask=7 pendInt=4 budgetLeft=432
+[INLOOP-HINT] ln=117 lineCyc=56 mask=7 pendInt=4 budgetLeft=428
+[INLOOP-HINT] ln=117 lineCyc=60 mask=7 pendInt=4 budgetLeft=424
+[INLOOP-HINT] ln=117 lineCyc=70 mask=7 pendInt=4 budgetLeft=414
+[INLOOP-HINT] ln=117 lineCyc=78 mask=7 pendInt=4 budgetLeft=406
+[INLOOP-HINT] ln=117 lineCyc=82 mask=7 pendInt=4 budgetLeft=402
+[INLOOP-HINT] ln=117 lineCyc=90 mask=7 pendInt=4 budgetLeft=394
+[INLOOP-HINT] ln=117 lineCyc=98 mask=7 pendInt=4 budgetLeft=386
+[INLOOP-HINT] ln=117 lineCyc=116 mask=7 pendInt=4 budgetLeft=368
+[INLOOP-HINT] ln=117 lineCyc=140 mask=7 pendInt=4 budgetLeft=344
+[INLOOP-HINT] ln=117 lineCyc=144 mask=7 pendInt=4 budgetLeft=340
+[INLOOP-HINT] ln=117 lineCyc=148 mask=7 pendInt=4 budgetLeft=336
+[INLOOP-HINT] ln=117 lineCyc=156 mask=7 pendInt=4 budgetLeft=328
+[INLOOP-HINT] ln=117 lineCyc=168 mask=7 pendInt=4 budgetLeft=316
+[INLOOP-HINT] ln=117 lineCyc=172 mask=7 pendInt=4 budgetLeft=312
+[INLOOP-HINT] ln=117 lineCyc=186 mask=7 pendInt=4 budgetLeft=298
+[INLOOP-HINT] ln=117 lineCyc=194 mask=7 pendInt=4 budgetLeft=290
+[INLOOP-HINT] ln=117 lineCyc=198 mask=7 pendInt=4 budgetLeft=286
+[INLOOP-HINT] ln=117 lineCyc=202 mask=7 pendInt=4 budgetLeft=282
+[INLOOP-HINT] ln=117 lineCyc=206 mask=7 pendInt=4 budgetLeft=278
+[INLOOP-HINT] ln=117 lineCyc=220 mask=7 pendInt=4 budgetLeft=264
+[INLOOP-HINT] ln=117 lineCyc=240 mask=7 pendInt=4 budgetLeft=244
+[INLOOP-HINT] ln=117 lineCyc=248 mask=7 pendInt=4 budgetLeft=236
+[INLOOP-HINT] ln=117 lineCyc=256 mask=7 pendInt=4 budgetLeft=228
+[INLOOP-HINT] ln=117 lineCyc=260 mask=7 pendInt=4 budgetLeft=224
+[INLOOP-HINT] ln=117 lineCyc=264 mask=7 pendInt=4 budgetLeft=220
+[INLOOP-HINT] ln=117 lineCyc=268 mask=7 pendInt=4 budgetLeft=216
+[INLOOP-HINT] ln=117 lineCyc=292 mask=7 pendInt=4 budgetLeft=192
+[INLOOP-HINT] ln=117 lineCyc=308 mask=7 pendInt=4 budgetLeft=176
+[INLOOP-HINT] ln=117 lineCyc=318 mask=7 pendInt=4 budgetLeft=166
+[INLOOP-HINT] ln=117 lineCyc=326 mask=7 pendInt=4 budgetLeft=158
+[INLOOP-HINT] ln=117 lineCyc=334 mask=7 pendInt=4 budgetLeft=150
+[INLOOP-HINT] ln=117 lineCyc=346 mask=7 pendInt=4 budgetLeft=138
+[INLOOP-HINT] ln=117 lineCyc=358 mask=7 pendInt=4 budgetLeft=126
+[INLOOP-HINT] ln=117 lineCyc=366 mask=7 pendInt=4 budgetLeft=118
+[INLOOP-HINT] ln=117 lineCyc=384 mask=7 pendInt=4 budgetLeft=100
+[INLOOP-HINT] ln=117 lineCyc=392 mask=7 pendInt=4 budgetLeft=92
+[INLOOP-HINT] ln=117 lineCyc=400 mask=7 pendInt=4 budgetLeft=84
+[INLOOP-HINT] ln=117 lineCyc=408 mask=7 pendInt=4 budgetLeft=76
+[INLOOP-HINT] ln=117 lineCyc=416 mask=7 pendInt=4 budgetLeft=68
+[INLOOP-HINT] ln=117 lineCyc=436 mask=7 pendInt=4 budgetLeft=48
+[INLOOP-HINT] ln=117 lineCyc=452 mask=7 pendInt=4 budgetLeft=32
+[INLOOP-HINT] ln=117 lineCyc=456 mask=7 pendInt=4 budgetLeft=28
+[INLOOP-HINT] ln=117 lineCyc=460 mask=7 pendInt=4 budgetLeft=24
+[INLOOP-HINT] ln=117 lineCyc=470 mask=7 pendInt=4 budgetLeft=14
+[INLOOP-HINT] ln=117 lineCyc=478 mask=7 pendInt=4 budgetLeft=6
+[INLOOP-HINT] ln=117 lineCyc=482 mask=7 pendInt=4 budgetLeft=2
+[INLOOP-HINT] ln=117 lineCyc=488 mask=7 pendInt=4 budgetLeft=-6
+[PRELOOP-HINT] ln=118 mask=7 pendInt=4 debt=-6
+[INLOOP-HINT] ln=118 lineCyc=10 mask=7 pendInt=4 budgetLeft=472
+[INLOOP-HINT] ln=118 lineCyc=20 mask=7 pendInt=4 budgetLeft=462
+[INLOOP-HINT] ln=118 lineCyc=28 mask=7 pendInt=4 budgetLeft=454
+[INLOOP-HINT] ln=118 lineCyc=36 mask=7 pendInt=4 budgetLeft=446
+[INLOOP-HINT] ln=118 lineCyc=48 mask=7 pendInt=4 budgetLeft=434
+[INLOOP-HINT] ln=118 lineCyc=60 mask=7 pendInt=4 budgetLeft=422
+[INLOOP-HINT] ln=118 lineCyc=68 mask=7 pendInt=4 budgetLeft=414
+[INLOOP-HINT] ln=118 lineCyc=86 mask=7 pendInt=4 budgetLeft=396
+[INLOOP-HINT] ln=118 lineCyc=94 mask=7 pendInt=4 budgetLeft=388
+[INLOOP-HINT] ln=118 lineCyc=102 mask=7 pendInt=4 budgetLeft=380
+[INLOOP-HINT] ln=118 lineCyc=110 mask=7 pendInt=4 budgetLeft=372
+[INLOOP-HINT] ln=118 lineCyc=118 mask=7 pendInt=4 budgetLeft=364
+[INLOOP-HINT] ln=118 lineCyc=138 mask=7 pendInt=4 budgetLeft=344
+[INLOOP-HINT] ln=118 lineCyc=154 mask=7 pendInt=4 budgetLeft=328
+[INLOOP-HINT] ln=118 lineCyc=158 mask=7 pendInt=4 budgetLeft=324
+[INLOOP-HINT] ln=118 lineCyc=162 mask=7 pendInt=4 budgetLeft=320
+[INLOOP-HINT] ln=118 lineCyc=172 mask=7 pendInt=4 budgetLeft=310
+[INLOOP-HINT] ln=118 lineCyc=180 mask=7 pendInt=4 budgetLeft=302
+[INLOOP-HINT] ln=118 lineCyc=184 mask=7 pendInt=4 budgetLeft=298
+[INLOOP-HINT] ln=118 lineCyc=192 mask=7 pendInt=4 budgetLeft=290
+[INLOOP-HINT] ln=118 lineCyc=202 mask=7 pendInt=4 budgetLeft=280
+[INLOOP-HINT] ln=118 lineCyc=212 mask=7 pendInt=4 budgetLeft=270
+[INLOOP-HINT] ln=118 lineCyc=220 mask=7 pendInt=4 budgetLeft=262
+[INLOOP-HINT] ln=118 lineCyc=228 mask=7 pendInt=4 budgetLeft=254
+[INLOOP-HINT] ln=118 lineCyc=240 mask=7 pendInt=4 budgetLeft=242
+[INLOOP-HINT] ln=118 lineCyc=252 mask=7 pendInt=4 budgetLeft=230
+[INLOOP-HINT] ln=118 lineCyc=260 mask=7 pendInt=4 budgetLeft=222
+[INLOOP-HINT] ln=118 lineCyc=278 mask=7 pendInt=4 budgetLeft=204
+[INLOOP-HINT] ln=118 lineCyc=286 mask=7 pendInt=4 budgetLeft=196
+[INLOOP-HINT] ln=118 lineCyc=294 mask=7 pendInt=4 budgetLeft=188
+[INLOOP-HINT] ln=118 lineCyc=302 mask=7 pendInt=4 budgetLeft=180
+[INLOOP-HINT] ln=118 lineCyc=310 mask=7 pendInt=4 budgetLeft=172
+[INLOOP-HINT] ln=118 lineCyc=330 mask=7 pendInt=4 budgetLeft=152
+[INLOOP-HINT] ln=118 lineCyc=346 mask=7 pendInt=4 budgetLeft=136
+[INLOOP-HINT] ln=118 lineCyc=350 mask=7 pendInt=4 budgetLeft=132
+[INLOOP-HINT] ln=118 lineCyc=354 mask=7 pendInt=4 budgetLeft=128
+[INLOOP-HINT] ln=118 lineCyc=364 mask=7 pendInt=4 budgetLeft=118
+[INLOOP-HINT] ln=118 lineCyc=372 mask=7 pendInt=4 budgetLeft=110
+[INLOOP-HINT] ln=118 lineCyc=376 mask=7 pendInt=4 budgetLeft=106
+[INLOOP-HINT] ln=118 lineCyc=384 mask=7 pendInt=4 budgetLeft=98
+[INLOOP-HINT] ln=118 lineCyc=394 mask=7 pendInt=4 budgetLeft=88
+[INLOOP-HINT] ln=118 lineCyc=404 mask=7 pendInt=4 budgetLeft=78
+[INLOOP-HINT] ln=118 lineCyc=412 mask=7 pendInt=4 budgetLeft=70
+[INLOOP-HINT] ln=118 lineCyc=420 mask=7 pendInt=4 budgetLeft=62
+[INLOOP-HINT] ln=118 lineCyc=432 mask=7 pendInt=4 budgetLeft=50
+[INLOOP-HINT] ln=118 lineCyc=444 mask=7 pendInt=4 budgetLeft=38
+[INLOOP-HINT] ln=118 lineCyc=452 mask=7 pendInt=4 budgetLeft=30
+[INLOOP-HINT] ln=118 lineCyc=470 mask=7 pendInt=4 budgetLeft=12
+[INLOOP-HINT] ln=118 lineCyc=478 mask=7 pendInt=4 budgetLeft=4
+[INLOOP-HINT] ln=118 lineCyc=486 mask=7 pendInt=4 budgetLeft=-4
+[PRELOOP-HINT] ln=119 mask=7 pendInt=4 debt=-4
+[INLOOP-HINT] ln=119 lineCyc=8 mask=7 pendInt=4 budgetLeft=477
+[INLOOP-HINT] ln=119 lineCyc=16 mask=7 pendInt=4 budgetLeft=469
+[INLOOP-HINT] ln=119 lineCyc=36 mask=7 pendInt=4 budgetLeft=449
+[INLOOP-HINT] ln=119 lineCyc=52 mask=7 pendInt=4 budgetLeft=433
+[INLOOP-HINT] ln=119 lineCyc=56 mask=7 pendInt=4 budgetLeft=429
+[INLOOP-HINT] ln=119 lineCyc=60 mask=7 pendInt=4 budgetLeft=425
+[INLOOP-HINT] ln=119 lineCyc=70 mask=7 pendInt=4 budgetLeft=415
+[INLOOP-HINT] ln=119 lineCyc=78 mask=7 pendInt=4 budgetLeft=407
+[INLOOP-HINT] ln=119 lineCyc=82 mask=7 pendInt=4 budgetLeft=403
+[INLOOP-HINT] ln=119 lineCyc=90 mask=7 pendInt=4 budgetLeft=395
+[INLOOP-HINT] ln=119 lineCyc=100 mask=7 pendInt=4 budgetLeft=385
+[INLOOP-HINT] ln=119 lineCyc=110 mask=7 pendInt=4 budgetLeft=375
+[INLOOP-HINT] ln=119 lineCyc=118 mask=7 pendInt=4 budgetLeft=367
+[INLOOP-HINT] ln=119 lineCyc=126 mask=7 pendInt=4 budgetLeft=359
+[INLOOP-HINT] ln=119 lineCyc=138 mask=7 pendInt=4 budgetLeft=347
+[INLOOP-HINT] ln=119 lineCyc=150 mask=7 pendInt=4 budgetLeft=335
+[INLOOP-HINT] ln=119 lineCyc=158 mask=7 pendInt=4 budgetLeft=327
+[INLOOP-HINT] ln=119 lineCyc=176 mask=7 pendInt=4 budgetLeft=309
+[INLOOP-HINT] ln=119 lineCyc=184 mask=7 pendInt=4 budgetLeft=301
+[INLOOP-HINT] ln=119 lineCyc=192 mask=7 pendInt=4 budgetLeft=293
+[INLOOP-HINT] ln=119 lineCyc=200 mask=7 pendInt=4 budgetLeft=285
+[INLOOP-HINT] ln=119 lineCyc=208 mask=7 pendInt=4 budgetLeft=277
+[INLOOP-HINT] ln=119 lineCyc=228 mask=7 pendInt=4 budgetLeft=257
+[INLOOP-HINT] ln=119 lineCyc=244 mask=7 pendInt=4 budgetLeft=241
+[INLOOP-HINT] ln=119 lineCyc=248 mask=7 pendInt=4 budgetLeft=237
+[INLOOP-HINT] ln=119 lineCyc=252 mask=7 pendInt=4 budgetLeft=233
+[INLOOP-HINT] ln=119 lineCyc=262 mask=7 pendInt=4 budgetLeft=223
+[INLOOP-HINT] ln=119 lineCyc=270 mask=7 pendInt=4 budgetLeft=215
+[INLOOP-HINT] ln=119 lineCyc=274 mask=7 pendInt=4 budgetLeft=211
+[INLOOP-HINT] ln=119 lineCyc=282 mask=7 pendInt=4 budgetLeft=203
+[INLOOP-HINT] ln=119 lineCyc=292 mask=7 pendInt=4 budgetLeft=193
+[INLOOP-HINT] ln=119 lineCyc=302 mask=7 pendInt=4 budgetLeft=183
+[INLOOP-HINT] ln=119 lineCyc=310 mask=7 pendInt=4 budgetLeft=175
+[INLOOP-HINT] ln=119 lineCyc=318 mask=7 pendInt=4 budgetLeft=167
+[INLOOP-HINT] ln=119 lineCyc=330 mask=7 pendInt=4 budgetLeft=155
+[INLOOP-HINT] ln=119 lineCyc=342 mask=7 pendInt=4 budgetLeft=143
+[INLOOP-HINT] ln=119 lineCyc=350 mask=7 pendInt=4 budgetLeft=135
+[INLOOP-HINT] ln=119 lineCyc=368 mask=7 pendInt=4 budgetLeft=117
+[INLOOP-HINT] ln=119 lineCyc=376 mask=7 pendInt=4 budgetLeft=109
+[INLOOP-HINT] ln=119 lineCyc=384 mask=7 pendInt=4 budgetLeft=101
+[INLOOP-HINT] ln=119 lineCyc=392 mask=7 pendInt=4 budgetLeft=93
+[INLOOP-HINT] ln=119 lineCyc=400 mask=7 pendInt=4 budgetLeft=85
+[INLOOP-HINT] ln=119 lineCyc=420 mask=7 pendInt=4 budgetLeft=65
+[INLOOP-HINT] ln=119 lineCyc=436 mask=7 pendInt=4 budgetLeft=49
+[INLOOP-HINT] ln=119 lineCyc=440 mask=7 pendInt=4 budgetLeft=45
+[INLOOP-HINT] ln=119 lineCyc=444 mask=7 pendInt=4 budgetLeft=41
+[INLOOP-HINT] ln=119 lineCyc=454 mask=7 pendInt=4 budgetLeft=31
+[INLOOP-HINT] ln=119 lineCyc=462 mask=7 pendInt=4 budgetLeft=23
+[INLOOP-HINT] ln=119 lineCyc=466 mask=7 pendInt=4 budgetLeft=19
+[INLOOP-HINT] ln=119 lineCyc=474 mask=7 pendInt=4 budgetLeft=11
+[INLOOP-HINT] ln=119 lineCyc=484 mask=7 pendInt=4 budgetLeft=1
+[INLOOP-HINT] ln=119 lineCyc=488 mask=7 pendInt=4 budgetLeft=-9
+[PRELOOP-HINT] ln=120 mask=7 pendInt=4 debt=-9
+[INLOOP-HINT] ln=120 lineCyc=8 mask=7 pendInt=4 budgetLeft=471
+[INLOOP-HINT] ln=120 lineCyc=16 mask=7 pendInt=4 budgetLeft=463
+[INLOOP-HINT] ln=120 lineCyc=28 mask=7 pendInt=4 budgetLeft=451
+[INLOOP-HINT] ln=120 lineCyc=40 mask=7 pendInt=4 budgetLeft=439
+[INLOOP-HINT] ln=120 lineCyc=48 mask=7 pendInt=4 budgetLeft=431
+[INLOOP-HINT] ln=120 lineCyc=66 mask=7 pendInt=4 budgetLeft=413
+[INLOOP-HINT] ln=120 lineCyc=74 mask=7 pendInt=4 budgetLeft=405
+[INLOOP-HINT] ln=120 lineCyc=82 mask=7 pendInt=4 budgetLeft=397
+[INLOOP-HINT] ln=120 lineCyc=90 mask=7 pendInt=4 budgetLeft=389
+[INLOOP-HINT] ln=120 lineCyc=98 mask=7 pendInt=4 budgetLeft=381
+[INLOOP-HINT] ln=120 lineCyc=118 mask=7 pendInt=4 budgetLeft=361
+[INLOOP-HINT] ln=120 lineCyc=134 mask=7 pendInt=4 budgetLeft=345
+[INLOOP-HINT] ln=120 lineCyc=138 mask=7 pendInt=4 budgetLeft=341
+[INLOOP-HINT] ln=120 lineCyc=142 mask=7 pendInt=4 budgetLeft=337
+[INLOOP-HINT] ln=120 lineCyc=152 mask=7 pendInt=4 budgetLeft=327
+[INLOOP-HINT] ln=120 lineCyc=160 mask=7 pendInt=4 budgetLeft=319
+[INLOOP-HINT] ln=120 lineCyc=164 mask=7 pendInt=4 budgetLeft=315
+[INLOOP-HINT] ln=120 lineCyc=172 mask=7 pendInt=4 budgetLeft=307
+[INLOOP-HINT] ln=120 lineCyc=182 mask=7 pendInt=4 budgetLeft=297
+[INLOOP-HINT] ln=120 lineCyc=192 mask=7 pendInt=4 budgetLeft=287
+[INLOOP-HINT] ln=120 lineCyc=200 mask=7 pendInt=4 budgetLeft=279
+[INLOOP-HINT] ln=120 lineCyc=208 mask=7 pendInt=4 budgetLeft=271
+[INLOOP-HINT] ln=120 lineCyc=220 mask=7 pendInt=4 budgetLeft=259
+[INLOOP-HINT] ln=120 lineCyc=232 mask=7 pendInt=4 budgetLeft=247
+[INLOOP-HINT] ln=120 lineCyc=240 mask=7 pendInt=4 budgetLeft=239
+[INLOOP-HINT] ln=120 lineCyc=258 mask=7 pendInt=4 budgetLeft=221
+[INLOOP-HINT] ln=120 lineCyc=266 mask=7 pendInt=4 budgetLeft=213
+[INLOOP-HINT] ln=120 lineCyc=274 mask=7 pendInt=4 budgetLeft=205
+[INLOOP-HINT] ln=120 lineCyc=282 mask=7 pendInt=4 budgetLeft=197
+[INLOOP-HINT] ln=120 lineCyc=290 mask=7 pendInt=4 budgetLeft=189
+[INLOOP-HINT] ln=120 lineCyc=310 mask=7 pendInt=4 budgetLeft=169
+[INLOOP-HINT] ln=120 lineCyc=326 mask=7 pendInt=4 budgetLeft=153
+[INLOOP-HINT] ln=120 lineCyc=330 mask=7 pendInt=4 budgetLeft=149
+[INLOOP-HINT] ln=120 lineCyc=334 mask=7 pendInt=4 budgetLeft=145
+[INLOOP-HINT] ln=120 lineCyc=342 mask=7 pendInt=4 budgetLeft=137
+[INLOOP-HINT] ln=120 lineCyc=350 mask=7 pendInt=4 budgetLeft=129
+[INLOOP-HINT] ln=120 lineCyc=354 mask=7 pendInt=4 budgetLeft=125
+[INLOOP-HINT] ln=120 lineCyc=366 mask=7 pendInt=4 budgetLeft=113
+[INLOOP-HINT] ln=120 lineCyc=370 mask=7 pendInt=4 budgetLeft=109
+[INLOOP-HINT] ln=120 lineCyc=378 mask=7 pendInt=4 budgetLeft=101
+[INLOOP-HINT] ln=120 lineCyc=382 mask=7 pendInt=4 budgetLeft=97
+[INLOOP-HINT] ln=120 lineCyc=390 mask=7 pendInt=4 budgetLeft=89
+[INLOOP-HINT] ln=120 lineCyc=398 mask=7 pendInt=4 budgetLeft=81
+[INLOOP-HINT] ln=120 lineCyc=416 mask=7 pendInt=4 budgetLeft=63
+[INLOOP-HINT] ln=120 lineCyc=440 mask=7 pendInt=4 budgetLeft=39
+[INLOOP-HINT] ln=120 lineCyc=444 mask=7 pendInt=4 budgetLeft=35
+[INLOOP-HINT] ln=120 lineCyc=448 mask=7 pendInt=4 budgetLeft=31
+[INLOOP-HINT] ln=120 lineCyc=456 mask=7 pendInt=4 budgetLeft=23
+[INLOOP-HINT] ln=120 lineCyc=468 mask=7 pendInt=4 budgetLeft=11
+[INLOOP-HINT] ln=120 lineCyc=472 mask=7 pendInt=4 budgetLeft=7
+[INLOOP-HINT] ln=120 lineCyc=486 mask=7 pendInt=4 budgetLeft=-7
+[PRELOOP-HINT] ln=121 mask=7 pendInt=4 debt=-7
+[INLOOP-HINT] ln=121 lineCyc=8 mask=7 pendInt=4 budgetLeft=474
+[INLOOP-HINT] ln=121 lineCyc=12 mask=7 pendInt=4 budgetLeft=470
+[INLOOP-HINT] ln=121 lineCyc=16 mask=7 pendInt=4 budgetLeft=466
+[INLOOP-HINT] ln=121 lineCyc=20 mask=7 pendInt=4 budgetLeft=462
+[INLOOP-HINT] ln=121 lineCyc=34 mask=7 pendInt=4 budgetLeft=448
+[INLOOP-HINT] ln=121 lineCyc=54 mask=7 pendInt=4 budgetLeft=428
+[INLOOP-HINT] ln=121 lineCyc=62 mask=7 pendInt=4 budgetLeft=420
+[INLOOP-HINT] ln=121 lineCyc=70 mask=7 pendInt=4 budgetLeft=412
+[INLOOP-HINT] ln=121 lineCyc=74 mask=7 pendInt=4 budgetLeft=408
+[INLOOP-HINT] ln=121 lineCyc=78 mask=7 pendInt=4 budgetLeft=404
+[INLOOP-HINT] ln=121 lineCyc=82 mask=7 pendInt=4 budgetLeft=400
+[INLOOP-HINT] ln=121 lineCyc=106 mask=7 pendInt=4 budgetLeft=376
+[INLOOP-HINT] ln=121 lineCyc=122 mask=7 pendInt=4 budgetLeft=360
+[INLOOP-HINT] ln=121 lineCyc=136 mask=7 pendInt=4 budgetLeft=346
+[INLOOP-HINT] ln=121 lineCyc=152 mask=7 pendInt=4 budgetLeft=330
+[INLOOP-HINT] ln=121 lineCyc=164 mask=3 pendInt=4 budgetLeft=318
+[REG01] ln=121 cyc=474 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=128 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=71
+[REG01] ln=108 cyc=466 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=117 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=410 newCyc=422 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=422 mask=3 pendInt=-1 budgetLeft=63
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=113 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=402 newCyc=414 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=414 mask=3 pendInt=-1 budgetLeft=71
+[REG01] ln=108 cyc=466 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=117 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=410 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=63
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=412 newCyc=420 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=420 mask=3 pendInt=-1 budgetLeft=68
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=416 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=416 mask=3 pendInt=-1 budgetLeft=69
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=67
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=410 newCyc=422 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=422 mask=3 pendInt=-1 budgetLeft=65
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=414 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=414 mask=3 pendInt=-1 budgetLeft=68
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=402 newCyc=414 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=414 mask=3 pendInt=-1 budgetLeft=75
+[REG01] ln=108 cyc=466 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=117 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=412 newCyc=420 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=420 mask=3 pendInt=-1 budgetLeft=63
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=414 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=414 mask=3 pendInt=-1 budgetLeft=74
+[REG01] ln=108 cyc=466 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=117 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=410 newCyc=414 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=414 mask=3 pendInt=-1 budgetLeft=71
+[REG01] ln=108 cyc=466 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=117 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=414 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=414 mask=3 pendInt=-1 budgetLeft=73
+[REG01] ln=108 cyc=466 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=117 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=412 newCyc=420 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=420 mask=3 pendInt=-1 budgetLeft=68
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=410 newCyc=420 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=420 mask=3 pendInt=-1 budgetLeft=61
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=113 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=410 newCyc=422 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=422 mask=3 pendInt=-1 budgetLeft=65
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=412 newCyc=424 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=424 mask=3 pendInt=-1 budgetLeft=65
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=412 newCyc=436 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=436 mask=3 pendInt=-1 budgetLeft=49
+[REG01] ln=109 cyc=8 px=0 val=34 old=74 dispEn=1 rendPx=0
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=0 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=67
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=410 newCyc=422 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=422 mask=3 pendInt=-1 budgetLeft=61
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=113 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=63
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=113 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=402 newCyc=414 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=414 mask=3 pendInt=-1 budgetLeft=69
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=396 newCyc=414 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=414 mask=3 pendInt=-1 budgetLeft=65
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=412 newCyc=420 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=420 mask=3 pendInt=-1 budgetLeft=65
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=410 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=69
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=402 newCyc=414 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=414 mask=3 pendInt=-1 budgetLeft=65
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=64
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=69
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=410 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=63
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=113 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=402 newCyc=414 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=414 mask=3 pendInt=-1 budgetLeft=72
+[REG01] ln=108 cyc=466 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=117 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=62
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=402 newCyc=414 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=414 mask=3 pendInt=-1 budgetLeft=70
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=422 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=422 mask=3 pendInt=-1 budgetLeft=52
+[REG01] ln=109 cyc=0 px=0 val=34 old=74 dispEn=1 rendPx=0
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=66
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=61
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=113 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=410 newCyc=414 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=414 mask=3 pendInt=-1 budgetLeft=71
+[REG01] ln=108 cyc=466 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=414 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=414 mask=3 pendInt=-1 budgetLeft=75
+[REG01] ln=108 cyc=466 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=117 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=416 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=416 mask=3 pendInt=-1 budgetLeft=71
+[REG01] ln=108 cyc=466 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=117 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=412 newCyc=416 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=416 mask=3 pendInt=-1 budgetLeft=65
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=402 newCyc=420 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=420 mask=3 pendInt=-1 budgetLeft=63
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=422 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=422 mask=3 pendInt=-1 budgetLeft=63
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=62
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=113 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=412 newCyc=420 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=420 mask=3 pendInt=-1 budgetLeft=65
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=412 newCyc=416 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=416 mask=3 pendInt=-1 budgetLeft=62
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=404 newCyc=414 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=0 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=414 mask=3 pendInt=-1 budgetLeft=70
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=59
+[REG01] ln=109 cyc=0 px=0 val=34 old=74 dispEn=1 rendPx=0
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=70
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=68
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=70
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=69
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=68
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=0 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=65
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=0 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=62
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=113 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=64
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=67
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=69
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=66
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=60
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=113 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=69
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=0 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=65
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=0 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=70
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=60
+[REG01] ln=109 cyc=0 px=0 val=34 old=74 dispEn=1 rendPx=0
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=70
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=61
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=113 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=66
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=66
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=63
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=0 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=67
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=0 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=68
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=67
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=70
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=69
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=71
+[REG01] ln=108 cyc=466 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=117 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=64
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=68
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=0 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=70
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=0 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=63
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=113 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=0 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=65
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=62
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=71
+[REG01] ln=108 cyc=466 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=117 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=61
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=113 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=60
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=113 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=62
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=0 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=64
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=0 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=70
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=68
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=61
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=113 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=67
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=59
+[REG01] ln=109 cyc=0 px=0 val=34 old=74 dispEn=1 rendPx=0
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=0 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=66
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=60
+[REG01] ln=109 cyc=0 px=0 val=34 old=74 dispEn=1 rendPx=0
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=0 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=65
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=406 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=0 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=60
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=113 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=66
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=408 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=65
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=410 newCyc=418 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=418 mask=3 pendInt=-1 budgetLeft=66
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
+[HINT] ln=107 cyc=412 newCyc=420 hbStart=414 reg0A=6B bgIdx=32 dispEn=1 blank=0 dma=0 dmaMode=1 dmaRem=0
+[INLOOP-HINT] ln=107 lineCyc=420 mask=3 pendInt=-1 budgetLeft=66
+[REG01] ln=108 cyc=478 px=320 val=34 old=74 dispEn=1 rendPx=320
+[REG01] ln=115 cyc=52 px=33 val=74 old=34 dispEn=0 rendPx=33
