@@ -1,0 +1,84 @@
+# Copyright (C) 2026 pagefault
+# SPDX-License-Identifier: GPL-3.0-only
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-24.04
+            name: Linux x86_64
+          - os: macos-latest
+            name: macOS arm64
+          - os: windows-latest
+            name: Windows x64
+
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # ── Linux dependencies ──
+      - name: Install dependencies (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential cmake pkg-config \
+            libglew-dev \
+            libx11-dev libxext-dev libxrandr-dev libxcursor-dev libxi-dev \
+            libxinerama-dev libxss-dev libxkbcommon-dev \
+            libwayland-dev libwayland-egl1 wayland-protocols \
+            libdecor-0-dev \
+            libpulse-dev libasound2-dev \
+            libgl1-mesa-dev libgles2-mesa-dev libegl1-mesa-dev \
+            libdbus-1-dev libudev-dev libpipewire-0.3-dev
+
+      - name: Build SDL3 from source (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          SDL3_TAG="release-3.2.8"
+          git clone --depth 1 --branch "$SDL3_TAG" https://github.com/libsdl-org/SDL.git /tmp/SDL3
+          cmake -S /tmp/SDL3 -B /tmp/SDL3/build \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_INSTALL_PREFIX=/usr/local \
+            -DSDL_WAYLAND=ON -DSDL_X11=ON
+          cmake --build /tmp/SDL3/build -j4
+          sudo cmake --install /tmp/SDL3/build
+
+      # ── macOS dependencies ──
+      - name: Install dependencies (macOS)
+        if: runner.os == 'macOS'
+        run: brew install sdl3
+
+      # ── Windows dependencies ──
+      - name: Install dependencies (Windows)
+        if: runner.os == 'Windows'
+        run: vcpkg install sdl3 glew --triplet x64-windows
+        env:
+          VCPKG_ROOT: C:\vcpkg
+
+      # ── Build ──
+      - name: Configure (Linux/macOS)
+        if: runner.os != 'Windows'
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+
+      - name: Configure (Windows)
+        if: runner.os == 'Windows'
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release "-DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake"
+
+      - name: Build
+        run: cmake --build build --config Release -j4
+
+      # ── Test ──
+      - name: Test
+        run: ctest --test-dir build -C Release --output-on-failure --timeout 600

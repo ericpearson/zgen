@@ -1,0 +1,27 @@
+# Copyright (C) 2026 pagefault
+# SPDX-License-Identifier: GPL-3.0-only
+
+# Build output
+build/
+build-native-opt/
+build-vulkan/
+
+# Object files
+*.o
+*.obj
+
+# Editor / IDE
+.cache
+.vscode/
+.idea/
+*.swp
+*~
+
+# OS
+.DS_Store
+
+# Local agent/skill metadata
+skills/
+
+# Extracted test ROMs are tracked; wrapper downloads are not.
+testroms/*.bin
