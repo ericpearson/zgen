@@ -12,6 +12,9 @@
 
 static constexpr int SINE_TABLE_SIZE = 512;
 static constexpr int POW_TABLE_SIZE = 8192;
+// Invalid status-port reads return a latched copy that decays after roughly
+// 225000 YM clocks. In scheduler units, one YM clock is 6 M68K cycles.
+static constexpr int YM_INVALID_STATUS_DECAY_CYCLES = 225000 * 6;
 
 // Hardware-accurate OPN2 log-sine and power tables.
 // sineTable: half-wave (0..pi), 4.8 fixed-point -log2(sin)
@@ -161,6 +164,8 @@ void YM2612::reset() {
     timerBCounter = 0;
     timerBSubCounter = 0;
     busyCounter = 0;
+    lastStatus = 0;
+    lastStatusDecayCycles = 0;
     egCounter = 0;
     egSubCounter = 0;
 
@@ -212,18 +217,26 @@ void YM2612::writeData(u8 data, int port) {
         std::fprintf(ymLog, "[YM] p%d r%02X=%02X\n", port & 1, addressLatch[port & 1], data);
     }
     writeRegister(addressLatch[port & 1], data, port & 1);
-    // YM2612 busy flag lasts 32 FM internal clock cycles after a data write
-    // (confirmed by Nuked OPN2 cycle-accurate core: write_busy_cnt counts 0-31).
-    // One FM sample = 24 internal clocks, so 32 clocks ≈ 1.33 samples → round up to 2.
-    busyCounter = 2;
+    // YM2612 busy flag lasts 32 YM clocks after a data write.
+    // 32 clocks * 6 subcycles = 192 M68K cycles.
+    busyCounter = 192;
 }
 
-u8 YM2612::readStatus() {
+u8 YM2612::readStatus(int port) {
+    if ((port & 3) != 0) {
+        if (lastStatusDecayCycles <= 0) {
+            lastStatus = 0;
+        }
+        return lastStatus;
+    }
+
     u8 status = 0;
     if (busyCounter > 0) status |= 0x80;  // Bit 7: busy flag
     if (timerAOverflow) status |= 0x01;
     if (timerBOverflow) status |= 0x02;
-    return status;
+    lastStatus = status;
+    lastStatusDecayCycles = YM_INVALID_STATUS_DECAY_CYCLES;
+    return lastStatus;
 }
 
 void YM2612::writeRegister(u8 addr, u8 data, int bank) {
@@ -974,8 +987,6 @@ void YM2612::advanceState() {
             }
         }
     }
-    if (busyCounter > 0) busyCounter--;
-
     // LFO update: hardware has 128 discrete steps per cycle.
     // Hardware uses 128 discrete steps per cycle, not continuous phase.
     if (lfoEnabled) {
@@ -1030,6 +1041,27 @@ void YM2612::advanceState() {
                 timerBCounter = timerB;
                 if (timerControl & 0x08) timerBOverflow = true;
             }
+        }
+    }
+}
+
+void YM2612::clockBusyCycles(int m68kCycles) {
+    if (m68kCycles <= 0) {
+        return;
+    }
+    if (busyCounter > 0) {
+        if (m68kCycles >= busyCounter) {
+            busyCounter = 0;
+        } else {
+            busyCounter -= m68kCycles;
+        }
+    }
+    if (lastStatusDecayCycles > 0) {
+        if (m68kCycles >= lastStatusDecayCycles) {
+            lastStatusDecayCycles = 0;
+            lastStatus = 0;
+        } else {
+            lastStatusDecayCycles -= m68kCycles;
         }
     }
 }

@@ -24,6 +24,15 @@ A desktop emulator with cycle-aware Genesis / Mega Drive hardware emulation:
 
 **Playable** — boots and runs games reliably. VDP uses a slot-driven rendering pipeline where each scanline's tiles, FIFO drains, and VSRAM latches are processed at their correct hardware slot positions. Audio and timing accuracy are under active improvement.
 
+## Downloads
+
+Prebuilt packages are published on the [GitHub Releases](https://github.com/ericpearson/zgen/releases) page:
+
+- `zgen-linux-x86_64.tar.gz`
+- `zgen-macos-arm64.tar.gz`
+- `zgen-windows-x64.zip` — default OpenGL build
+- `zgen-windows-x64-vulkan.zip` — Windows build with the Vulkan renderer enabled
+
 ## Build
 
 Requires:

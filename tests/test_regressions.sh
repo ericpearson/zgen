@@ -197,6 +197,13 @@ with open(sys.argv[1], 'w') as f:
 " "$path"
 }
 
+write_clue_menu_start_input() {
+    # Clue reaches the attract-room scene by frame 1500. Press Start on the
+    # next frame to enter the game-level selection menu from cold boot.
+    local path="$1"
+    printf '1501:S\n' > "$path"
+}
+
 # --- Panorama Cotton (single run, three checks) ---
 # Run once for 22000 frames, dump frame at 22000.
 # Then check HUD, sky, and floor rendering from that one frame.
@@ -419,27 +426,31 @@ test_f1_race_pal_bottom_border() {
 
     write_f1_race_start_input /tmp/test_f1_start_input.txt
 
-    ./build/cpz_trace "$rom" none 1500 1500 /tmp/test_f1_race.ppm \
-        --input-file /tmp/test_f1_start_input.txt 2>/dev/null
+    CPZ_DUMP_FRAMES="1310:/tmp/test_f1_race_f1310.ppm,1312:/tmp/test_f1_race_f1312.ppm,1398:/tmp/test_f1_race_f1398.ppm,1400:/tmp/test_f1_race_f1400.ppm,1416:/tmp/test_f1_race_f1416.ppm,1418:/tmp/test_f1_race_f1418.ppm,1479:/tmp/test_f1_race_f1479.ppm,1480:/tmp/test_f1_race_f1480.ppm,1490:/tmp/test_f1_race_f1490.ppm,1492:/tmp/test_f1_race_f1492.ppm,1497:/tmp/test_f1_race_f1497.ppm,1499:/tmp/test_f1_race_f1499.ppm,1500:/tmp/test_f1_race_f1500.ppm" \
+        ./build/cpz_trace "$rom" none 1500 0 /dev/null \
+        --input-file /tmp/test_f1_start_input.txt >/tmp/test_f1_race_trace.log 2>/dev/null
 
     python3 - <<'PY'
 import sys
 
-data = open('/tmp/test_f1_race.ppm', 'rb').read().split(b'\n', 3)
-w, h = map(int, data[1].split())
-px = data[3]
+def load_frame(frame):
+    data = open(f'/tmp/test_f1_race_f{frame}.ppm', 'rb').read().split(b'\n', 3)
+    w, h = map(int, data[1].split())
+    return w, h, data[3]
 
-if (w, h) != (256, 240):
-    print(f'F1 race PAL viewport is {w}x{h}, expected 256x240')
-    sys.exit(1)
-
-def nonblack(row):
+def nonblack(px, w, row):
     return sum(
         1 for x in range(w)
         if px[(row * w + x) * 3:(row * w + x) * 3 + 3] != b'\x00\x00\x00'
     )
 
-row216 = nonblack(216)
+w, h, px = load_frame(1500)
+
+if (w, h) != (256, 240):
+    print(f'F1 race PAL viewport is {w}x{h}, expected 256x240')
+    sys.exit(1)
+
+row216 = nonblack(px, w, 216)
 if row216 < 200:
     print(f'F1 race row 216 has {row216}/{w} non-black pixels, expected dense race content')
     sys.exit(1)
@@ -460,15 +471,26 @@ if len(row216_colors) > 12 or row216_greenish > 0:
     )
     sys.exit(1)
 
-bad_bottom = [(y, nonblack(y)) for y in range(217, 240) if nonblack(y) != 0]
+sampled_frames = [1310, 1312, 1398, 1400, 1416, 1418, 1479, 1480, 1490, 1492, 1497, 1499, 1500]
+bad_bottom = []
+for frame in sampled_frames:
+    fw, fh, fpx = load_frame(frame)
+    if (fw, fh) != (256, 240):
+        print(f'F1 race frame {frame} viewport is {fw}x{fh}, expected 256x240')
+        sys.exit(1)
+    bad_bottom.extend(
+        (frame, y, nonblack(fpx, fw, y))
+        for y in range(217, 240)
+        if nonblack(fpx, fw, y) != 0
+    )
 if bad_bottom:
-    preview = ', '.join(f'row {y}: {n}' for y, n in bad_bottom[:8])
+    preview = ', '.join(f'frame {frame} row {y}: {n}' for frame, y, n in bad_bottom[:8])
     print(f'F1 race bottom border not black after row 216: {preview}')
     sys.exit(1)
 
 print(
     f'F1 race PAL viewport: {w}x{h}, row216={row216}, '
-    f'row216_colors={len(row216_colors)}, rows 217..239 black'
+    f'row216_colors={len(row216_colors)}, rows 217..239 black across {len(sampled_frames)} sampled frames'
 )
 PY
 }
@@ -1032,6 +1054,188 @@ print('Cotton play scroll-state oracle: rows 23..60 match reference raw 44000')
 PY
 }
 
+# --- Clue game-level menu background ---
+# The game-level menu should draw an opaque black panel behind the selectable
+# text. The bad frame leaks stale/generated background tiles through the panel,
+# especially in the central rectangle around rows 78..166.
+test_clue_menu_background_clean() {
+    local rom="build/Clue (USA).md"
+    [ -f "$rom" ] || return 2
+
+    write_clue_menu_start_input /tmp/test_clue_menu_input.txt
+
+    ./build/cpz_trace "$rom" none 1600 1600 /tmp/test_clue_menu.ppm \
+        --input-file /tmp/test_clue_menu_input.txt >/dev/null 2>/dev/null
+
+    python3 - <<'PY'
+import sys
+
+chunks = open('/tmp/test_clue_menu.ppm', 'rb').read().split(b'\n', 3)
+w = int(chunks[1].split()[0])
+h = int(chunks[1].split()[1])
+px = chunks[3]
+
+if (w, h) != (256, 224):
+    print(f'Clue menu viewport is {w}x{h}, expected 256x224')
+    sys.exit(1)
+
+# Rect covers the menu panel but avoids most surrounding board-room tiles.
+x0, y0, x1, y1 = 56, 78, 199, 166
+bad = 0
+for y in range(y0, y1 + 1):
+    for x in range(x0, x1 + 1):
+        off = (y * w + x) * 3
+        r, g, b = px[off], px[off + 1], px[off + 2]
+        # The correct panel has black plus yellow/orange text. Green/blue/red
+        # stale tiles in this rectangle indicate the menu background leak.
+        if max(r, g, b) > 40 and not (r >= g >= b and r > 80):
+            bad += 1
+
+if bad > 100:
+    print(f'Clue menu background has {bad} colored garbage pixels (expected <=100)')
+    sys.exit(1)
+
+print(f'Clue menu background clean: {bad} colored garbage pixels')
+PY
+}
+
+# --- Darius title boot ---
+# Darius uses the Z80 reset/BUSREQ handshake during startup. If BUSACK status
+# treats reset as a granted bus, the game stays black before the SEGA logo.
+test_darius_reaches_title() {
+    local rom="build/Darius (World) (Genesis Mini, Mega Drive Mini).md"
+    [ -f "$rom" ] || return 2
+
+    ./build/cpz_trace "$rom" none 300 300 /tmp/test_darius_title.ppm >/dev/null 2>/dev/null
+
+    python3 - <<'PY'
+import sys
+
+chunks = open('/tmp/test_darius_title.ppm', 'rb').read().split(b'\n', 3)
+w = int(chunks[1].split()[0])
+h = int(chunks[1].split()[1])
+px = chunks[3]
+
+if (w, h) != (320, 224):
+    print(f'Darius title viewport is {w}x{h}, expected 320x224')
+    sys.exit(1)
+
+nonblack = 0
+red = 0
+for i in range(0, len(px), 3):
+    r, g, b = px[i], px[i + 1], px[i + 2]
+    if (r, g, b) != (0, 0, 0):
+        nonblack += 1
+    if r > 140 and g < 80 and b < 80:
+        red += 1
+
+if nonblack < 15000 or red < 300:
+    print(f'Darius did not reach title frame: nonblack={nonblack}, red={red}')
+    sys.exit(1)
+
+def pixel(x, y):
+    off = (y * w + x) * 3
+    return px[off], px[off + 1], px[off + 2]
+
+def dark(rgb):
+    return sum(rgb) < 25
+
+def bright(rgb):
+    return sum(rgb) > 120
+
+bad_dash_runs = 0
+for y in range(50, 135):
+    x = 16
+    while x < 304:
+        if not dark(pixel(x, y)):
+            x += 1
+            continue
+        start = x
+        while x < 304 and dark(pixel(x, y)):
+            x += 1
+        end = x - 1
+        length = end - start + 1
+        if 3 <= length <= 6 and start > 16 and end < 303:
+            if not dark(pixel(start - 1, y)) and not dark(pixel(end + 1, y)):
+                surrounded = 0
+                for xx in range(start, end + 1):
+                    if bright(pixel(xx, y - 1)) and bright(pixel(xx, y + 1)):
+                        surrounded += 1
+                if surrounded >= min(3, length):
+                    bad_dash_runs += 1
+
+if bad_dash_runs > 2:
+    print(f'Darius title logo has FIFO-drop dash artifacts: runs={bad_dash_runs}')
+    sys.exit(1)
+
+print(f'Darius title reached: nonblack={nonblack}, red={red}, bad_dash_runs={bad_dash_runs}')
+PY
+}
+
+# --- Flashback intro audio cadence ---
+# Flashback's Z80 sound driver advances its music on the raw VBlank pulse.
+# The pulse must occur once per frame even when the 68K-facing V-int path is
+# masked or acknowledged; otherwise the early YM register batches drift late
+# and the cutscene music tempo drags.
+test_flashback_intro_audio_cadence() {
+    local rom="build/Flashback - The Quest for Identity (USA) (En,Fr).md"
+    [ -f "$rom" ] || return 2
+
+    GENESIS_LOG_Z80_AUDIO=1 GENESIS_LOG_YM_WRITES=1 \
+        ./build/cpz_trace "$rom" none 1200 1200 /tmp/test_flashback_intro.ppm \
+        >/tmp/test_flashback_intro_audio.log 2>&1
+
+    python3 - <<'PY'
+import re
+import sys
+
+z80_rows = 0
+z80_pulses = 0
+ym_data_total = 0
+ym_data_frames = []
+
+for line in open('/tmp/test_flashback_intro_audio.log', 'r', encoding='utf-8', errors='replace'):
+    if not line.startswith('[Z80-AUDIO]'):
+        continue
+    z80_rows += 1
+    values = {name: int(value) for name, value in re.findall(r'(\w+)=(-?\d+)', line)}
+    frame = values.get('frame')
+    pulses = values.get('z80IntPulses', 0)
+    data_writes = values.get('ymDataWrites', 0)
+    z80_pulses += pulses
+    ym_data_total += data_writes
+    if data_writes:
+        ym_data_frames.append((frame, data_writes))
+
+if z80_rows != 1200:
+    print(f'Flashback trace has {z80_rows} Z80 audio rows, expected 1200')
+    sys.exit(1)
+
+if z80_pulses != 1200:
+    print(f'Flashback trace has {z80_pulses} Z80 V-int pulses, expected 1200')
+    sys.exit(1)
+
+if len(ym_data_frames) < 3:
+    print(f'Flashback trace has only {len(ym_data_frames)} YM data-write frames')
+    sys.exit(1)
+
+expected_windows = [(320, 345), (540, 565), (625, 650)]
+for idx, (lo, hi) in enumerate(expected_windows):
+    frame, writes = ym_data_frames[idx]
+    if not (lo <= frame <= hi):
+        print(
+            f'Flashback YM batch {idx + 1} landed at frame {frame} '
+            f'({writes} data writes), expected frame {lo}..{hi}'
+        )
+        sys.exit(1)
+
+print(
+    f'Flashback intro audio cadence: pulses={z80_pulses}, '
+    f'ymDataWrites={ym_data_total}, firstBatches={ym_data_frames[:3]}'
+)
+PY
+}
+
 # --- Register tests ---
 echo "=== Rendering regression tests ==="
 
@@ -1045,6 +1249,12 @@ have_outrun="no"
 [ -f "build/OutRun (USA, Europe).md" ] && have_outrun="yes"
 have_f1="no"
 [ -f "build/F1 (Europe).md" ] && have_f1="yes"
+have_clue="no"
+[ -f "build/Clue (USA).md" ] && have_clue="yes"
+have_darius="no"
+[ -f "build/Darius (World) (Genesis Mini, Mega Drive Mini).md" ] && have_darius="yes"
+have_flashback="no"
+[ -f "build/Flashback - The Quest for Identity (USA) (En,Fr).md" ] && have_flashback="yes"
 
 reg() {
     # Usage: reg "<name>" <func> <has-prereq:yes|no>
@@ -1069,6 +1279,9 @@ reg "Top Gear 2 race (left edge col 0-7 not black)" test_topgear2_race_left_edge
 reg "OutRun title (frame 400 row 24 not black)" test_outrun_title_row_24 "$have_outrun"
 reg "OutRun title (sky rows uniform, no tile-edge stripes)" test_outrun_title_sky_stripes "$have_outrun"
 reg "F1 race (PAL viewport bottom border)" test_f1_race_pal_bottom_border "$have_f1"
+reg "Clue menu (game-level panel background clean)" test_clue_menu_background_clean "$have_clue"
+reg "Darius title (Z80 reset/BUSACK startup)" test_darius_reaches_title "$have_darius"
+reg "Flashback intro (Z80 audio cadence)" test_flashback_intro_audio_cadence "$have_flashback"
 reg "Panorama Cotton play (scroll-state oracle, bike/HUD)" test_cotton_play_scroll_state_oracle "$have_cotton_rom"
 reg "Panorama Cotton play (bike/HUD top playfield not black)" test_cotton_play_black_lines "$have_cotton_rom"
 

@@ -2389,10 +2389,17 @@ static void test_instruction_timing() {
 
     resetCPU(); writeLong(0x4000, 1);
     cycles = placeAndExec2(0x52B8, 0x4000); // ADDQ.L #1,$4000.W
-    check(cycles == 36, "ADDQ.L #n,(xxx).W = 24+EA");
+    check(cycles == 24, "ADDQ.L #n,(xxx).W = 12+EA");
     check(((u32)memory[0x4000] << 24 | (u32)memory[0x4001] << 16 |
            (u32)memory[0x4002] << 8 | (u32)memory[0x4003]) == 2,
           "ADDQ.L #n,(xxx).W result");
+
+    resetCPU(); writeLong(0x4000, 1);
+    cycles = placeAndExec3(0x52B9, 0x0000, 0x4000); // ADDQ.L #1,$00004000.L
+    check(cycles == 28, "ADDQ.L #n,(xxx).L = 12+EA");
+    check(((u32)memory[0x4000] << 24 | (u32)memory[0x4001] << 16 |
+           (u32)memory[0x4002] << 8 | (u32)memory[0x4003]) == 2,
+          "ADDQ.L #n,(xxx).L result");
 
     resetCPU(); cpu.state.d[0] = 10;
     cycles = placeAndExec(0x5740); // SUBQ.W #3,D0
@@ -2404,10 +2411,17 @@ static void test_instruction_timing() {
 
     resetCPU(); writeLong(0x4000, 10);
     cycles = placeAndExec2(0x53B8, 0x4000); // SUBQ.L #1,$4000.W
-    check(cycles == 52, "SUBQ.L #n,(xxx).W = 40+EA");
+    check(cycles == 24, "SUBQ.L #n,(xxx).W = 12+EA");
     check(((u32)memory[0x4000] << 24 | (u32)memory[0x4001] << 16 |
            (u32)memory[0x4002] << 8 | (u32)memory[0x4003]) == 9,
           "SUBQ.L #n,(xxx).W result");
+
+    resetCPU(); writeLong(0x4000, 10);
+    cycles = placeAndExec3(0x53B9, 0x0000, 0x4000); // SUBQ.L #1,$00004000.L
+    check(cycles == 28, "SUBQ.L #n,(xxx).L = 12+EA");
+    check(((u32)memory[0x4000] << 24 | (u32)memory[0x4001] << 16 |
+           (u32)memory[0x4002] << 8 | (u32)memory[0x4003]) == 9,
+          "SUBQ.L #n,(xxx).L result");
 
     // --- ADDA/SUBA timing ---
     resetCPU(); cpu.state.a[0] = 0x1000; cpu.state.d[0] = 0x100;
@@ -2694,7 +2708,7 @@ static void test_instruction_timing() {
 
     resetCPU(); writeWord(0x3000, 0x4E71);
     cycles = placeAndExec3(0x4EB9, 0x0000, 0x3000); // JSR $3000.L
-    check(cycles == 20, "JSR (xxx).L = 20");
+    check(cycles == 24, "JSR (xxx).L = 24");
 
     // --- BRA/BSR/Bcc timing ---
     resetCPU();

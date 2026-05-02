@@ -5,10 +5,15 @@
 // Tests Z80 bank access timing and 68K Z80-area wait states
 
 #include "memory/bus.h"
+#include "memory/cartridge.h"
+#include "genesis.h"
 #include "cpu/m68k.h"
 #include "cpu/z80.h"
+#include "video/vdp.h"
 #include <cstdio>
 #include <cstring>
+#include <filesystem>
+#include <vector>
 
 // --- Test framework ---
 static int totalTests = 0;
@@ -46,6 +51,107 @@ static bool check(bool condition, const char* desc) {
         printf("\n    FAIL: %s [%s]", desc, currentGroup);
         return false;
     }
+}
+
+static void writeBE16(std::vector<u8>& rom, size_t offset, u16 value) {
+    rom[offset] = static_cast<u8>((value >> 8) & 0xFF);
+    rom[offset + 1] = static_cast<u8>(value & 0xFF);
+}
+
+static void writeBE32(std::vector<u8>& rom, size_t offset, u32 value) {
+    rom[offset] = static_cast<u8>((value >> 24) & 0xFF);
+    rom[offset + 1] = static_cast<u8>((value >> 16) & 0xFF);
+    rom[offset + 2] = static_cast<u8>((value >> 8) & 0xFF);
+    rom[offset + 3] = static_cast<u8>(value & 0xFF);
+}
+
+static void writePaddedField(std::vector<u8>& rom, size_t offset, size_t len, const char* text) {
+    std::memset(rom.data() + offset, ' ', len);
+    const size_t textLen = std::strlen(text);
+    const size_t copyLen = textLen < len ? textLen : len;
+    std::memcpy(rom.data() + offset, text, copyLen);
+}
+
+static std::vector<u8> makeOverlappingSRAMRom() {
+    std::vector<u8> rom(0x204000, 0);
+
+    writeBE32(rom, 0x000, 0x00FF0000);
+    writeBE32(rom, 0x004, 0x00000200);
+    writePaddedField(rom, 0x100, 16, "SEGA GENESIS");
+    writePaddedField(rom, 0x120, 48, "SRAM OVERLAP TEST");
+    writePaddedField(rom, 0x150, 48, "SRAM OVERLAP TEST");
+    writePaddedField(rom, 0x180, 14, "GM TEST-00");
+    writePaddedField(rom, 0x190, 16, "J               ");
+    writeBE32(rom, 0x1A0, 0x00000000);
+    writeBE32(rom, 0x1A4, static_cast<u32>(rom.size() - 1));
+    writePaddedField(rom, 0x1B0, 12, "RA");
+    rom[0x1B2] = 0xF8; // Odd-byte SRAM bus.
+    rom[0x1B3] = 0x20;
+    writeBE32(rom, 0x1B4, 0x00200001);
+    writeBE32(rom, 0x1B8, 0x00200003);
+    writePaddedField(rom, 0x1F0, 3, "U");
+
+    rom[0x200000] = 0x11;
+    rom[0x200001] = 0x22;
+    rom[0x200002] = 0x33;
+    rom[0x200003] = 0x44;
+    writeBE16(rom, 0x18E, 0x4466);
+    return rom;
+}
+
+static std::vector<u8> makeDirectSRAMAtRomEndRom() {
+    std::vector<u8> rom(0x200000, 0);
+
+    writeBE32(rom, 0x000, 0x00FF0000);
+    writeBE32(rom, 0x004, 0x00000200);
+    writePaddedField(rom, 0x100, 16, "SEGA GENESIS");
+    writePaddedField(rom, 0x120, 48, "DIRECT SRAM TEST");
+    writePaddedField(rom, 0x150, 48, "DIRECT SRAM TEST");
+    writePaddedField(rom, 0x180, 14, "GM TEST-01");
+    writePaddedField(rom, 0x190, 16, "J               ");
+    writeBE32(rom, 0x1A0, 0x00000000);
+    writeBE32(rom, 0x1A4, static_cast<u32>(rom.size() - 1));
+    writePaddedField(rom, 0x1B0, 12, "RA");
+    rom[0x1B2] = 0xF8; // Odd-byte SRAM bus.
+    rom[0x1B3] = 0x20;
+    writeBE32(rom, 0x1B4, 0x00200001);
+    writeBE32(rom, 0x1B8, 0x00203FFF);
+    writePaddedField(rom, 0x1F0, 3, "U");
+
+    rom[0x1FFFFE] = 0xCA;
+    rom[0x1FFFFF] = 0xFE;
+    writeBE16(rom, 0x18E, 0xCAFE);
+    return rom;
+}
+
+static std::vector<u8> makeZ80BankStallSchedulerRom() {
+    std::vector<u8> rom(0x4000, 0);
+
+    writeBE32(rom, 0x000, 0x00FF0000);
+    writeBE32(rom, 0x004, 0x00000200);
+    writePaddedField(rom, 0x100, 16, "SEGA GENESIS");
+    writePaddedField(rom, 0x120, 48, "Z80 BANK STALL TEST");
+    writePaddedField(rom, 0x150, 48, "Z80 BANK STALL TEST");
+    writePaddedField(rom, 0x180, 14, "GM TEST-02");
+    writePaddedField(rom, 0x190, 16, "J               ");
+    writeBE32(rom, 0x1A0, 0x00000000);
+    writeBE32(rom, 0x1A4, static_cast<u32>(rom.size() - 1));
+    writePaddedField(rom, 0x1F0, 3, "U");
+
+    // Keep the 68K busy in a tight loop while the Z80 test program runs.
+    rom[0x200] = 0x60; // BRA.S -2
+    rom[0x201] = 0xFE;
+    return rom;
+}
+
+static bool writeRomFile(const std::filesystem::path& path, const std::vector<u8>& rom) {
+    std::FILE* f = std::fopen(path.string().c_str(), "wb");
+    if (!f) {
+        return false;
+    }
+    const size_t written = std::fwrite(rom.data(), 1, rom.size(), f);
+    std::fclose(f);
+    return written == rom.size();
 }
 
 // --- BusTest: friend class for direct state inspection ---
@@ -136,6 +242,102 @@ public:
     }
 };
 
+class GenesisTimingTest {
+public:
+    static void resetZ80AudioTrace(Genesis& genesis) {
+        genesis.z80AudioTrace_ = {};
+        genesis.ymPendingCycles_ = 0;
+        genesis.ymBurstTotalCycles_ = 0;
+        genesis.ymBurstDrained_ = 0;
+        genesis.z80BurstInitialDebt_ = 0;
+    }
+
+    static void clockZ80AndYM(Genesis& genesis, int m68kCycles) {
+        genesis.clockZ80AndYM(m68kCycles);
+    }
+
+    static void clockZ80Master(Genesis& genesis, int masterCycles) {
+        genesis.clockZ80Master(masterCycles);
+    }
+
+    static void clockYM(Genesis& genesis, int m68kCycles) {
+        genesis.clockYM(m68kCycles);
+    }
+
+    static void assertZ80InterruptPulse(Genesis& genesis) {
+        genesis.assertZ80InterruptPulse();
+    }
+
+    static int getZ80InterruptPulseCycles(const Genesis& genesis) {
+        return genesis.z80InterruptPulseCycles_;
+    }
+
+    static u64 getZ80InterruptPulseStartMasterCycle(const Genesis& genesis) {
+        return genesis.z80InterruptPulseStartMasterCycle_;
+    }
+
+    static u64 getZ80InterruptPulseEndMasterCycle(const Genesis& genesis) {
+        return genesis.z80InterruptPulseEndMasterCycle_;
+    }
+
+    static bool getZ80InterruptLine(const Genesis& genesis) {
+        return genesis.z80.state.irqLine;
+    }
+
+    static u64 getZ80InterruptPulseExpirations(const Genesis& genesis) {
+        return genesis.z80AudioTrace_.z80InterruptPulseExpirations;
+    }
+
+    static int getZ80CycleAccum(const Genesis& genesis) {
+        return genesis.z80CycleAccum;
+    }
+
+    static u64 getZ80CyclesBudgeted(const Genesis& genesis) {
+        return genesis.z80AudioTrace_.z80CyclesBudgeted;
+    }
+
+    static u64 getZ80CyclesHalted(const Genesis& genesis) {
+        return genesis.z80AudioTrace_.z80CyclesHalted;
+    }
+
+    static void haltZ80(Genesis& genesis) {
+        genesis.bus.z80Reset = true;
+        genesis.bus.z80BusRequested = false;
+    }
+
+    static u64 getYMWrites(const Genesis& genesis) {
+        return genesis.z80AudioTrace_.ymWrites;
+    }
+
+    static u64 getYMSyncCycles(const Genesis& genesis) {
+        return genesis.z80AudioTrace_.ymSyncCycles;
+    }
+
+    static u64 getMasterCycle(const Genesis& genesis) {
+        return genesis.masterCycle_;
+    }
+
+    static u64 getScanlineStartMasterCycle(const Genesis& genesis) {
+        return genesis.scanlineStartMasterCycle_;
+    }
+
+    static void resetMasterClock(Genesis& genesis) {
+        genesis.resetMasterClock();
+    }
+
+    static void beginMasterClockScanline(Genesis& genesis) {
+        genesis.beginMasterClockScanline();
+    }
+
+    static void syncMasterClockToM68KLineCycle(Genesis& genesis, int lineCycle) {
+        genesis.syncMasterClockToM68KLineCycle(lineCycle);
+    }
+
+    static void endMasterClockScanline(Genesis& genesis) {
+        genesis.endMasterClockScanline();
+    }
+};
+
 struct ConnectedM68KBus {
     Bus bus;
     M68K cpu;
@@ -162,6 +364,23 @@ struct ConnectedZ80BankBus {
         bus.connectZ80(&z80);
         BusTest::resetZ80BankAccessCycles(bus);
         z80.state.cycles = 0;
+    }
+};
+
+struct ConnectedM68KVDPBus {
+    Bus bus;
+    M68K cpu;
+    VDP vdp;
+
+    ConnectedM68KVDPBus() {
+        BusTest::initMinimal(bus);
+        cpu.connectBus(&bus);
+        bus.connectCPU(&cpu);
+        bus.connectVDP(&vdp);
+        vdp.connectBus(&bus);
+        vdp.reset();
+        vdp.setVideoStandard(VideoStandard::NTSC);
+        cpu.state.cycles = 0;
     }
 };
 
@@ -452,6 +671,31 @@ static void testBusackRegisterRead() {
     endGroup();
 }
 
+static void testBusackRegisterReadWhileResetAsserted() {
+    beginGroup("BUSACK register read while Z80 reset");
+
+    Bus bus;
+    BusTest::initMinimal(bus);
+    BusTest::setZ80Reset(bus, false);
+    BusTest::resetZ80CycleCounter(bus);
+
+    BusTest::writeBusreq(bus, true);
+    BusTest::updateBusAck(bus, 5);
+    check(BusTest::getZ80BusAck(bus) == true, "BUSACK granted before reset assertion");
+
+    bus.write16(0xA11200, 0x0000); // Assert Z80 reset.
+    u16 val = bus.read16(0xA11100);
+    check((val & 0x0100) != 0,
+          "BUSACK bit = 1 when Z80 reset is asserted");
+
+    BusTest::writeBusreq(bus, false);
+    val = bus.read16(0xA11100);
+    check((val & 0x0100) != 0,
+          "BUSACK bit = 1 when Z80 reset is asserted and BUSREQ released");
+
+    endGroup();
+}
+
 // =====================================================================
 // Test 8b: 68K BUSACK polling observes elapsed time inside one M68K burst
 // =====================================================================
@@ -513,6 +757,584 @@ static void testBusreqMultipleToggles() {
     endGroup();
 }
 
+static void testMappedSRAMOverridesOverlappingROM() {
+    beginGroup("mapped SRAM overrides overlapping ROM");
+
+    const std::filesystem::path dir = std::filesystem::temp_directory_path() / "genesis_bus_timing_test";
+    std::filesystem::create_directories(dir);
+    const std::filesystem::path romPath = dir / "sram_overlap.bin";
+
+    check(writeRomFile(romPath, makeOverlappingSRAMRom()), "writes overlapping SRAM ROM");
+
+    Cartridge cartridge;
+    check(cartridge.load(romPath.string().c_str()), "loads cartridge");
+
+    Bus bus;
+    BusTest::initMinimal(bus);
+    bus.connectCartridge(&cartridge);
+    check(bus.loadROM(romPath.string().c_str()), "loads bus ROM mirror");
+
+    check(bus.read8(0x200001) == 0x22, "unmapped read sees ROM byte under SRAM");
+
+    bus.write8(0xA130F1, 0x01);
+    check(bus.read8(0xA130F0) == 0x01, "SRAM mapping is enabled");
+
+    bus.write8(0x200001, 0x5A);
+    check(bus.read8(0x200001) == 0x5A, "mapped SRAM byte read returns save RAM");
+    check(bus.read16(0x200000) == 0xFF5A,
+          "mapped odd-byte SRAM word read returns open high byte and SRAM low byte");
+
+    bus.write8(0x200002, 0xA5);
+    check(bus.read8(0x200002) == 0xFF, "mapped odd-byte SRAM ignores even byte lane");
+
+    std::error_code ec;
+    std::filesystem::remove(romPath, ec);
+    std::filesystem::remove(dir, ec);
+
+    endGroup();
+}
+
+static void testDirectSRAMAtRomEndDoesNotRequireMapper() {
+    beginGroup("direct SRAM at ROM end does not require mapper");
+
+    const std::filesystem::path dir = std::filesystem::temp_directory_path() / "genesis_bus_timing_test";
+    std::filesystem::create_directories(dir);
+    const std::filesystem::path romPath = dir / "sram_direct.bin";
+
+    check(writeRomFile(romPath, makeDirectSRAMAtRomEndRom()), "writes direct SRAM ROM");
+
+    Cartridge cartridge;
+    check(cartridge.load(romPath.string().c_str()), "loads cartridge");
+
+    Bus bus;
+    BusTest::initMinimal(bus);
+    bus.connectCartridge(&cartridge);
+    check(bus.loadROM(romPath.string().c_str()), "loads bus ROM mirror");
+
+    check(bus.read16(0x1FFFFE) == 0xCAFE, "ROM remains readable before direct SRAM");
+    check(bus.read8(0xA130F0) == 0x00, "SRAM mapper is not enabled");
+
+    bus.write8(0x200001, 0x5A);
+    check(bus.read8(0x200001) == 0x5A, "direct odd-byte SRAM write is visible without mapper");
+    check(bus.read16(0x200000) == 0xFF5A,
+          "direct odd-byte SRAM word read returns open high byte and SRAM low byte");
+
+    bus.write16(0x200002, 0x1234);
+    check(bus.read16(0x200002) == 0xFF34,
+          "direct odd-byte SRAM word write stores the odd byte lane");
+
+    std::error_code ec;
+    std::filesystem::remove(romPath, ec);
+    std::filesystem::remove(dir, ec);
+
+    endGroup();
+}
+
+static void testQueuedZ80BankStallsDoNotRecursivelyClockZ80() {
+    beginGroup("queued Z80 bank stalls do not recursively clock Z80");
+
+    const std::filesystem::path dir = std::filesystem::temp_directory_path() / "genesis_bus_timing_test";
+    std::filesystem::create_directories(dir);
+    const std::filesystem::path romPath = dir / "z80_bank_stall_scheduler.bin";
+
+    check(writeRomFile(romPath, makeZ80BankStallSchedulerRom()), "writes scheduler ROM");
+
+    Genesis genesis;
+    check(genesis.loadROM(romPath.string().c_str()), "loads scheduler ROM");
+
+    Bus& bus = genesis.getBus();
+    Z80& z80 = genesis.getZ80();
+    u8* z80Ram = BusTest::getZ80Ram(bus);
+    std::memset(z80Ram, 0, 0x2000);
+
+    const u8 program[] = {
+        0x3A, 0x00, 0x10,       // loop: LD A,($1000)
+        0x3C,                   // INC A
+        0x32, 0x00, 0x10,       // LD ($1000),A
+        0xC3, 0x00, 0x00        // JP loop
+    };
+    std::memcpy(z80Ram, program, sizeof(program));
+
+    z80.reset();
+    bus.z80Reset = false;
+    bus.z80BusRequested = false;
+    bus.z80BusAck = false;
+    bus.pendingM68KZ80BusStallCycles = 200000;
+
+    genesis.runFrame();
+
+    check(z80Ram[0x1000] == 0,
+          "pre-queued 68K-side stalls do not give the Z80 another execution budget");
+
+    std::error_code ec;
+    std::filesystem::remove(romPath, ec);
+    std::filesystem::remove(dir, ec);
+
+    endGroup();
+}
+
+static void testZ80YMWritesSyncDuringElapsedSlice() {
+    beginGroup("Z80 YM writes sync during elapsed slice");
+
+    const std::filesystem::path dir = std::filesystem::temp_directory_path() / "genesis_bus_timing_test";
+    std::filesystem::create_directories(dir);
+    const std::filesystem::path romPath = dir / "z80_ym_elapsed_slice.bin";
+
+    check(writeRomFile(romPath, makeZ80BankStallSchedulerRom()), "writes elapsed-slice ROM");
+
+    Genesis genesis;
+    check(genesis.loadROM(romPath.string().c_str()), "loads elapsed-slice ROM");
+
+    Bus& bus = genesis.getBus();
+    Z80& z80 = genesis.getZ80();
+    u8* z80Ram = BusTest::getZ80Ram(bus);
+    std::memset(z80Ram, 0, 0x2000);
+
+    const u8 program[] = {
+        0x3E, 0x22,             // loop: LD A,$22
+        0x32, 0x00, 0x40,       // LD ($4000),A
+        0x3E, 0x00,             // LD A,$00
+        0x32, 0x01, 0x40,       // LD ($4001),A
+        0xC3, 0x00, 0x00        // JP loop
+    };
+    std::memcpy(z80Ram, program, sizeof(program));
+
+    z80.reset();
+    bus.z80Reset = false;
+    bus.z80BusRequested = false;
+    bus.z80BusAck = false;
+    GenesisTimingTest::resetZ80AudioTrace(genesis);
+
+    GenesisTimingTest::clockZ80AndYM(genesis, 4000);
+
+    check(GenesisTimingTest::getYMWrites(genesis) > 0,
+          "Z80 program writes YM during elapsed slice");
+    check(GenesisTimingTest::getYMSyncCycles(genesis) > 0,
+          "elapsed Z80 slice synchronizes YM before Z80 register writes");
+
+    std::error_code ec;
+    std::filesystem::remove(romPath, ec);
+    std::filesystem::remove(dir, ec);
+
+    endGroup();
+}
+
+static void testZ80YMStatusReadsSyncDuringBusyPoll() {
+    beginGroup("Z80 YM status reads sync during busy poll");
+
+    const std::filesystem::path dir = std::filesystem::temp_directory_path() / "genesis_bus_timing_test";
+    std::filesystem::create_directories(dir);
+    const std::filesystem::path romPath = dir / "z80_ym_busy_poll.bin";
+
+    check(writeRomFile(romPath, makeZ80BankStallSchedulerRom()), "writes busy-poll ROM");
+
+    Genesis genesis;
+    check(genesis.loadROM(romPath.string().c_str()), "loads busy-poll ROM");
+
+    Bus& bus = genesis.getBus();
+    Z80& z80 = genesis.getZ80();
+    u8* z80Ram = BusTest::getZ80Ram(bus);
+    std::memset(z80Ram, 0, 0x2000);
+
+    const u8 program[] = {
+        0x3E, 0x22,             // loop: LD A,$22
+        0x32, 0x00, 0x40,       // LD ($4000),A
+        0x3E, 0x00,             // LD A,$00
+        0x32, 0x01, 0x40,       // LD ($4001),A
+        0x3A, 0x00, 0x40,       // wait: LD A,($4000)
+        0xE6, 0x80,             // AND $80
+        0x20, 0xF9,             // JR NZ,wait
+        0x3A, 0x00, 0x10,       // LD A,($1000)
+        0x3C,                   // INC A
+        0x32, 0x00, 0x10,       // LD ($1000),A
+        0xC3, 0x00, 0x00        // JP loop
+    };
+    std::memcpy(z80Ram, program, sizeof(program));
+
+    z80.reset();
+    bus.z80Reset = false;
+    bus.z80BusRequested = false;
+    bus.z80BusAck = false;
+    GenesisTimingTest::resetZ80AudioTrace(genesis);
+
+    GenesisTimingTest::clockZ80AndYM(genesis, 4000);
+
+    check(GenesisTimingTest::getYMWrites(genesis) > 0,
+          "Z80 busy-poll program writes YM");
+    check(z80Ram[0x1000] > 0,
+          "YM busy-poll loop observes busy clear during the elapsed slice");
+
+    std::error_code ec;
+    std::filesystem::remove(romPath, ec);
+    std::filesystem::remove(dir, ec);
+
+    endGroup();
+}
+
+static void testZ80YMInvalidStatusMirrorUsesLatch() {
+    beginGroup("Z80 YM invalid status mirror uses latch");
+
+    const std::filesystem::path dir = std::filesystem::temp_directory_path() / "genesis_bus_timing_test";
+    std::filesystem::create_directories(dir);
+    const std::filesystem::path romPath = dir / "z80_ym_status_mirror.bin";
+
+    check(writeRomFile(romPath, makeZ80BankStallSchedulerRom()), "writes YM status mirror ROM");
+
+    Genesis genesis;
+    check(genesis.loadROM(romPath.string().c_str()), "loads YM status mirror ROM");
+
+    Bus& bus = genesis.getBus();
+    bus.z80Reset = false;
+    bus.z80BusRequested = false;
+    bus.z80BusAck = false;
+
+    bus.z80Write(0x4000, 0x22);
+    bus.z80Write(0x4001, 0x00);
+
+    check((bus.z80Read(0x4000) & 0x80) != 0, "valid status read latches busy flag");
+
+    GenesisTimingTest::clockYM(genesis, 192);
+    check((bus.z80Read(0x4002) & 0x80) != 0,
+          "invalid status mirror returns latched status after live busy clears");
+    check((bus.z80Read(0x4000) & 0x80) == 0, "valid status read refreshes latch clear");
+    check((bus.z80Read(0x4002) & 0x80) == 0, "invalid status mirror follows refreshed latch");
+
+    std::error_code ec;
+    std::filesystem::remove(romPath, ec);
+    std::filesystem::remove(dir, ec);
+
+    endGroup();
+}
+
+static void testZ80InterruptPulseExpiresIfInterruptsDisabled() {
+    beginGroup("Z80 interrupt pulse expires if interrupts disabled");
+
+    const std::filesystem::path dir = std::filesystem::temp_directory_path() / "genesis_bus_timing_test";
+    std::filesystem::create_directories(dir);
+    const std::filesystem::path romPath = dir / "z80_interrupt_pulse.bin";
+
+    check(writeRomFile(romPath, makeZ80BankStallSchedulerRom()), "writes Z80 interrupt pulse ROM");
+
+    Genesis genesis;
+    check(genesis.loadROM(romPath.string().c_str()), "loads Z80 interrupt pulse ROM");
+
+    Bus& bus = genesis.getBus();
+    Z80& z80 = genesis.getZ80();
+    u8* z80Ram = BusTest::getZ80Ram(bus);
+    std::memset(z80Ram, 0, 0x2000);
+    z80Ram[0] = 0x00; // NOP forever while IFF1 remains disabled.
+
+    z80.reset();
+    z80.state.iff1 = false;
+    z80.state.iff2 = false;
+    bus.z80Reset = false;
+    bus.z80BusRequested = false;
+    bus.z80BusAck = false;
+    GenesisTimingTest::resetZ80AudioTrace(genesis);
+
+    GenesisTimingTest::assertZ80InterruptPulse(genesis);
+    check(z80.state.irqLine, "Z80 V-int pulse asserts interrupt line");
+
+    GenesisTimingTest::clockZ80AndYM(genesis, 4000);
+
+    check(!z80.state.irqLine,
+          "Z80 V-int pulse clears when not accepted before the pulse window ends");
+    check(GenesisTimingTest::getZ80InterruptPulseCycles(genesis) == 0,
+          "Z80 V-int pulse countdown reaches zero");
+
+    std::error_code ec;
+    std::filesystem::remove(romPath, ec);
+    std::filesystem::remove(dir, ec);
+
+    endGroup();
+}
+
+static void testZ80VIntPulseIgnores68KVIntEnable() {
+    beginGroup("Z80 V-int pulse ignores 68K V-int enable");
+
+    const std::filesystem::path dir = std::filesystem::temp_directory_path() / "genesis_bus_timing_test";
+    std::filesystem::create_directories(dir);
+    const std::filesystem::path romPath = dir / "z80_vint_independent.bin";
+
+    check(writeRomFile(romPath, makeZ80BankStallSchedulerRom()), "writes Z80 V-int ROM");
+
+    Genesis genesis;
+    check(genesis.loadROM(romPath.string().c_str()), "loads Z80 V-int ROM");
+
+    Bus& bus = genesis.getBus();
+    Z80& z80 = genesis.getZ80();
+    u8* z80Ram = BusTest::getZ80Ram(bus);
+    std::memset(z80Ram, 0, 0x2000);
+
+    const u8 program[] = {
+        0xFB,                   // EI
+        0xC3, 0x01, 0x00        // loop: JP loop
+    };
+    std::memcpy(z80Ram, program, sizeof(program));
+
+    const u8 handler[] = {
+        0x3A, 0x00, 0x10,       // LD A,($1000)
+        0x3C,                   // INC A
+        0x32, 0x00, 0x10,       // LD ($1000),A
+        0xFB,                   // EI
+        0xED, 0x4D              // RETI
+    };
+    std::memcpy(z80Ram + 0x0038, handler, sizeof(handler));
+
+    z80.reset();
+    bus.z80Reset = false;
+    bus.z80BusRequested = false;
+    bus.z80BusAck = false;
+    GenesisTimingTest::resetZ80AudioTrace(genesis);
+
+    genesis.runFrame();
+
+    check(z80Ram[0x1000] != 0,
+          "Z80 receives V-int pulse even when VDP reg #1 V-int enable is clear");
+
+    std::error_code ec;
+    std::filesystem::remove(romPath, ec);
+    std::filesystem::remove(dir, ec);
+
+    endGroup();
+}
+
+static void testMasterClockShadowTracksExactLineBoundary() {
+    beginGroup("master clock shadow exact line boundary");
+
+    Genesis genesis;
+    GenesisTimingTest::resetMasterClock(genesis);
+    GenesisTimingTest::beginMasterClockScanline(genesis);
+
+    GenesisTimingTest::syncMasterClockToM68KLineCycle(genesis, 488);
+    check(GenesisTimingTest::getMasterCycle(genesis) == 3416,
+          "488 elapsed 68K cycles map to 3416 master clocks inside the line");
+
+    GenesisTimingTest::endMasterClockScanline(genesis);
+    check(GenesisTimingTest::getMasterCycle(genesis) == Genesis::MASTER_CYCLES_PER_SCANLINE,
+          "ending a scanline advances to the exact 3420-master-clock boundary");
+    check(GenesisTimingTest::getScanlineStartMasterCycle(genesis) == Genesis::MASTER_CYCLES_PER_SCANLINE,
+          "next scanline starts at the exact master-clock boundary");
+
+    endGroup();
+}
+
+static void testMasterClockShadowAdvancesOneFrame() {
+    beginGroup("master clock shadow frame advance");
+
+    const std::filesystem::path dir = std::filesystem::temp_directory_path() / "genesis_bus_timing_test";
+    std::filesystem::create_directories(dir);
+    const std::filesystem::path romPath = dir / "master_clock_shadow_frame.bin";
+
+    check(writeRomFile(romPath, makeZ80BankStallSchedulerRom()), "writes master-clock ROM");
+
+    Genesis genesis;
+    check(genesis.loadROM(romPath.string().c_str()), "loads master-clock ROM");
+    GenesisTimingTest::resetMasterClock(genesis);
+
+    const u64 expectedFrameMasters =
+        static_cast<u64>(genesis.getScanlinesPerFrame()) * Genesis::MASTER_CYCLES_PER_SCANLINE;
+
+    genesis.runFrame();
+    check(GenesisTimingTest::getMasterCycle(genesis) == expectedFrameMasters,
+          "one frame advances the shadow clock by scanlines * 3420 master clocks");
+
+    genesis.runFrame();
+    check(GenesisTimingTest::getMasterCycle(genesis) == expectedFrameMasters * 2,
+          "two frames accumulate exact master-clock frame length");
+
+    std::error_code ec;
+    std::filesystem::remove(romPath, ec);
+    std::filesystem::remove(dir, ec);
+
+    endGroup();
+}
+
+static void testZ80InterruptPulseRecordsMasterWindow() {
+    beginGroup("Z80 interrupt pulse records master window");
+
+    Genesis genesis;
+    GenesisTimingTest::resetMasterClock(genesis);
+    GenesisTimingTest::beginMasterClockScanline(genesis);
+    GenesisTimingTest::syncMasterClockToM68KLineCycle(genesis, 112);
+
+    const u64 pulseStart = GenesisTimingTest::getMasterCycle(genesis);
+    GenesisTimingTest::assertZ80InterruptPulse(genesis);
+
+    check(GenesisTimingTest::getZ80InterruptPulseStartMasterCycle(genesis) == pulseStart,
+          "Z80 interrupt pulse records the current master-cycle start");
+    check(GenesisTimingTest::getZ80InterruptPulseEndMasterCycle(genesis) == pulseStart + 2573,
+          "Z80 interrupt pulse records the measured 2573-master-clock end");
+
+    endGroup();
+}
+
+static void testZ80InterruptPulseMasterSyncDoesNotPreemptZ80Slice() {
+    beginGroup("Z80 interrupt pulse master sync does not preempt Z80 slice");
+
+    Genesis genesis;
+    GenesisTimingTest::resetZ80AudioTrace(genesis);
+    GenesisTimingTest::resetMasterClock(genesis);
+    GenesisTimingTest::beginMasterClockScanline(genesis);
+    GenesisTimingTest::assertZ80InterruptPulse(genesis);
+
+    GenesisTimingTest::syncMasterClockToM68KLineCycle(genesis, 368);
+    check(GenesisTimingTest::getZ80InterruptLine(genesis),
+          "Z80 interrupt line stays asserted until Z80 execution observes it");
+    check(GenesisTimingTest::getZ80InterruptPulseCycles(genesis) > 0,
+          "Z80 interrupt pulse countdown remains owned by Z80 elapsed cycles");
+    check(GenesisTimingTest::getZ80InterruptPulseExpirations(genesis) == 0,
+          "Z80 interrupt pulse is not expired by master sync alone");
+
+    endGroup();
+}
+
+static void testZ80MasterClockFragmentsPreserveDivider() {
+    beginGroup("Z80 master clock fragments preserve divider");
+
+    Genesis genesis;
+    GenesisTimingTest::resetZ80AudioTrace(genesis);
+    GenesisTimingTest::haltZ80(genesis);
+
+    GenesisTimingTest::clockZ80Master(genesis, 14);
+    check(GenesisTimingTest::getZ80CycleAccum(genesis) == 14,
+          "Z80 master clock keeps sub-divider remainder");
+    check(GenesisTimingTest::getZ80CyclesBudgeted(genesis) == 0,
+          "Z80 master clock does not budget a cycle before divider threshold");
+    check(GenesisTimingTest::getZ80CyclesHalted(genesis) == 0,
+          "Z80 halt path does not consume before divider threshold");
+
+    GenesisTimingTest::clockZ80Master(genesis, 1);
+    check(GenesisTimingTest::getZ80CycleAccum(genesis) == 0,
+          "Z80 master clock clears remainder at divider threshold");
+    check(GenesisTimingTest::getZ80CyclesBudgeted(genesis) == 1,
+          "Z80 master clock budgets one Z80 cycle after 15 master clocks");
+    check(GenesisTimingTest::getZ80CyclesHalted(genesis) == 1,
+          "Z80 halted clock consumes the converted Z80 cycle");
+
+    endGroup();
+}
+
+static void testVDPDataWriteStallsWhenFifoFull() {
+    beginGroup("VDP data write full FIFO wait");
+
+    ConnectedM68KVDPBus env;
+
+    // Set data port target to VRAM write at address zero.
+    env.vdp.writeControl(0x4000);
+    env.vdp.writeControl(0x0000);
+
+    for (int i = 0; i < 4; i++) {
+        env.bus.write16(0xC00000, static_cast<u16>(0x1000 + i), 0);
+    }
+    check(env.vdp.isVDPFIFOFull(), "four data writes fill the VDP FIFO");
+
+    const int cyclesBefore = env.cpu.state.cycles;
+    env.bus.write16(0xC00000, 0x2000, 0);
+
+    check(env.cpu.state.cycles > cyclesBefore,
+          "fifth data write stalls the 68K until FIFO space is available");
+    check(env.vdp.isVDPFIFOFull(),
+          "fifth data write occupies the freed FIFO slot");
+    check(env.vdp.readVRAM(8) == 0x00 && env.vdp.readVRAM(9) == 0x00,
+          "fifth data write does not bypass FIFO and modify VRAM immediately");
+
+    endGroup();
+}
+
+static void testVDPDataWriteAtLineBoundaryDoesNotDropWhenFifoFull() {
+    beginGroup("VDP data write full FIFO at line boundary");
+
+    ConnectedM68KVDPBus env;
+
+    // Exhaust the current scanline so no same-line external slot can drain
+    // the FIFO before the next data-port write.
+    env.vdp.clockM68K(VDP_MAX_M68K_CYCLES);
+
+    env.vdp.writeControl(0x4000); // VRAM write address $0000
+    env.vdp.writeControl(0x0000);
+
+    for (int i = 0; i < 4; i++) {
+        env.bus.write16(0xC00000, static_cast<u16>(0x1000 + i), 0);
+    }
+    check(env.vdp.isVDPFIFOFull(), "four boundary writes fill the VDP FIFO");
+
+    env.bus.write16(0xC00000, 0x2000, 0);
+
+    for (int i = 0; i < 4; i++) {
+        env.vdp.endScanline();
+        env.vdp.beginScanline();
+        env.vdp.clockM68K(VDP_MAX_M68K_CYCLES);
+    }
+
+    check(env.vdp.readVRAM(8) == 0x20 && env.vdp.readVRAM(9) == 0x00,
+          "line-boundary FIFO-full write eventually reaches VRAM");
+
+    endGroup();
+}
+
+static void testVDPControlWriteStarting68kDMAStallsCPU() {
+    beginGroup("VDP control write 68K DMA wait");
+
+    ConnectedM68KVDPBus env;
+
+    env.bus.write16(0xFF0000, 0xABCD);
+
+    env.vdp.writeControl(0x8110); // DMA enabled, display disabled
+    env.vdp.writeControl(0x8C81); // H40 slot cadence
+    env.vdp.writeControl(0x8F02); // auto-increment by one word
+    env.vdp.writeControl(0x9301); // DMA length low: one word
+    env.vdp.writeControl(0x9400); // DMA length high
+    env.vdp.writeControl(0x9500); // source low: $FF0000 >> 1
+    env.vdp.writeControl(0x9680); // source mid
+    env.vdp.writeControl(0x977F); // source high, 68K -> VDP mode
+
+    env.bus.write16(0xC00004, 0x4000, 0); // VRAM write address $0000
+    const int cyclesBefore = env.cpu.state.cycles;
+    env.bus.write16(0xC00004, 0x0080, 0); // DMA bit set
+
+    check(env.cpu.state.cycles > cyclesBefore,
+          "DMA-starting control write stalls the 68K");
+    check(!env.vdp.is68kDMABusy(),
+          "68K DMA source transfer completes before CPU continues");
+    check(env.vdp.readVRAM(0) == 0x00 && env.vdp.readVRAM(1) == 0x00,
+          "DMA write remains queued behind FIFO latency after CPU stall");
+
+    env.vdp.clockM68K(VDP_MAX_M68K_CYCLES);
+    check(env.vdp.readVRAM(0) == 0xAB && env.vdp.readVRAM(1) == 0xCD,
+          "queued DMA write eventually reaches VRAM");
+
+    endGroup();
+}
+
+static void testVDPControlWrite68kDMAWaitStopsAtLineBoundary() {
+    beginGroup("VDP control write DMA line boundary");
+
+    ConnectedM68KVDPBus env;
+
+    env.bus.write16(0xFF0000, 0xABCD);
+    env.bus.write16(0xFF0002, 0x1234);
+
+    env.vdp.clockM68K(VDP_MAX_M68K_CYCLES - 1);
+    env.vdp.writeControl(0x8110); // DMA enabled, display disabled
+    env.vdp.writeControl(0x8F02); // auto-increment by one word
+    env.vdp.writeControl(0x9302); // DMA length low: two words
+    env.vdp.writeControl(0x9400); // DMA length high
+    env.vdp.writeControl(0x9500); // source low: $FF0000 >> 1
+    env.vdp.writeControl(0x9680); // source mid
+    env.vdp.writeControl(0x977F); // source high, 68K -> VDP mode
+
+    env.bus.write16(0xC00004, 0x4000, 0); // VRAM write address $0000
+    env.bus.write16(0xC00004, 0x0080, 0); // DMA bit set
+
+    check(env.cpu.state.cycles <= 1,
+          "DMA wait does not spin past the scanline budget");
+    check(env.vdp.is68kDMABusy(),
+          "DMA that cannot finish this line remains active for the scheduler");
+
+    endGroup();
+}
+
 // =====================================================================
 int main() {
     printf("=== Bus Timing Test Suite ===\n\n");
@@ -527,8 +1349,26 @@ int main() {
     testBusreqAckDelay();
     testBusreqResumeDelay();
     testBusackRegisterRead();
+    testBusackRegisterReadWhileResetAsserted();
     testBusackPollProgressesWithinM68KBurst();
     testBusreqMultipleToggles();
+    testMappedSRAMOverridesOverlappingROM();
+    testDirectSRAMAtRomEndDoesNotRequireMapper();
+    testQueuedZ80BankStallsDoNotRecursivelyClockZ80();
+    testZ80YMWritesSyncDuringElapsedSlice();
+    testZ80YMStatusReadsSyncDuringBusyPoll();
+    testZ80YMInvalidStatusMirrorUsesLatch();
+    testZ80InterruptPulseExpiresIfInterruptsDisabled();
+    testZ80VIntPulseIgnores68KVIntEnable();
+    testMasterClockShadowTracksExactLineBoundary();
+    testMasterClockShadowAdvancesOneFrame();
+    testZ80InterruptPulseRecordsMasterWindow();
+    testZ80InterruptPulseMasterSyncDoesNotPreemptZ80Slice();
+    testZ80MasterClockFragmentsPreserveDivider();
+    testVDPDataWriteStallsWhenFifoFull();
+    testVDPDataWriteAtLineBoundaryDoesNotDropWhenFifoFull();
+    testVDPControlWriteStarting68kDMAStallsCPU();
+    testVDPControlWrite68kDMAWaitStopsAtLineBoundary();
 
     printf("\n=== Results: %d/%d passed", passedTests, totalTests);
     if (failedTests > 0) {

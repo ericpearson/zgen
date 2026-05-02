@@ -50,7 +50,7 @@ public:
     
     void writeAddress(u8 data, int port);  // Write to address port (port 0 or 1)
     void writeData(u8 data, int port);     // Write to data port
-    u8 readStatus();                        // Read status register
+    u8 readStatus(int port = 0);            // Read status register
     
     YMSample tick();
     void tickMany(int count, s32& leftAccum, s32& rightAccum);
@@ -84,6 +84,8 @@ private:
     int timerBSubCounter;
 
     int busyCounter;
+    u8 lastStatus;
+    int lastStatusDecayCycles;
     u32 egCounter;  // Global envelope generator counter
     u8 egSubCounter; // EG updates every 3 FM samples
 
@@ -110,6 +112,7 @@ private:
     void keyOn(int ch, int op);
     void keyOff(int ch, int op);
     void advanceState();
+    void clockBusyCycles(int m68kCycles);
     void advanceAttack(FMOperator& op, int rate);
     void advanceDecay(FMOperator& op, int rate);
     void advanceSustain(FMOperator& op, int rate);

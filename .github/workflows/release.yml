@@ -24,12 +24,19 @@ jobs:
           - os: ubuntu-24.04
             name: linux-x86_64
             archive_ext: tar.gz
+            use_vulkan: false
           - os: macos-latest
             name: macos-arm64
             archive_ext: tar.gz
+            use_vulkan: false
           - os: windows-latest
             name: windows-x64
             archive_ext: zip
+            use_vulkan: false
+          - os: windows-latest
+            name: windows-x64-vulkan
+            archive_ext: zip
+            use_vulkan: true
 
     name: Build ${{ matrix.name }}
     runs-on: ${{ matrix.os }}
@@ -83,6 +90,9 @@ jobs:
             mingw-w64-x86_64-ninja
             mingw-w64-x86_64-sdl3
             mingw-w64-x86_64-glew
+            mingw-w64-x86_64-vulkan-headers
+            mingw-w64-x86_64-vulkan-loader
+            mingw-w64-x86_64-shaderc
             zip
 
       # ── Build ──
@@ -93,7 +103,9 @@ jobs:
       - name: Configure (Windows)
         if: runner.os == 'Windows'
         shell: msys2 {0}
-        run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+        env:
+          USE_VULKAN: ${{ matrix.use_vulkan && 'ON' || 'OFF' }}
+        run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DUSE_VULKAN="$USE_VULKAN"
 
       - name: Build (Linux/macOS)
         if: runner.os != 'Windows'
@@ -129,10 +141,19 @@ jobs:
         run: |
           mkdir -p staging
           cp build/genesis.exe staging/zgen.exe
-          # Bundle MinGW runtime DLLs needed by the exe
+          # Bundle MinGW runtime DLLs needed by the exe.
           MINGW_BIN="/mingw64/bin"
-          for dll in SDL3.dll glew32.dll libgcc_s_seh-1.dll libstdc++-6.dll libwinpthread-1.dll; do
-            [ -f "$MINGW_BIN/$dll" ] && cp "$MINGW_BIN/$dll" staging/
+          for dll in SDL3.dll glew32.dll vulkan-1.dll libshaderc_shared.dll shaderc_shared.dll libgcc_s_seh-1.dll libstdc++-6.dll libwinpthread-1.dll; do
+            [ -f "$MINGW_BIN/$dll" ] && cp -n "$MINGW_BIN/$dll" staging/
+          done
+          ldd staging/zgen.exe | awk '
+            /\/mingw64\/bin\// {
+              for (i = 1; i <= NF; i++) {
+                if ($i ~ /^\/mingw64\/bin\//) print $i
+              }
+            }
+          ' | sort -u | while read -r dll; do
+            [ -f "$dll" ] && cp -n "$dll" staging/
           done
           cp README.md REFERENCES.md LICENSE staging/
           cd staging && zip -r "../zgen-${{ matrix.name }}.${{ matrix.archive_ext }}" . && cd ..

@@ -115,10 +115,13 @@ void PSG::write(u8 data) {
 
 }
 
-void PSG::clock(int m68kCycles) {
+void PSG::clockMaster(int masterCycles) {
+    if (masterCycles <= 0) {
+        return;
+    }
+
     // PSG ticks at Z80 clock / 16 = master / (15*16) = master / 240
-    // Input is M68K cycles (master / 7), so multiply by 7 to get master cycles
-    clockCounter += m68kCycles * 7;
+    clockCounter += masterCycles;
 
     while (clockCounter >= 240) {
         clockCounter -= 240;
@@ -196,6 +199,10 @@ void PSG::clock(int m68kCycles) {
         sampleAccum += mix;
         sampleCount++;
     }
+}
+
+void PSG::clock(int m68kCycles) {
+    clockMaster(m68kCycles * 7);
 }
 
 s16 PSG::getSample() {

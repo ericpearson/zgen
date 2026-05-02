@@ -220,14 +220,13 @@ void M68K::op_addq() {
         chargeCycles(eaCycles(mode, reg, size));
     }
 
-    // MC68000 User's Manual Table 8-4: ADDQ Dn b/w=4, Dn l=8, An=8,
-    // mem b/w=12+EA, mem l=24+EA
+    // 68000 timing: ADDQ memory b/w=8+EA, mem l=12+EA.
     if (mode == 0) {
         chargeCycles((size == SIZE_LONG) ? 8 : 4);
     } else if (mode == 1) {
         chargeCycles(8);
     } else {
-        chargeCycles((size == SIZE_LONG) ? 24 : 12);
+        chargeCycles((size == SIZE_LONG) ? 12 : 8);
     }
 }
 
@@ -396,14 +395,13 @@ void M68K::op_subq() {
         chargeCycles(eaCycles(mode, reg, size));
     }
 
-    // MC68000 User's Manual Table 8-4: SUBQ Dn b/w=4, Dn l=8, An=8,
-    // mem b/w=20+EA, mem l=40+EA
+    // 68000 timing: SUBQ memory matches ADDQ.
     if (mode == 0) {
         chargeCycles((size == SIZE_LONG) ? 8 : 4);
     } else if (mode == 1) {
         chargeCycles(8);
     } else {
-        chargeCycles((size == SIZE_LONG) ? 40 : 20);
+        chargeCycles((size == SIZE_LONG) ? 12 : 8);
     }
 }
 

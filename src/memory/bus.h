@@ -127,6 +127,8 @@ private:
     u8 readControllerData(int port);
     void addM68KZ80AreaWaitCycles(int cycles = 1);
     void addZ80BankAccessPenalty();
+    void waitForVDPFIFOForWrite();
+    void waitForVDP68KDMA();
     u64 m68kAccessMclk(int partialCycles) const;
     void settleBusAckForM68KAccess(int partialCycles);
 };

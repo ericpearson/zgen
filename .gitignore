@@ -6,6 +6,20 @@ build/
 build-native-opt/
 build-vulkan/
 
+# In-source CMake output
+/CMakeCache.txt
+/CMakeFiles/
+/CTestTestfile.cmake
+/Makefile
+/cmake_install.cmake
+/compile_commands.json
+/Testing/
+/genesis
+/*_test
+/cpz_trace
+/vdp_state_dump
+/libgenesis_core.a
+
 # Object files
 *.o
 *.obj
@@ -22,6 +36,23 @@ build-vulkan/
 
 # Local agent/skill metadata
 skills/
+.superpowers/
+
+# Local debug/save output
+/*.log
+/ours_*.txt
+*.srm
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Local reference-emulator source dumps
+third_party/Genesis-Plus-GX/
+third_party/blastem-src/blastem-tip.tar.gz
+third_party/blastem-src/blastem-884de5ef1263/*
+!third_party/blastem-src/blastem-884de5ef1263/
+!third_party/blastem-src/blastem-884de5ef1263/genesis.c
 
 # Extracted test ROMs are tracked; wrapper downloads are not.
 testroms/*.bin

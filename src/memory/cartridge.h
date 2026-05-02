@@ -36,8 +36,12 @@ public:
     
     u8 read8(u32 addr) const;
     u16 read16(u32 addr) const;
+    u8 readSRAM8(u32 addr) const;
+    u16 readSRAM16(u32 addr) const;
     void write8(u32 addr, u8 val);
     void write16(u32 addr, u16 val);
+    void writeSRAM8(u32 addr, u8 val);
+    void writeSRAM16(u32 addr, u16 val);
     
     bool isLoaded() const { return !rom.empty(); }
     u32 size() const { return rom.size(); }
@@ -47,6 +51,8 @@ public:
     std::string getRegion() const;
     VideoStandard preferredVideoStandard() const;
     bool hasSRAM() const { return sramEnabled; }
+    bool isSRAMAddress(u32 addr) const;
+    bool isDirectMappedSRAMAddress(u32 addr) const;
     
     void printInfo() const;
     
@@ -58,10 +64,13 @@ private:
     bool sramEnabled;
     u32 sramStart;
     u32 sramEnd;
+    u8 sramBusFlags;
     std::vector<u8> sram;
     
     void parseHeader();
     bool detectSMD();
     void convertSMD();
     u16 calculateChecksum() const;
+    bool sramByteAccessible(u32 addr) const;
+    u32 sramByteOffset(u32 addr) const;
 };

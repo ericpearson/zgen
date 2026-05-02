@@ -449,14 +449,10 @@ void VDP::writeControl(u16 value) {
     // Always recognized regardless of controlPending state (real hardware behavior).
     if ((value & 0xC000) == 0x8000) {
         controlPending = false;
-        // Register writes update address[13:0] and code[1:0] from the written
-        // word, just like the first half of a two-word command (confirmed by
-        // hardware tests). Since bits 15:14 are always 10 for
-        // register writes, code[1:0] becomes 2 — an invalid write target.
-        // Data port writes therefore become no-ops until a new control-port
-        // command sets a valid target (1=VRAM, 3=CRAM, 5=VSRAM).
-        address = (address & 0xC000) | (value & 0x3FFF);
-        code = (code & 0x3C) | static_cast<u8>((value >> 14) & 0x03);
+        // Register writes are not memory control commands. They cancel any
+        // half-written command, but the active data-port target and address
+        // continue unchanged so interrupt handlers can touch VDP registers
+        // while mainline code streams data.
         int reg = (value >> 8) & 0x1F;
         if (reg < 24) {
             const u8 oldRegValue = regs[reg];
@@ -651,7 +647,6 @@ void VDP::writeData(u16 value) {
     }
 
     // Normal write path (executes even when triggering a fill)
-    int target = code & 0x0F;
     if (logPortTrace) {
         const u32 a6 = bus ? bus->getM68KA6() : 0;
         const u32 pc = bus ? bus->getM68KPC() : 0;
@@ -690,11 +685,7 @@ void VDP::writeData(u16 value) {
                      a60,
                      a62);
     }
-    if (target == 1 || target == 3 || target == 5) {
-        if (!enqueueFIFOEntry(value, address, code, false, false)) {
-            applyFIFOEntry({value, address, code, false, false});
-        }
-    }
+    enqueueFIFOEntry(value, address, code, false, false);
 
     address = static_cast<u16>(address + regs[15]);
 
@@ -737,12 +728,7 @@ void VDP::writeDataByte(u8 value, bool lowByte) {
         startFill = true;
     }
 
-    int target = code & 0x0F;
-    if (target == 1 || target == 3 || target == 5) {
-        if (!enqueueFIFOEntry(value, address, code, true, lowByte)) {
-            applyFIFOEntry({value, address, code, true, lowByte});
-        }
-    }
+    enqueueFIFOEntry(value, address, code, true, lowByte);
 
     address = static_cast<u16>(address + regs[15]);
 
@@ -1000,15 +986,16 @@ void VDP::beginScanlineCommon() {
                            | vram[(hoff + 3) & 0xFFFF];
     }
 
-    // Full-screen vscroll latch: H40 samples VSRAM[0]/[1] at the line-change
-    // phase of line N-1 for use on line N. That
-    // sample point is before line N-1's late-HINT VSRAM writes land in the
-    // FIFO, so line N renders with the pre-HINT value. Matching semantic
-    // here: capture the latch at line N-start *before* draining carry-over
-    // FIFO writes (which would otherwise apply line N-1's HINT-driven write
-    // at line N cyc 0 and corrupt the sample). The carry-over drain then
-    // runs so those writes DO land in vsram for later per-cell sampling in
-    // 2-cell mode.
+    // Full-screen vscroll latch: H40 uses the boundary sample captured before
+    // late-HINT carry-over drains. H32 samples before visible output, after
+    // previous-line carry-over VSRAM writes but before same-line H-int code can
+    // rewrite VSRAM for future lines.
+    const bool h32FullScreenVscroll =
+        activeWidth != 320 && vscrollMode == 0 && scanline < activeHeight;
+    if (h32FullScreenVscroll) {
+        commitCarryoverVscrollWritesForLineSample();
+    }
+
     const bool useBoundaryVscroll =
         boundaryVscrollLatchValid_ && activeWidth == 320 &&
         vscrollMode == 0 && scanline < activeHeight;
@@ -1023,10 +1010,12 @@ void VDP::beginScanlineCommon() {
     visibleLineVscroll[0] = vscrollLatch[0];
     visibleLineVscroll[1] = vscrollLatch[1];
 
-    // Drain pre-line VSRAM writes after the line-wide sample so full-screen
+    // H40 drains pre-line VSRAM after the line-wide sample so full-screen
     // rendering keeps the pre-HINT value, while later per-column / 2-cell
-    // paths see the updated vsram when they read it live.
-    commitCarryoverVscrollWritesForLineSample();
+    // paths see updated vsram when they read it live.
+    if (!h32FullScreenVscroll) {
+        commitCarryoverVscrollWritesForLineSample();
+    }
     if (vdpPortTraceEnabled(debugFrameNumber_, scanline)) {
         std::fprintf(stderr,
                      "[VDP-LINE-LATCH] frame=%d ln=%d cyc=%d vs0=%03X vs1=%03X vis0=%03X vis1=%03X lat0=%03X lat1=%03X hs0=%03X hs1=%03X fifo=%d\n",
@@ -1225,6 +1214,10 @@ void VDP::refreshVBlankIRQState() {
     megaTimingLog("VINT-ARM");
 }
 
+int VDP::getVBlankIRQAssertCycle() const {
+    return vblankIrqDelayCycles(activeWidth);
+}
+
 void VDP::beginScanline() {
     beginScanlineTimed();
 }
@@ -1306,6 +1299,9 @@ void VDP::processExternalSlot() {
             switch (entry.code & 0x07) { case 1: tgt="VRAM"; break; case 3: tgt="CRAM"; break; case 5: tgt="VSRAM"; break; }
             std::fprintf(stderr, "[EVT] ln=%d cyc=%d event=FIFO-DRAIN slot=%d addr=%04X val=%04X target=%s fifoN=%d\n",
                          scanline, lineCycles, currentSlotIndex, entry.address, entry.value, tgt, fifoCount);
+        }
+        if (dmaActive && dmaWordsRemaining > 0 && fifoCount < FIFO_SIZE) {
+            processDMASlot();
         }
         return;
     }
@@ -1858,7 +1854,12 @@ void VDP::scheduleDisplayEnableChange(bool value) {
     } else {
         const int dotDivisor = (activeWidth == 320) ? 8 : 10;
         int viewportPixel = ((mclk - kViewportStartMclk) / dotDivisor) + 16;
-        if (viewportPixel < activeWidth) {
+        // H32 display-off writes in the left-edge output window still suppress
+        // the whole line. The segmented renderer may already have flushed this
+        // small region, so the pixel-0 apply path below overwrites it.
+        if (!value && activeWidth == 256 && viewportPixel <= 48) {
+            applyPixel = 0;
+        } else if (viewportPixel < activeWidth) {
             // Round up to 2-pixel boundary for the segmented renderer.
             applyPixel = ((viewportPixel + 1) / 2) * 2;
             if (applyPixel <= renderedPixels) {
@@ -1893,6 +1894,9 @@ void VDP::scheduleDisplayEnableChange(bool value) {
         displayEnabled = value;
         lineIsBlank = (scanline >= activeHeight) || !displayEnabled;
         recordDisplayEnableApply(scanline, 0, displayEnabled);
+        if (!displayEnabled && renderedPixels > 0) {
+            renderScanlineSegment(scanline, 0, renderedPixels);
+        }
         if (logHintTiming) {
             std::fprintf(stderr,
                          "[DISP-APPLY] ln=%d px=0 val=%d reason=current-line-pixel0\n",
@@ -2027,6 +2031,32 @@ bool VDP::inHBlankPeriod(int cycleOffset) const {
     const VDPSlotTable& table = (activeWidth == 320) ? kH40Active : kH32Active;
     int slot = table.slotAtM68kCycle[effectiveCycle];
     return slot < table.hblankEndSlot || slot >= table.hblankStartSlot;
+}
+
+bool VDP::advanceFifoForCpuBoundaryWait() {
+    if (fifoCount <= 0) {
+        return false;
+    }
+
+    // If a CPU data-port write stalls at the scanline boundary, the scheduler
+    // cannot advance into the next line from inside the bus callback. Consume
+    // the FIFO slot phase needed to make room without dropping the blocked
+    // write; the outer scanline loop accounts for the bus wait cycles.
+    const int target = fifo[fifoReadIndex].code & 0x07;
+    if (target == 1 && !vramWriteSecondSlot) {
+        vramWriteSecondSlot = true;
+        return true;
+    }
+
+    if (target == 1) {
+        vramWriteSecondSlot = false;
+    }
+
+    const VDPFifoEntry entry = fifo[fifoReadIndex];
+    fifoReadIndex = (fifoReadIndex + 1) % FIFO_SIZE;
+    fifoCount--;
+    applyFIFOEntry(entry);
+    return true;
 }
 
 u32 VDP::cramToRGB(u16 cramValue) {
@@ -2259,7 +2289,8 @@ void VDP::applyFIFOEntry(const VDPFifoEntry& entry) {
                 constexpr int kH32FullScreenVscrollLatchWindowEndSlot = 41;
                 if (scanline < activeHeight && !lineIsBlank &&
                     !(regs[0x0B] & 0x04) && activeWidth != 320 &&
-                    currentSlotIndex < kH32FullScreenVscrollLatchWindowEndSlot) {
+                    currentSlotIndex < kH32FullScreenVscrollLatchWindowEndSlot &&
+                    entry.enqueueScanline != scanline) {
                     const u16 oldVsA = vscrollLatch[0];
                     const u16 oldVsB = vscrollLatch[1];
                     vscrollLatch[0] = vsram[0];

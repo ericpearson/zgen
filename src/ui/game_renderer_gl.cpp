@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 #include "ui/game_renderer.h"
+#include "ui/shaders.h"
 
 #ifdef __APPLE__
 #include <OpenGL/gl3.h>
@@ -13,127 +14,16 @@
 #include <cstdlib>
 #include <cmath>
 
-// ---------- Shaders (GLSL 150 for OpenGL 3.2 Core) ----------
-
-static const char* vertSrc = R"(
-#version 150
-in vec2 aPos;
-in vec2 aUV;
-out vec2 vUV;
-uniform mat4 uMVP;
-void main() {
-    vUV = aUV;
-    gl_Position = uMVP * vec4(aPos, 0.0, 1.0);
-}
-)";
-
-static const char* fragSrc = R"(
-#version 150
-in vec2 vUV;
-out vec4 fragColor;
-uniform sampler2D uTex;
-void main() {
-    fragColor = texture(uTex, vUV);
-}
-)";
-
-static const char* fragCRT = R"(
-#version 150
-in vec2 vUV;
-out vec4 fragColor;
-uniform sampler2D uTex;
-uniform vec2 uResolution;
-uniform vec2 uInputRes;
-uniform float uCurvature;
-uniform float uScanline;
-uniform float uBloom;
-uniform float uVignette;
-uniform int uMaskType;   // 0=aperture grille, 1=slot mask, 2=none
-
-vec2 distort(vec2 coord) {
-    vec2 cc = coord - 0.5;
-    float d = dot(cc, cc) * uCurvature;
-    return coord + cc * d;
-}
-
-float scanlineWeight(float y, float brightness) {
-    float s = sin(y * uInputRes.y * 3.14159265) * 0.5 + 0.5;
-    float dark = 1.0 - uScanline;
-    float intensity = mix(dark, 1.0, s);
-    return mix(intensity, 1.0, brightness * 0.4);
-}
-
-vec3 phosphorMask(vec2 fragCoord) {
-    if (uMaskType == 2) return vec3(1.0);
-    float strength = 0.3;
-    if (uMaskType == 0) {
-        // Aperture grille: vertical RGB stripes
-        int col = int(mod(fragCoord.x, 3.0));
-        vec3 mask = vec3(1.0 - strength);
-        if (col == 0) mask.r = 1.0;
-        else if (col == 1) mask.g = 1.0;
-        else mask.b = 1.0;
-        return mask;
-    } else {
-        // Slot mask: 2D dot pattern
-        int col = int(mod(fragCoord.x, 3.0));
-        int row = int(mod(fragCoord.y, 2.0));
-        vec3 mask = vec3(1.0 - strength);
-        int idx = (col + row) % 3;
-        if (idx == 0) mask.r = 1.0;
-        else if (idx == 1) mask.g = 1.0;
-        else mask.b = 1.0;
-        return mask;
-    }
-}
-
-void main() {
-    vec2 uv = distort(vUV);
-
-    if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) {
-        fragColor = vec4(0.0, 0.0, 0.0, 1.0);
-        return;
-    }
-
-    // Bloom: blend with blurred neighbors
-    vec2 texel = 1.0 / uInputRes;
-    vec3 col = texture(uTex, uv).rgb;
-    if (uBloom > 0.0) {
-        vec3 blur = col;
-        blur += texture(uTex, uv + vec2(-texel.x, 0.0)).rgb * 0.25;
-        blur += texture(uTex, uv + vec2( texel.x, 0.0)).rgb * 0.25;
-        blur += texture(uTex, uv + vec2(0.0, -texel.y)).rgb * 0.25;
-        blur += texture(uTex, uv + vec2(0.0,  texel.y)).rgb * 0.25;
-        col = mix(col, blur / 2.0, uBloom);
-    }
-
-    // Scanlines
-    float brightness = dot(col, vec3(0.299, 0.587, 0.114));
-    col *= scanlineWeight(uv.y, brightness);
-
-    // Phosphor mask
-    vec2 fragCoord = uv * uResolution;
-    col *= phosphorMask(fragCoord);
-
-    // Vignette
-    if (uVignette > 0.0) {
-        vec2 vig = uv * (1.0 - uv);
-        float v = pow(vig.x * vig.y * 15.0, 0.25);
-        col *= mix(1.0, v, uVignette);
-    }
-
-    // Brightness compensation for scanlines + mask
-    col *= 1.3;
-
-    fragColor = vec4(col, 1.0);
-}
-)";
-
 // ---------- Helpers ----------
 
-static GLuint compileShader(GLenum type, const char* src) {
+// Concatenate the GL #version prelude with the shared GLSL body and feed
+// both strings to glShaderSource. Source-line numbers in error messages
+// match shaders.h (the prelude is one line and is prepended as a separate
+// string, so the body still starts at line 1 from glCompileShader's view).
+static GLuint compileShader(GLenum type, const char* body) {
+    const char* parts[2] = { shaders::kGLPrelude, body };
     GLuint s = glCreateShader(type);
-    glShaderSource(s, 1, &src, nullptr);
+    glShaderSource(s, 2, parts, nullptr);
     glCompileShader(s);
     GLint ok = 0;
     glGetShaderiv(s, GL_COMPILE_STATUS, &ok);
@@ -193,15 +83,15 @@ void GameRenderer::init(int gameW, int gameH) {
 
     // Passthrough shader
     {
-        GLuint vs = compileShader(GL_VERTEX_SHADER, vertSrc);
-        GLuint fs = compileShader(GL_FRAGMENT_SHADER, fragSrc);
+        GLuint vs = compileShader(GL_VERTEX_SHADER, shaders::kVertSrc);
+        GLuint fs = compileShader(GL_FRAGMENT_SHADER, shaders::kFragPassthrough);
         shaderNone_ = linkProgram(vs, fs);
     }
 
     // CRT shader
     {
-        GLuint vs = compileShader(GL_VERTEX_SHADER, vertSrc);
-        GLuint fs = compileShader(GL_FRAGMENT_SHADER, fragCRT);
+        GLuint vs = compileShader(GL_VERTEX_SHADER, shaders::kVertSrc);
+        GLuint fs = compileShader(GL_FRAGMENT_SHADER, shaders::kFragCRT);
         shaderCRT_ = linkProgram(vs, fs);
     }
 

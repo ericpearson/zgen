@@ -109,41 +109,18 @@ void VDP::dma68kToVRAM() {
         return;
     }
 
+    if (fifoCount >= FIFO_SIZE) {
+        return;
+    }
+
     // Source is a 24-bit, word-addressed 68K address.
     u32 srcAddr = ((static_cast<u32>(regs[23] & 0x7F) << 17) |
                    (static_cast<u32>(regs[22]) << 9) |
                    (static_cast<u32>(regs[21]) << 1)) & 0xFFFFFF;
 
-    int target = code & 0x07;
     u16 data = bus->read16(srcAddr);
-    if (target == 1 || target == 3 || target == 5) {
-        flushCurrentLineToCurrentCycle();
-    }
-
-    switch (target) {
-        case 1: // VRAM
-            if (address & 1) {
-                vram[(address - 1) & 0xFFFF] = data & 0xFF;
-                vram[address & 0xFFFF] = data >> 8;
-            } else {
-                vram[address & 0xFFFF] = data >> 8;
-                vram[(address + 1) & 0xFFFF] = data & 0xFF;
-            }
-            break;
-
-        case 3: // CRAM
-            cram[(address >> 1) & 0x3F] = data & 0x0EEE;
-            updateCachedColor((address >> 1) & 0x3F);
-            break;
-
-        case 5: // VSRAM
-            if ((address >> 1) < 40) {
-                vsram[(address >> 1) & 0x3F] = data & 0x07FF;
-            }
-            break;
-
-        default:
-            break;
+    if (!enqueueFIFOEntry(data, address, code, false, false)) {
+        return;
     }
 
     srcAddr = (srcAddr + 2) & 0xFFFFFF;
@@ -187,15 +164,8 @@ void VDP::processDMASlot() {
     if (!dmaActive || dmaWordsRemaining == 0) return;
 
     if (dmaMode <= 1) {
-        // 68K→VDP: VRAM target takes 2 slots per word, CRAM/VSRAM takes 1
-        int target = code & 0x07;
-        if (target == 1) {
-            if (!dmaVramSecondSlot) {
-                dmaVramSecondSlot = true;
-                return;
-            }
-            dmaVramSecondSlot = false;
-        }
+        // 68K→VDP DMA feeds the same FIFO as CPU data-port writes. The
+        // eventual VRAM/CRAM/VSRAM update happens when the FIFO entry drains.
         dma68kToVRAM();
     } else if (dmaMode == 2) {
         // Fill: 1 external slot per iteration.

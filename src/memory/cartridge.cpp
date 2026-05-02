@@ -7,7 +7,15 @@
 #include <cstring>
 #include <algorithm>
 
-Cartridge::Cartridge() : sramEnabled(false), sramStart(0), sramEnd(0) {
+namespace {
+constexpr u8 SRAM_BUS_BOTH = 0x00;
+constexpr u8 SRAM_BUS_EVEN = 0x10;
+constexpr u8 SRAM_BUS_ODD = 0x18;
+constexpr u8 SRAM_BUS_MASK = 0x18;
+}
+
+Cartridge::Cartridge() : sramEnabled(false), sramStart(0), sramEnd(0),
+                         sramBusFlags(SRAM_BUS_BOTH) {
     std::memset(&header, 0, sizeof(header));
 }
 
@@ -54,6 +62,7 @@ bool Cartridge::load(const char* filename) {
     sramEnabled = false;
     sramStart = 0;
     sramEnd = 0;
+    sramBusFlags = SRAM_BUS_BOTH;
     sram.clear();
     
     // Parse the header
@@ -76,6 +85,9 @@ void Cartridge::unload() {
     rom.clear();
     sram.clear();
     sramEnabled = false;
+    sramStart = 0;
+    sramEnd = 0;
+    sramBusFlags = SRAM_BUS_BOTH;
     std::memset(&header, 0, sizeof(header));
 }
 
@@ -108,12 +120,16 @@ void Cartridge::parseHeader() {
     // Check for SRAM
     if (header.extraMemory[0] == 'R' && header.extraMemory[1] == 'A') {
         sramEnabled = true;
-        sramStart = (rom[0x1B4] << 24) | (rom[0x1B5] << 16) | 
-                    (rom[0x1B6] << 8) | rom[0x1B7];
-        sramEnd = (rom[0x1B8] << 24) | (rom[0x1B9] << 16) | 
-                  (rom[0x1BA] << 8) | rom[0x1BB];
+        sramBusFlags = static_cast<u8>(rom[0x1B2] & SRAM_BUS_MASK);
+        sramStart = ((rom[0x1B4] << 24) | (rom[0x1B5] << 16) |
+                     (rom[0x1B6] << 8) | rom[0x1B7]) & 0xFFFFFE;
+        sramEnd = ((rom[0x1B8] << 24) | (rom[0x1B9] << 16) |
+                   (rom[0x1BA] << 8) | rom[0x1BB]) | 1;
         
         u32 sramSize = sramEnd - sramStart + 1;
+        if (sramBusFlags != SRAM_BUS_BOTH) {
+            sramSize /= 2;
+        }
         sram.resize(sramSize, 0xFF);
         printf("SRAM enabled: %08X-%08X (%u bytes)\n", sramStart, sramEnd, sramSize);
     }
@@ -200,16 +216,8 @@ u8 Cartridge::read8(u32 addr) const {
     if (addr < rom.size()) {
         return rom[addr];
     }
-    
-    // SRAM access
-    if (sramEnabled && addr >= sramStart && addr <= sramEnd) {
-        u32 sramAddr = addr - sramStart;
-        if (sramAddr < sram.size()) {
-            return sram[sramAddr];
-        }
-    }
-    
-    return 0xFF;
+
+    return readSRAM8(addr);
 }
 
 u16 Cartridge::read16(u32 addr) const {
@@ -217,38 +225,73 @@ u16 Cartridge::read16(u32 addr) const {
         return (static_cast<u16>(rom[addr]) << 8) | rom[addr + 1];
     }
 
-    if (sramEnabled && addr >= sramStart && addr < sramEnd) {
-        u32 sramAddr = addr - sramStart;
-        if (sramAddr + 1 < sram.size()) {
-            return (static_cast<u16>(sram[sramAddr]) << 8) | sram[sramAddr + 1];
-        }
-    }
-
     return (read8(addr) << 8) | read8(addr + 1);
 }
 
-void Cartridge::write8(u32 addr, u8 val) {
-    // SRAM write
-    if (sramEnabled && addr >= sramStart && addr <= sramEnd) {
-        u32 sramAddr = addr - sramStart;
-        if (sramAddr < sram.size()) {
-            sram[sramAddr] = val;
-        }
+bool Cartridge::sramByteAccessible(u32 addr) const {
+    if (!isSRAMAddress(addr)) {
+        return false;
+    }
+
+    switch (sramBusFlags) {
+        case SRAM_BUS_EVEN:
+            return (addr & 1) == 0;
+        case SRAM_BUS_ODD:
+            return (addr & 1) != 0;
+        case SRAM_BUS_BOTH:
+        default:
+            return true;
     }
 }
 
-void Cartridge::write16(u32 addr, u16 val) {
-    if (sramEnabled && addr >= sramStart && addr < sramEnd) {
-        u32 sramAddr = addr - sramStart;
-        if (sramAddr + 1 < sram.size()) {
-            sram[sramAddr] = static_cast<u8>(val >> 8);
-            sram[sramAddr + 1] = static_cast<u8>(val & 0xFF);
-            return;
-        }
+bool Cartridge::isSRAMAddress(u32 addr) const {
+    return sramEnabled && addr >= sramStart && addr <= sramEnd;
+}
+
+bool Cartridge::isDirectMappedSRAMAddress(u32 addr) const {
+    return isSRAMAddress(addr) && sramStart >= rom.size();
+}
+
+u32 Cartridge::sramByteOffset(u32 addr) const {
+    const u32 offset = addr - sramStart;
+    return sramBusFlags == SRAM_BUS_BOTH ? offset : (offset >> 1);
+}
+
+u8 Cartridge::readSRAM8(u32 addr) const {
+    if (!sramByteAccessible(addr)) {
+        return 0xFF;
     }
 
-    write8(addr, val >> 8);
-    write8(addr + 1, val & 0xFF);
+    const u32 sramAddr = sramByteOffset(addr);
+    return sramAddr < sram.size() ? sram[sramAddr] : 0xFF;
+}
+
+u16 Cartridge::readSRAM16(u32 addr) const {
+    return (static_cast<u16>(readSRAM8(addr)) << 8) | readSRAM8(addr + 1);
+}
+
+void Cartridge::write8(u32 addr, u8 val) {
+    writeSRAM8(addr, val);
+}
+
+void Cartridge::write16(u32 addr, u16 val) {
+    writeSRAM16(addr, val);
+}
+
+void Cartridge::writeSRAM8(u32 addr, u8 val) {
+    if (!sramByteAccessible(addr)) {
+        return;
+    }
+
+    const u32 sramAddr = sramByteOffset(addr);
+    if (sramAddr < sram.size()) {
+        sram[sramAddr] = val;
+    }
+}
+
+void Cartridge::writeSRAM16(u32 addr, u16 val) {
+    writeSRAM8(addr, static_cast<u8>(val >> 8));
+    writeSRAM8(addr + 1, static_cast<u8>(val & 0xFF));
 }
 
 std::string Cartridge::getGameName() const {

@@ -99,6 +99,8 @@ public:
     static void doKeyOff(YM2612& ym, int ch, int op) { ym.keyOff(ch, op); }
     static s32 doGenerateChannel(YM2612& ym, int ch) { return ym.generateChannel(ch); }
     static void doAdvanceState(YM2612& ym) { ym.advanceState(); }
+    static void clockBusyCycles(YM2612& ym, int m68kCycles) { ym.clockBusyCycles(m68kCycles); }
+    static int& lastStatusDecayCycles(YM2612& ym) { return ym.lastStatusDecayCycles; }
 
     // Helper: write a register via address+data
     static void writeReg(YM2612& ym, u8 addr, u8 data, int bank = 0) {
@@ -182,24 +184,50 @@ static void testDecayToSustainTransition() {
 }
 
 // =====================================================================
-// Test 2: Busy counter native tick lifetime
+// Test 2: Busy counter cycle lifetime
 // =====================================================================
 static void testBusyCounterOnNativeTicks() {
     beginGroup("busy counter lifetime");
 
-    // Busy flag lasts 32 internal FM clocks (Nuked OPN2: write_busy_cnt 0-31).
-    // One FM sample = 24 internal clocks, so 32 clocks ≈ 1.33 samples → 2 ticks.
+    // Busy flag lasts 32 YM clocks. In Genesis scheduler units:
+    // 32 * 6 YM subcycles = 192 M68K cycles.
     YM2612 ym;
     ym.writeAddress(0x22, 0);
     ym.writeData(0x00, 0);
     check((ym.readStatus() & 0x80) != 0, "busy flag is set after register write");
+    check(YM2612Test::busyCounter(ym) == 192, "busy counter starts at 192 M68K cycles");
 
-    ym.tick();
-    check((ym.readStatus() & 0x80) != 0, "busy flag remains set after first tick");
+    YM2612Test::clockBusyCycles(ym, 191);
+    check((ym.readStatus() & 0x80) != 0, "busy flag remains set before 192 cycles elapse");
 
-    ym.tick();
-    check((ym.readStatus() & 0x80) == 0, "busy flag clears after second tick");
+    YM2612Test::clockBusyCycles(ym, 1);
+    check((ym.readStatus() & 0x80) == 0, "busy flag clears after 192 M68K cycles");
     check(YM2612Test::busyCounter(ym) == 0, "busy counter reaches zero exactly");
+
+    endGroup();
+}
+
+static void testInvalidStatusPortReturnsLatchedStatus() {
+    beginGroup("invalid status port latch");
+
+    YM2612 ym;
+    ym.writeAddress(0x22, 0);
+    ym.writeData(0x00, 0);
+
+    check((ym.readStatus(0) & 0x80) != 0, "valid status read latches busy status");
+
+    YM2612Test::clockBusyCycles(ym, 192);
+    check((ym.readStatus(2) & 0x80) != 0,
+          "invalid status port returns previous latched status instead of live clear");
+
+    check((ym.readStatus(0) & 0x80) == 0, "valid status read refreshes latch after busy clears");
+    check((ym.readStatus(2) & 0x80) == 0, "invalid status port follows refreshed latch");
+
+    ym.writeAddress(0x22, 0);
+    ym.writeData(0x00, 0);
+    check((ym.readStatus(0) & 0x80) != 0, "valid status read re-latches busy status");
+    YM2612Test::clockBusyCycles(ym, YM2612Test::lastStatusDecayCycles(ym));
+    check((ym.readStatus(2) & 0x80) == 0, "invalid status latch decays to zero");
 
     endGroup();
 }
@@ -1442,6 +1470,7 @@ static void testReset() {
     YM2612Test::lfoEnabled(ym) = true;
     YM2612Test::ch3SpecialMode(ym) = true;
     YM2612Test::busyCounter(ym) = 100;
+    YM2612Test::lastStatusDecayCycles(ym) = 100;
     YM2612Test::channel(ym, 0).keyOn[0] = true;
     YM2612Test::channel(ym, 0).op[0].egLevel = 500;
     YM2612Test::channel(ym, 0).op[0].egPhase = 2;
@@ -1454,6 +1483,7 @@ static void testReset() {
     check(!YM2612Test::lfoEnabled(ym), "reset: LFO disabled");
     check(!YM2612Test::ch3SpecialMode(ym), "reset: CH3 special mode off");
     check(YM2612Test::busyCounter(ym) == 0, "reset: busy counter = 0");
+    check(YM2612Test::lastStatusDecayCycles(ym) == 0, "reset: status latch decay = 0");
     check(!YM2612Test::channel(ym, 0).keyOn[0], "reset: key on cleared");
     check(YM2612Test::channel(ym, 0).op[0].egLevel == 1023, "reset: EG level = 1023");
     check(YM2612Test::channel(ym, 0).op[0].egPhase == 0, "reset: EG phase = 0 (off)");
@@ -2694,6 +2724,7 @@ int main() {
 
     testDecayToSustainTransition();
     testBusyCounterOnNativeTicks();
+    testInvalidStatusPortReturnsLatchedStatus();
     testTimerStepping();
     testDACOverride();
     testRegisterRouting();

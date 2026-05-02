@@ -55,6 +55,15 @@ private:
     int gameW_ = 0, gameH_ = 0;
     int scale_ = 1;
 
+    // Shared shader-state (used by setCRTParams / shaderMode accessors in
+    // both backends; the Vulkan path does not yet act on the CRT parameters).
+    ShaderMode shaderMode_ = ShaderMode::None;
+    float curvature_ = 0.20f;
+    float scanline_ = 0.5f;
+    float bloom_ = 0.15f;
+    float vignette_ = 0.5f;
+    int maskType_ = 0;
+
 #ifdef USE_VULKAN
     unsigned int texture_ = 0; // placeholder — VkDescriptorSet stored as intptr_t
     // Vulkan-specific resources are managed by VulkanContext + game_renderer_vk.cpp
@@ -68,7 +77,6 @@ private:
     unsigned int shaderNone_ = 0;   // passthrough
     unsigned int shaderCRT_ = 0;    // CRT simulation
     unsigned int shader_ = 0;       // currently active
-    ShaderMode shaderMode_ = ShaderMode::None;
     int locMVP_ = -1;
     int locResolution_ = -1;
     int locInputRes_ = -1;
@@ -77,10 +85,5 @@ private:
     int locBloom_ = -1;
     int locVignette_ = -1;
     int locMaskType_ = -1;
-    float curvature_ = 0.20f;
-    float scanline_ = 0.5f;
-    float bloom_ = 0.15f;
-    float vignette_ = 0.5f;
-    int maskType_ = 0;
 #endif
 };

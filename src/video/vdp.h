@@ -85,16 +85,19 @@ public:
     bool vblankPending() const { return vblankIRQ && vblankEnabled; }
     bool hblankPending() const { return hblankIRQ; }
     bool hblankIRQAsserted() const { return hblankIRQ && hblankEnabled; }
+    int getVBlankIRQAssertCycle() const;
     void clearVBlank() { vblankIRQ = false; }
     void clearHBlank() { hblankIRQ = false; }
     void acknowledgeInterrupt(int level);
 
     // Status
     int getScanline() const { return scanline; }
+    int getLineCycles() const { return lineCycles; }
     bool inVBlank() const { return scanline >= activeHeight; }
     bool is68kDMABusy() const { return dmaActive && dmaMode <= 1 && dmaWordsRemaining > 0; }
     bool isVDPFIFOFull() const { return fifoCount >= FIFO_SIZE; }
     int fifoWaitCycles() const;
+    bool advanceFifoForCpuBoundaryWait();
     int dmaWaitCycles() const;
     int fifoCountAtCycleOffset(int offset) const;
 

@@ -154,7 +154,7 @@ void M68K::op_jsr() {
         case 7:
             switch (reg) {
                 case 0: chargeCycles(18); break;  // xxx.W
-                case 1: chargeCycles(20); break;  // xxx.L
+                case 1: chargeCycles(24); break;  // xxx.L
                 case 2: chargeCycles(18); break;  // d(PC)
                 case 3: chargeCycles(22); break;  // d(PC,Xi)
                 default: chargeCycles(16); break;

@@ -449,6 +449,16 @@ static void testClockConversion() {
     check(PSGTest::sampleCount(psg) == 7, "240 M68K cycles = 7 ticks");
     check(PSGTest::clockCounter(psg) == 0, "No remainder");
 
+    psg.reset();
+    PSGTest::clockCounter(psg) = 0;
+    psg.clockMaster(239);
+    check(PSGTest::sampleCount(psg) == 0, "239 master clocks = 0 PSG ticks");
+    check(PSGTest::clockCounter(psg) == 239, "Raw master remainder is preserved");
+
+    psg.clockMaster(1);
+    check(PSGTest::sampleCount(psg) == 1, "240th master clock produces one PSG tick");
+    check(PSGTest::clockCounter(psg) == 0, "Raw master divider clears at 240");
+
     endGroup();
 }
 

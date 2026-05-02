@@ -24,6 +24,7 @@ class CheatEngine;
 class CheatMemoryInterface;
 }
 class GenesisCheatMemoryBridge;
+class GenesisTimingTest;
 
 class Genesis {
 public:
@@ -85,6 +86,11 @@ public:
     void setAudioSampleRate(int rate);
     void setVideoStandard(VideoStandard standard);
     void syncYMBeforeWrite();  // Advance YM to current Z80 position before register write
+    void syncYMBeforeRead();   // Advance YM to current Z80 position before status read
+    void traceZ80YMRead(u16 addr, u8 status);
+    void traceZ80YMWrite(u16 addr, u8 value, bool dataPort);
+    void traceZ80PSGWrite(u8 value);
+    void traceZ80BankAccessPenalty(int z80Cycles, int m68kStallCycles);
     VideoStandard getVideoStandard() const { return vdp.getVideoStandard(); }
     double getFrameRate() const;
     int getScanlinesPerFrame() const { return vdp.getTotalScanlines(); }
@@ -151,6 +157,7 @@ public:
     
 private:
     friend class GenesisCheatMemoryBridge;
+    friend class GenesisTimingTest;
 
     M68K m68k;
     Z80 z80;
@@ -164,6 +171,35 @@ private:
     bool paused;
     bool detailedProfilingEnabled_;
     FrameProfile frameProfile_;
+
+    struct Z80AudioTraceCounters {
+        u64 m68kCyclesBudgeted = 0;
+        u64 z80CyclesBudgeted = 0;
+        u64 z80CyclesExecuted = 0;
+        u64 z80CyclesHalted = 0;
+        u64 z80Instructions = 0;
+        u64 ymTicks = 0;
+        u64 ymReads = 0;
+        u64 ymBusyReads = 0;
+        u64 ymBusyTransitions = 0;
+        u64 ymWrites = 0;
+        u64 ymAddressWrites = 0;
+        u64 ymDataWrites = 0;
+        u64 ymPort0Writes = 0;
+        u64 ymPort1Writes = 0;
+        u64 ymSyncs = 0;
+        u64 ymSyncCycles = 0;
+        u64 psgWrites = 0;
+        u64 z80BankAccesses = 0;
+        u64 z80BankPenaltyCycles = 0;
+        u64 m68kZ80BusStallQueued = 0;
+        u64 m68kZ80BusStallConsumed = 0;
+        u64 z80InterruptPulses = 0;
+        u64 z80InterruptPulseExpirations = 0;
+        u8 lastYMStatus = 0;
+        bool haveYMStatus = false;
+    };
+    Z80AudioTraceCounters z80AudioTrace_;
 
     // Audio output buffer (stereo interleaved: L, R, L, R, ...)
     static constexpr int DEFAULT_AUDIO_RATE = 48000;
@@ -181,6 +217,11 @@ private:
     int ymBurstTotalCycles_;    // total M68K cycles in current Z80 burst (for clamping)
     int ymBurstDrained_;        // M68K cycles of YM already drained this burst (via syncs)
     int z80BurstInitialDebt_;   // z80CycleDebt at start of current burst (for progress calc)
+    int z80InterruptPulseCycles_; // Remaining V-int pulse length in Z80 cycles.
+    u64 z80InterruptPulseStartMasterCycle_; // Shadow raw /INT pulse start.
+    u64 z80InterruptPulseEndMasterCycle_;   // Shadow raw /INT pulse end.
+    u64 masterCycle_;           // Shadow absolute master-clock position.
+    u64 scanlineStartMasterCycle_; // Shadow master-clock position at current scanline start.
     int m68kCycleDebt;          // carry-over from scanline overshoot (negative = overshoot)
     int z80CycleDebt;           // persistent converted Z80 cycle budget (negative = overshoot)
     int m68kLineAccum;          // fractional M68K cycles accumulator (3420 master / 7 has remainder)
@@ -231,7 +272,15 @@ private:
     void pushYMSample(const YMSample& sample);
     bool popYMSample(YMSample& outSample);
     void clockYM(int m68kCycles);
+    void clockZ80Master(int masterCycles);
     void clockZ80(int m68kCycles);
+    void clockZ80AndYM(int m68kCycles);
+    void assertZ80InterruptPulse();
+    void advanceZ80InterruptPulse(int z80Cycles);
+    void resetMasterClock();
+    void beginMasterClockScanline();
+    void syncMasterClockToM68KLineCycle(int lineCycle);
+    void endMasterClockScanline();
     bool cheatRead8(u32 address, u8& outValue) const;
     bool cheatRead16(u32 address, u16& outValue) const;
     bool cheatWrite8(u32 address, u8 value);

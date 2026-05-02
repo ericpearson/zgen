@@ -405,7 +405,10 @@ inline constexpr VDPSlotTable buildH32Active() {
     VDPSlotTable t{};
     t.count = 171;
     t.activeWidth = 256;
-    t.hintAssertSlot = 117;   // Keep legacy behavior outside the H40 Cotton path
+    // H-int counter/IRQ advances at the V-counter line boundary in H32 too.
+    // F1 depends on the handler reaching its display-disable write while the
+    // target scanline is still current.
+    t.hintAssertSlot = 0;
     t.hblankEndSlot = 4;
     t.hblankStartSlot = 117;
 
@@ -429,11 +432,8 @@ inline constexpr VDPSlotTable buildH32Active() {
         t.types[s] = SLOT_REFRESH;
     }
 
-    // VSRAM latch point for H32 mode: slot 35 at ~M68K cycle 126.
-    // Must be after TG2's carry-over handler FIFO drain at slot 31
-    // (~cycle 115). H40 doesn't need this (Cotton is H40, handled
-    // by the cycle-0 fallback in beginScanlineCommon).
-    t.types[35] = SLOT_VSCROLL_LATCH;
+    // H32 full-screen vscroll is sampled at line start after previous-line
+    // carry-over VSRAM drains, so there is no active-display latch slot here.
 
     // Anchor the active-line external access windows to verified H32 FIFO
     // timings. Formula One is one of the games that flickers when these

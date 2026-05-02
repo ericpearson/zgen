@@ -17,6 +17,10 @@
 namespace {
 using ProfileClock = std::chrono::steady_clock;
 
+constexpr int Z80_INTERRUPT_PULSE_MASTER_CYCLES = 2573;
+constexpr int Z80_INTERRUPT_PULSE_CYCLES = 172; // 2573 master clocks / 15, rounded up.
+constexpr int YM_INVALID_STATUS_DECAY_CYCLES = 225000 * 6;
+
 inline double elapsedMs(ProfileClock::time_point start) {
     return std::chrono::duration<double, std::milli>(ProfileClock::now() - start).count();
 }
@@ -164,6 +168,30 @@ inline bool megaTimingEnabled() {
     return envEnabled("GENESIS_LOG_MEGA_TIMING");
 }
 
+inline bool z80AudioTraceEnabled() {
+    return envEnabled("GENESIS_LOG_Z80_AUDIO");
+}
+
+inline bool z80AudioTraceFrameAllowed(int frame) {
+    static int frameFirst = 0;
+    static int frameLast = 0;
+    static bool initialized = false;
+    if (!initialized) {
+        frameFirst = envIntOrDefault("GENESIS_LOG_Z80_AUDIO_FRAME_FIRST", 0);
+        frameLast = envIntOrDefault("GENESIS_LOG_Z80_AUDIO_FRAME_LAST", 0);
+        initialized = true;
+    }
+    if (!frameFirst && !frameLast) {
+        return true;
+    }
+    const int last = frameLast ? frameLast : frameFirst;
+    return frame >= frameFirst && frame <= last;
+}
+
+inline bool z80AudioTraceDetailEnabled(int frame) {
+    return envEnabled("GENESIS_LOG_Z80_AUDIO_DETAIL") && z80AudioTraceFrameAllowed(frame);
+}
+
 inline std::uint16_t packCram9Bit(std::uint16_t value) {
     return static_cast<std::uint16_t>(((value & 0x0E00) >> 3) |
                                       ((value & 0x00E0) >> 2) |
@@ -241,6 +269,9 @@ Genesis::Genesis() : frameCount(0), paused(false),
                      z80CycleAccum(0), ymNativeTickAccum(0),
                      ymPendingCycles_(0), ymBurstTotalCycles_(0),
                      ymBurstDrained_(0), z80BurstInitialDebt_(0),
+                     z80InterruptPulseCycles_(0),
+                     z80InterruptPulseStartMasterCycle_(0), z80InterruptPulseEndMasterCycle_(0),
+                     masterCycle_(0), scanlineStartMasterCycle_(0),
                      m68kCycleDebt(0), z80CycleDebt(0), m68kLineAccum(0),
                      badSplitTraceWriteIndex_(0), badSplitTraceCount_(0),
                      badSplitTraceSeenSerial_(0), badSplitTraceDumped_(false),
@@ -334,6 +365,8 @@ bool Genesis::popYMSample(YMSample& outSample) {
 }
 
 void Genesis::clockYM(int m68kCycles) {
+    ym2612.clockBusyCycles(m68kCycles);
+
     // Low-pass filter: first-order Butterworth at ~3390 Hz.
     // Matches the Model 1 analog RC output filter. Essential for games
     // that stream PCM through the DAC at low sample rates (Codemasters
@@ -351,6 +384,7 @@ void Genesis::clockYM(int m68kCycles) {
     ymNativeTickAccum += m68kCycles;
     int ymTicks = ymNativeTickAccum / 144;
     ymNativeTickAccum %= 144;
+    z80AudioTrace_.ymTicks += static_cast<u64>(ymTicks);
     for (int i = 0; i < ymTicks; i++) {
         YMSample sample = ym2612.tick();
 
@@ -370,14 +404,19 @@ void Genesis::clockYM(int m68kCycles) {
     }
 }
 
-void Genesis::clockZ80(int m68kCycles) {
-    // Convert elapsed 68K time into Z80 cycles and carry the budget across
+void Genesis::clockZ80Master(int masterCycles) {
+    if (masterCycles <= 0) {
+        return;
+    }
+
+    // Convert elapsed master-clock time into Z80 cycles and carry the budget across
     // calls. Instruction overshoot is kept as negative debt so it is paid back
     // by later elapsed time instead of becoming free extra Z80 execution.
-    z80CycleAccum += m68kCycles * M68K_DIVIDER;
+    z80CycleAccum += masterCycles;
     int z80Cycles = z80CycleAccum / Z80_DIVIDER;
     z80CycleAccum %= Z80_DIVIDER;
     z80CycleDebt += z80Cycles;
+    z80AudioTrace_.z80CyclesBudgeted += static_cast<u64>(z80Cycles);
 
     // Record Z80 starting position for syncYMBeforeWrite progress calculation.
     // Sentinel set to INT_MIN at burst start; record after cycles are credited
@@ -391,7 +430,9 @@ void Genesis::clockZ80(int m68kCycles) {
         // cycle counter so BUSACK settles the right number of cycles after
         // BUSREQ is asserted (and Z80 resumes the right delay after release).
         if (z80CycleDebt > 0) {
+            z80AudioTrace_.z80CyclesHalted += static_cast<u64>(z80CycleDebt);
             bus.updateBusAck(z80CycleDebt);
+            advanceZ80InterruptPulse(z80CycleDebt);
             z80CycleDebt = 0;
         }
         return;
@@ -402,12 +443,167 @@ void Genesis::clockZ80(int m68kCycles) {
         if (ran <= 0) {
             break;
         }
+        z80AudioTrace_.z80Instructions++;
+        z80AudioTrace_.z80CyclesExecuted += static_cast<u64>(ran);
         z80CycleDebt -= ran;
         // Advance the bus's Z80-cycle counter so BUSREQ/BUSACK transitions
         // settle on the hardware-accurate ~3 Z80-cycle (assert) and ~1-cycle
         // (release) thresholds. See Bus::updateBusAck.
         bus.updateBusAck(ran);
+        advanceZ80InterruptPulse(ran);
     }
+}
+
+void Genesis::clockZ80(int m68kCycles) {
+    if (m68kCycles <= 0) {
+        return;
+    }
+
+    z80AudioTrace_.m68kCyclesBudgeted += static_cast<u64>(m68kCycles);
+    clockZ80Master(m68kCycles * M68K_DIVIDER);
+}
+
+void Genesis::assertZ80InterruptPulse() {
+    z80.interrupt();
+    z80InterruptPulseCycles_ = Z80_INTERRUPT_PULSE_CYCLES;
+    z80InterruptPulseStartMasterCycle_ = masterCycle_;
+    z80InterruptPulseEndMasterCycle_ =
+        masterCycle_ + static_cast<u64>(Z80_INTERRUPT_PULSE_MASTER_CYCLES);
+    z80AudioTrace_.z80InterruptPulses++;
+}
+
+void Genesis::advanceZ80InterruptPulse(int z80Cycles) {
+    if (z80Cycles <= 0 || z80InterruptPulseCycles_ <= 0) {
+        return;
+    }
+    if (z80Cycles >= z80InterruptPulseCycles_) {
+        z80InterruptPulseCycles_ = 0;
+        if (z80.state.irqLine) {
+            z80AudioTrace_.z80InterruptPulseExpirations++;
+            z80.clearInterrupt();
+        }
+    } else {
+        z80InterruptPulseCycles_ -= z80Cycles;
+    }
+}
+
+void Genesis::resetMasterClock() {
+    masterCycle_ = 0;
+    scanlineStartMasterCycle_ = 0;
+}
+
+void Genesis::beginMasterClockScanline() {
+    scanlineStartMasterCycle_ = masterCycle_;
+}
+
+void Genesis::syncMasterClockToM68KLineCycle(int lineCycle) {
+    if (lineCycle < 0) {
+        lineCycle = 0;
+    }
+    masterCycle_ = scanlineStartMasterCycle_ +
+                   static_cast<u64>(lineCycle) * M68K_DIVIDER;
+}
+
+void Genesis::endMasterClockScanline() {
+    masterCycle_ = scanlineStartMasterCycle_ + MASTER_CYCLES_PER_SCANLINE;
+    scanlineStartMasterCycle_ = masterCycle_;
+}
+
+void Genesis::traceZ80YMRead(u16 addr, u8 status) {
+    z80AudioTrace_.ymReads++;
+    if (status & 0x80) {
+        z80AudioTrace_.ymBusyReads++;
+    }
+    if (z80AudioTrace_.haveYMStatus && ((z80AudioTrace_.lastYMStatus ^ status) & 0x80)) {
+        z80AudioTrace_.ymBusyTransitions++;
+    }
+    z80AudioTrace_.lastYMStatus = status;
+    z80AudioTrace_.haveYMStatus = true;
+
+    const int frame = frameCount + 1;
+    if (z80AudioTraceDetailEnabled(frame)) {
+        std::fprintf(stderr,
+                     "[Z80-YM-READ] frame=%d line=%d pc=%04X addr=%04X status=%02X busy=%d z80Debt=%d ymPending=%d ymDrained=%d\n",
+                     frame,
+                     vdp.getScanline(),
+                     z80.state.pc,
+                     addr,
+                     status,
+                     (status & 0x80) ? 1 : 0,
+                     z80CycleDebt,
+                     ymPendingCycles_,
+                     ymBurstDrained_);
+    }
+}
+
+void Genesis::traceZ80YMWrite(u16 addr, u8 value, bool dataPort) {
+    z80AudioTrace_.ymWrites++;
+    if (dataPort) {
+        z80AudioTrace_.ymDataWrites++;
+    } else {
+        z80AudioTrace_.ymAddressWrites++;
+    }
+    if (((addr >> 1) & 1) == 0) {
+        z80AudioTrace_.ymPort0Writes++;
+    } else {
+        z80AudioTrace_.ymPort1Writes++;
+    }
+
+    const int frame = frameCount + 1;
+    if (z80AudioTraceDetailEnabled(frame)) {
+        std::fprintf(stderr,
+                     "[Z80-YM-WRITE] frame=%d line=%d pc=%04X addr=%04X port=%d kind=%s value=%02X z80Debt=%d ymPending=%d ymDrained=%d\n",
+                     frame,
+                     vdp.getScanline(),
+                     z80.state.pc,
+                     addr,
+                     (addr >> 1) & 1,
+                     dataPort ? "data" : "addr",
+                     value,
+                     z80CycleDebt,
+                     ymPendingCycles_,
+                     ymBurstDrained_);
+    }
+}
+
+void Genesis::traceZ80PSGWrite(u8 value) {
+    z80AudioTrace_.psgWrites++;
+
+    const int frame = frameCount + 1;
+    if (z80AudioTraceDetailEnabled(frame)) {
+        std::fprintf(stderr,
+                     "[Z80-PSG-WRITE] frame=%d line=%d pc=%04X value=%02X z80Debt=%d\n",
+                     frame,
+                     vdp.getScanline(),
+                     z80.state.pc,
+                     value,
+                     z80CycleDebt);
+    }
+}
+
+void Genesis::traceZ80BankAccessPenalty(int z80Cycles, int m68kStallCycles) {
+    z80AudioTrace_.z80BankAccesses++;
+    z80AudioTrace_.z80BankPenaltyCycles += static_cast<u64>(z80Cycles);
+    z80AudioTrace_.m68kZ80BusStallQueued += static_cast<u64>(m68kStallCycles);
+}
+
+void Genesis::clockZ80AndYM(int m68kCycles) {
+    if (m68kCycles <= 0) {
+        return;
+    }
+
+    ymPendingCycles_ = m68kCycles;
+    ymBurstTotalCycles_ = m68kCycles;
+    ymBurstDrained_ = 0;
+    z80BurstInitialDebt_ = INT_MIN;
+    clockZ80(m68kCycles);
+
+    if (ymPendingCycles_ > 0) {
+        clockYM(ymPendingCycles_);
+        ymPendingCycles_ = 0;
+    }
+    ymBurstTotalCycles_ = 0;
+    ymBurstDrained_ = 0;
 }
 
 void Genesis::syncYMBeforeWrite() {
@@ -435,11 +631,17 @@ void Genesis::syncYMBeforeWrite() {
     }
     int toDrain = m68kEquivalent - ymBurstDrained_;
     if (toDrain > 0) {
+        z80AudioTrace_.ymSyncs++;
+        z80AudioTrace_.ymSyncCycles += static_cast<u64>(toDrain);
         clockYM(toDrain);
         ymBurstDrained_ += toDrain;
         ymPendingCycles_ -= toDrain;
         if (ymPendingCycles_ < 0) ymPendingCycles_ = 0;
     }
+}
+
+void Genesis::syncYMBeforeRead() {
+    syncYMBeforeWrite();
 }
 
 void Genesis::setVideoStandard(VideoStandard standard) {
@@ -482,6 +684,10 @@ void Genesis::reset() {
     ymNativeTickAccum = 0;
     m68kCycleDebt = 0;
     z80CycleDebt = 0;
+    z80InterruptPulseCycles_ = 0;
+    z80InterruptPulseStartMasterCycle_ = 0;
+    z80InterruptPulseEndMasterCycle_ = 0;
+    resetMasterClock();
     m68kLineAccum = 0;
 
     m68k.refreshCounter_ = 0;
@@ -653,6 +859,7 @@ void Genesis::runFrame() {
     logCottonRamSlice("frame-start", frameCount + 1, bus);
     stallCyclesDMA_ = 0;
     stallCyclesFIFO_ = 0;
+    z80AudioTrace_ = {};
 
     for (int line = 0; line < getScanlinesPerFrame(); line++) {
         m68k.traceScanline_ = line;
@@ -670,6 +877,40 @@ void Genesis::runFrame() {
     }
 
     frameCount++;
+
+    if (z80AudioTraceEnabled() && z80AudioTraceFrameAllowed(frameCount)) {
+        std::fprintf(stderr,
+                     "[Z80-AUDIO] frame=%d m68kBudget=%llu z80Budget=%llu z80Exec=%llu z80Halt=%llu z80Debt=%d z80Instr=%llu ymTicks=%llu ymReads=%llu ymBusyReads=%llu ymBusyTransitions=%llu ymWrites=%llu ymAddrWrites=%llu ymDataWrites=%llu ymPort0Writes=%llu ymPort1Writes=%llu ymSyncs=%llu ymSyncCycles=%llu psgWrites=%llu bankAccesses=%llu bankPenaltyZ80=%llu busStallQueued=%llu busStallConsumed=%llu z80IntPulses=%llu z80IntPulseExpirations=%llu z80IrqLine=%d z80PulseCycles=%d ymQueue=%d lastStatus=%02X\n",
+                     frameCount,
+                     static_cast<unsigned long long>(z80AudioTrace_.m68kCyclesBudgeted),
+                     static_cast<unsigned long long>(z80AudioTrace_.z80CyclesBudgeted),
+                     static_cast<unsigned long long>(z80AudioTrace_.z80CyclesExecuted),
+                     static_cast<unsigned long long>(z80AudioTrace_.z80CyclesHalted),
+                     z80CycleDebt,
+                     static_cast<unsigned long long>(z80AudioTrace_.z80Instructions),
+                     static_cast<unsigned long long>(z80AudioTrace_.ymTicks),
+                     static_cast<unsigned long long>(z80AudioTrace_.ymReads),
+                     static_cast<unsigned long long>(z80AudioTrace_.ymBusyReads),
+                     static_cast<unsigned long long>(z80AudioTrace_.ymBusyTransitions),
+                     static_cast<unsigned long long>(z80AudioTrace_.ymWrites),
+                     static_cast<unsigned long long>(z80AudioTrace_.ymAddressWrites),
+                     static_cast<unsigned long long>(z80AudioTrace_.ymDataWrites),
+                     static_cast<unsigned long long>(z80AudioTrace_.ymPort0Writes),
+                     static_cast<unsigned long long>(z80AudioTrace_.ymPort1Writes),
+                     static_cast<unsigned long long>(z80AudioTrace_.ymSyncs),
+                     static_cast<unsigned long long>(z80AudioTrace_.ymSyncCycles),
+                     static_cast<unsigned long long>(z80AudioTrace_.psgWrites),
+                     static_cast<unsigned long long>(z80AudioTrace_.z80BankAccesses),
+                     static_cast<unsigned long long>(z80AudioTrace_.z80BankPenaltyCycles),
+                     static_cast<unsigned long long>(z80AudioTrace_.m68kZ80BusStallQueued),
+                     static_cast<unsigned long long>(z80AudioTrace_.m68kZ80BusStallConsumed),
+                     static_cast<unsigned long long>(z80AudioTrace_.z80InterruptPulses),
+                     static_cast<unsigned long long>(z80AudioTrace_.z80InterruptPulseExpirations),
+                     z80.state.irqLine ? 1 : 0,
+                     z80InterruptPulseCycles_,
+                     ymNativeQueueCount,
+                     z80AudioTrace_.lastYMStatus);
+    }
 
     {
         static const bool logStalls = []() {
@@ -760,6 +1001,7 @@ void Genesis::runScanline() {
     } else {
         vdp.beginScanline();
     }
+    beginMasterClockScanline();
     logCottonRamScanline("line-start", currentFrame, vdp.getScanline(), bus, vdp);
     logMegaTimingState("CPU-LINE-START", currentFrame, vdp.getScanline(), vdp.activeHeight, vdp.lineCycles, vdp, m68k, bus);
 
@@ -789,16 +1031,27 @@ void Genesis::runScanline() {
         } else {
             vdp.clockM68K(carryInCycles);
         }
+        syncMasterClockToM68KLineCycle(vdp.lineCycles);
     }
 
     // Deliver pending interrupts before the 68K runs.
     bool z80VIntDelivered = false;
+    const int z80VIntAssertCycle =
+        (vdp.getScanline() == vdp.activeHeight) ? vdp.getVBlankIRQAssertCycle() : -1;
+    auto deliverZ80VIntPulse = [&]() {
+        if (!z80VIntDelivered &&
+            vdp.getScanline() == vdp.activeHeight &&
+            z80VIntAssertCycle >= 0 &&
+            vdp.lineCycles >= z80VIntAssertCycle) {
+            assertZ80InterruptPulse();
+            z80VIntDelivered = true;
+        }
+    };
+    deliverZ80VIntPulse();
     // V-int has priority: assert level 6 to both Z80 and 68K.
     // H-int is only delivered when V-int is not pending (lower priority).
     if (vdp.vblankPending() && vdp.getScanline() == vdp.activeHeight) {
         logMegaTimingState("IRQ-PRE-VINT", currentFrame, vdp.getScanline(), vdp.activeHeight, vdp.lineCycles, vdp, m68k, bus, 6);
-        z80.interrupt();
-        z80VIntDelivered = true;
         m68k.interrupt(6);
     }
     if (!vdp.vblankPending() && vdp.hblankIRQAsserted()) {
@@ -822,11 +1075,8 @@ void Genesis::runScanline() {
         // current interrupt state. When a status-register read clears the
         // pending flags, de-assert the corresponding CPU pending level so a
         // stale H-int doesn't fire after a VBlank handler reads status.
+        deliverZ80VIntPulse();
         if (vdp.vblankPending()) {
-            if (!z80VIntDelivered && vdp.getScanline() == vdp.activeHeight) {
-                z80.interrupt();
-                z80VIntDelivered = true;
-            }
             logMegaTimingState("IRQ-LOOP-VINT", currentFrame, vdp.getScanline(), vdp.activeHeight, vdp.lineCycles, vdp, m68k, bus, 6);
             m68k.interrupt(6);
         } else if (vdp.hblankIRQAsserted()) {
@@ -848,8 +1098,10 @@ void Genesis::runScanline() {
     while (m68kCyclesRemaining > 0) {
         // Z80 banked accesses into the 68K address space temporarily own the
         // external 68K bus. The Z80 instruction already paid its own access
-        // penalty; consume only the queued 68K-side stall time here.
+        // penalty; consume the queued 68K-side stall time here while VDP and
+        // audio continue to receive wall-clock cycles.
         if (int skip = bus.consumeM68KZ80BusStallCycles(m68kCyclesRemaining)) {
+            z80AudioTrace_.m68kZ80BusStallConsumed += static_cast<u64>(skip);
             if (profile) {
                 auto vdpStart = ProfileClock::now();
                 vdp.clockM68K(skip);
@@ -867,8 +1119,10 @@ void Genesis::runScanline() {
                 psg.clock(skip);
                 clockYM(skip);
             }
+            syncMasterClockToM68KLineCycle(vdp.lineCycles);
             m68k.advanceRefreshNoWait(skip);
             m68kCyclesRemaining -= skip;
+            deliverPendingInterrupts();
             continue;
         }
 
@@ -891,23 +1145,18 @@ void Genesis::runScanline() {
                 vdp.clockM68K(skip);
                 psg.clock(skip);
             }
+            syncMasterClockToM68KLineCycle(vdp.lineCycles);
             // Z80 before YM so DAC writes take effect immediately
             if (profile) {
                 auto z80Start = ProfileClock::now();
-                clockZ80(skip);
+                clockZ80AndYM(skip);
                 frameProfile_.z80Ms += elapsedMs(z80Start);
             } else {
-                clockZ80(skip);
-            }
-            if (profile) {
-                auto ymStart = ProfileClock::now();
-                clockYM(skip);
-                frameProfile_.ymMs += elapsedMs(ymStart);
-            } else {
-                clockYM(skip);
+                clockZ80AndYM(skip);
             }
             m68k.advanceRefreshNoWait(skip);
             m68kCyclesRemaining -= skip;
+            deliverPendingInterrupts();
             continue;
         }
 
@@ -930,23 +1179,18 @@ void Genesis::runScanline() {
                 vdp.clockM68K(skip);
                 psg.clock(skip);
             }
+            syncMasterClockToM68KLineCycle(vdp.lineCycles);
             // Z80 before YM so DAC writes take effect immediately
             if (profile) {
                 auto z80Start = ProfileClock::now();
-                clockZ80(skip);
+                clockZ80AndYM(skip);
                 frameProfile_.z80Ms += elapsedMs(z80Start);
             } else {
-                clockZ80(skip);
-            }
-            if (profile) {
-                auto ymStart = ProfileClock::now();
-                clockYM(skip);
-                frameProfile_.ymMs += elapsedMs(ymStart);
-            } else {
-                clockYM(skip);
+                clockZ80AndYM(skip);
             }
             m68k.advanceRefreshNoWait(skip);
             m68kCyclesRemaining -= skip;
+            deliverPendingInterrupts();
         }
         if (m68kCyclesRemaining <= 0) break;
 
@@ -1121,6 +1365,7 @@ void Genesis::runScanline() {
             } else {
                 vdp.syncToLineCycle(burstStartLineCycle + burstCycles);
             }
+            syncMasterClockToM68KLineCycle(vdp.lineCycles);
 
 
             // Deliver interrupts after each instruction's VDP sync so
@@ -1293,6 +1538,7 @@ void Genesis::runScanline() {
     } else {
         vdp.endScanline();
     }
+    endMasterClockScanline();
 }
 
 void Genesis::step() {
@@ -1323,7 +1569,7 @@ bool Genesis::canonicalizeLoadedBoundaryState() {
 
 // Save state format: magic + version + components + thumbnail
 static constexpr u32 SAVE_MAGIC = 0x47454E53; // "GENS"
-static constexpr u32 SAVE_VERSION = 19;
+static constexpr u32 SAVE_VERSION = 21;
 static constexpr int THUMB_W = 320;
 static constexpr int THUMB_H = 224;
 
@@ -1490,6 +1736,8 @@ bool Genesis::saveState(int slot, const u32* screenshotBuffer) {
     writeVal(f, ym2612.timerBCounter);
     writeVal(f, ym2612.timerBSubCounter);
     writeVal(f, ym2612.busyCounter);
+    writeVal(f, ym2612.lastStatus);
+    writeVal(f, ym2612.lastStatusDecayCycles);
     writeVal(f, ym2612.egCounter);
     writeVal(f, ym2612.egSubCounter);
     writeVal(f, ym2612.ch3SpecialMode);
@@ -1521,6 +1769,7 @@ bool Genesis::saveState(int slot, const u32* screenshotBuffer) {
     writeVal(f, ymNativeTickAccum);
     writeVal(f, m68kCycleDebt);
     writeVal(f, z80CycleDebt);
+    writeVal(f, z80InterruptPulseCycles_);
     writeVal(f, m68kLineAccum);
     writeArr(f, dcBlockPrevIn, 2);
     writeArr(f, dcBlockPrevOut, 2);
@@ -1813,6 +2062,16 @@ bool Genesis::loadStateFromFile(const std::string& path) {
         ym2612.timerBSubCounter = 0;
     }
     readVal(f, ym2612.busyCounter);
+    if (version >= 20) {
+        readVal(f, ym2612.lastStatus);
+    } else {
+        ym2612.lastStatus = 0;
+    }
+    if (version >= 21) {
+        readVal(f, ym2612.lastStatusDecayCycles);
+    } else {
+        ym2612.lastStatusDecayCycles = ym2612.lastStatus ? YM_INVALID_STATUS_DECAY_CYCLES : 0;
+    }
     readVal(f, ym2612.egCounter);
     readVal(f, ym2612.egSubCounter);
     readVal(f, ym2612.ch3SpecialMode);
@@ -1849,6 +2108,11 @@ bool Genesis::loadStateFromFile(const std::string& path) {
     readVal(f, ymNativeTickAccum);
     readVal(f, m68kCycleDebt);
     readVal(f, z80CycleDebt);
+    if (version >= 20) {
+        readVal(f, z80InterruptPulseCycles_);
+    } else {
+        z80InterruptPulseCycles_ = z80.state.irqLine ? Z80_INTERRUPT_PULSE_CYCLES : 0;
+    }
     readVal(f, m68kLineAccum);
     if (version >= 12) {
         readArr(f, dcBlockPrevIn, 2);
@@ -1881,6 +2145,7 @@ bool Genesis::loadStateFromFile(const std::string& path) {
     const int loadedYMNativeTickAccum = ymNativeTickAccum;
     const int loadedM68KCycleDebt = m68kCycleDebt;
     const int loadedZ80CycleDebt = z80CycleDebt;
+    const int loadedZ80InterruptPulseCycles = z80InterruptPulseCycles_;
     const int loadedM68KLineAccum = m68kLineAccum;
     YMSample loadedYMNativeQueue[YM_NATIVE_QUEUE_SIZE];
     std::memcpy(loadedYMNativeQueue, ymNativeQueue, sizeof(loadedYMNativeQueue));
@@ -1897,6 +2162,7 @@ bool Genesis::loadStateFromFile(const std::string& path) {
     ymNativeTickAccum = loadedYMNativeTickAccum;
     m68kCycleDebt = loadedM68KCycleDebt;
     z80CycleDebt = loadedZ80CycleDebt;
+    z80InterruptPulseCycles_ = loadedZ80InterruptPulseCycles;
     m68kLineAccum = loadedM68KLineAccum;
     std::memcpy(ymNativeQueue, loadedYMNativeQueue, sizeof(loadedYMNativeQueue));
     ymNativeQueueHead = loadedYMNativeQueueHead;

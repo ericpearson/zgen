@@ -178,10 +178,61 @@ void Bus::addM68KZ80AreaWaitCycles(int cycles) {
     }
 }
 
+void Bus::waitForVDPFIFOForWrite() {
+    if (!vdp || !m68k) {
+        return;
+    }
+
+    int guard = 0;
+    while (vdp->isVDPFIFOFull() && guard++ < 4096) {
+        int wait = vdp->fifoWaitCycles();
+        if (wait <= 0) {
+            wait = 1;
+        }
+        const int before = vdp->getLineCycles();
+        vdp->clockM68K(wait);
+        m68k->addBusWaitCycles(wait);
+        if (!vdp->isVDPFIFOFull()) {
+            break;
+        }
+        if (vdp->getLineCycles() == before &&
+            vdp->advanceFifoForCpuBoundaryWait()) {
+            continue;
+        }
+        if (vdp->getLineCycles() == before) {
+            break;
+        }
+    }
+}
+
+void Bus::waitForVDP68KDMA() {
+    if (!vdp || !m68k) {
+        return;
+    }
+
+    int guard = 0;
+    while (vdp->is68kDMABusy() && guard++ < 65536) {
+        int wait = vdp->dmaWaitCycles();
+        if (wait <= 0) {
+            wait = 1;
+        }
+
+        const int lineCyclesBefore = vdp->getLineCycles();
+        vdp->clockM68K(wait);
+        if (vdp->getLineCycles() == lineCyclesBefore && vdp->is68kDMABusy()) {
+            break;
+        }
+        m68k->addBusWaitCycles(wait);
+    }
+}
+
 void Bus::addZ80BankAccessPenalty() {
     z80BankAccessCount++;
     z80BankAccessCycles += 3;
     pendingM68KZ80BusStallCycles += 8;
+    if (genesis) {
+        genesis->traceZ80BankAccessPenalty(3, 8);
+    }
     if (z80) {
         z80->state.cycles += 3;
     }
@@ -423,9 +474,12 @@ u8 Bus::read8(u32 addr, int partialCycles) {
 
     // ROM / SRAM: 0x000000 - 0x3FFFFF
     if (addr < 0x400000) {
-        // SRAM mapped into 0x200000-0x3FFFFF when enabled
-        if (sramMapped && cartridge && cartridge->hasSRAM() && addr >= 0x200000) {
-            return cartridge->read8(addr);
+        // SRAM can either be selected through the Sega mapper or directly
+        // mapped after ROM for smaller carts.
+        if (cartridge && cartridge->hasSRAM() &&
+            (cartridge->isDirectMappedSRAMAddress(addr) ||
+             (sramMapped && addr >= 0x200000))) {
+            return cartridge->readSRAM8(addr);
         }
         // SEGA mapper bank switching: each 512KB window can be remapped
         u32 bank = addr >> 19;  // 0-7 (each bank = 512KB)
@@ -449,10 +503,10 @@ u8 Bus::read8(u32 addr, int partialCycles) {
             }
             return z80Ram[addr & 0x1FFF];
         }
-        // YM2612 at 0xA04000-0xA04003
-        // All four addresses return the same status byte on real hardware.
+        // YM2612 at 0xA04000-0xA04003. Port 0 returns live status; the
+        // other ports return the chip's latched last status value.
         if (addr >= 0xA04000 && addr < 0xA04004) {
-            return ym2612 ? ym2612->readStatus() : 0;
+            return ym2612 ? ym2612->readStatus(static_cast<int>(addr & 3)) : 0;
         }
         return 0xFF;
     }
@@ -495,8 +549,9 @@ u8 Bus::read8(u32 addr, int partialCycles) {
     if (addr == 0xA11100) {
         settleBusAckForM68KAccess(cpuPartialCycles);
         // Bit 0 = 0 when bus granted (68K can access), 1 when Z80 running
-        // z80BusAck = true means 68K owns bus, z80Reset = true means Z80 halted
-        bool busGranted = z80BusAck || z80Reset;
+        // Reset asserted is not a BUSACK grant; games poll for bit 0 set
+        // after halting the Z80 with reset.
+        bool busGranted = z80BusAck && !z80Reset;
         return busGranted ? 0x00 : 0x01;
     }
     if (addr == 0xA11101) {
@@ -549,8 +604,10 @@ u8 Bus::debugPeek8(u32 addr) const {
     addr &= 0xFFFFFF;
 
     if (addr < 0x400000) {
-        if (sramMapped && cartridge && cartridge->hasSRAM() && addr >= 0x200000) {
-            return cartridge->read8(addr);
+        if (cartridge && cartridge->hasSRAM() &&
+            (cartridge->isDirectMappedSRAMAddress(addr) ||
+             (sramMapped && addr >= 0x200000))) {
+            return cartridge->readSRAM8(addr);
         }
         const u32 bank = addr >> 19;
         const u32 mappedAddr = (static_cast<u32>(romBankRegs[bank]) << 19) | (addr & 0x7FFFF);
@@ -576,8 +633,10 @@ u16 Bus::debugPeek16(u32 addr) const {
     addr &= 0xFFFFFF;
 
     if (addr < 0x400000) {
-        if (sramMapped && cartridge && cartridge->hasSRAM() && addr >= 0x200000) {
-            return cartridge->read16(addr);
+        if (cartridge && cartridge->hasSRAM() &&
+            (cartridge->isDirectMappedSRAMAddress(addr) ||
+             (sramMapped && addr >= 0x200000))) {
+            return cartridge->readSRAM16(addr);
         }
 
         const u32 bank = addr >> 19;
@@ -634,8 +693,10 @@ u16 Bus::read16(u32 addr, int partialCycles) {
 
     // ROM / SRAM
     if (addr < 0x400000) {
-        if (sramMapped && cartridge && cartridge->hasSRAM() && addr >= 0x200000) {
-            return cartridge->read16(addr);
+        if (cartridge && cartridge->hasSRAM() &&
+            (cartridge->isDirectMappedSRAMAddress(addr) ||
+             (sramMapped && addr >= 0x200000))) {
+            return cartridge->readSRAM16(addr);
         }
 
         const u32 bank = addr >> 19;
@@ -666,7 +727,7 @@ u16 Bus::read16(u32 addr, int partialCycles) {
         }
         if (addr >= 0xA04000 && addr < 0xA04004) {
             addM68KZ80AreaWaitCycles();
-            const u8 value = ym2612 ? ym2612->readStatus() : 0;
+            const u8 value = ym2612 ? ym2612->readStatus(static_cast<int>(addr & 3)) : 0;
             return (static_cast<u16>(value) << 8) | value;
         }
     }
@@ -686,8 +747,9 @@ void Bus::write8(u32 addr, u8 val, int partialCycles) {
 
     // SRAM writes (0x200000-0x3FFFFF when mapped)
     if (addr >= 0x200000 && addr < 0x400000) {
-        if (sramMapped && cartridge && cartridge->hasSRAM()) {
-            cartridge->write8(addr, val);
+        if (cartridge && cartridge->hasSRAM() &&
+            (cartridge->isDirectMappedSRAMAddress(addr) || sramMapped)) {
+            cartridge->writeSRAM8(addr, val);
         }
         return;
     }
@@ -833,10 +895,12 @@ void Bus::write8(u32 addr, u8 val, int partialCycles) {
         int reg = (addr & 0x1E) >> 1;
         switch (reg) {
             case 0: case 1:  // Data port
+                waitForVDPFIFOForWrite();
                 vdp->writeDataByte(val, (addr & 1) != 0);
                 break;
             case 2: case 3:  // Control port
                 vdp->writeControl((val << 8) | val);
+                waitForVDP68KDMA();
                 break;
             default:
                 break;
@@ -876,10 +940,12 @@ void Bus::write16(u32 addr, u16 val, int partialCycles) {
         int reg = (addr & 0x1E) >> 1;
         switch (reg) {
             case 0: case 1:  // Data port
+                waitForVDPFIFOForWrite();
                 vdp->writeData(val);
                 break;
             case 2: case 3:  // Control port
                 vdp->writeControl(val);
+                waitForVDP68KDMA();
                 break;
             default:
                 break;
@@ -889,8 +955,9 @@ void Bus::write16(u32 addr, u16 val, int partialCycles) {
 
     // SRAM writes
     if (addr >= 0x200000 && addr < 0x400000) {
-        if (sramMapped && cartridge && cartridge->hasSRAM()) {
-            cartridge->write16(addr, val);
+        if (cartridge && cartridge->hasSRAM() &&
+            (cartridge->isDirectMappedSRAMAddress(addr) || sramMapped)) {
+            cartridge->writeSRAM16(addr, val);
         }
         return;
     }
@@ -970,7 +1037,12 @@ u8 Bus::z80Read(u16 addr) {
     // within this range return the same value.  GEMS (and other Z80 sound
     // drivers) read the busy flag from $4002, so this must not return $FF.
     if (addr < 0x6000) {
-        return ym2612 ? ym2612->readStatus() : 0;
+        if (genesis) genesis->syncYMBeforeRead();
+        u8 status = ym2612 ? ym2612->readStatus(static_cast<int>(addr & 3)) : 0;
+        if (genesis) {
+            genesis->traceZ80YMRead(addr, status);
+        }
+        return status;
     }
     
     // Bank register: $6000-$60FF
@@ -1012,6 +1084,7 @@ void Bus::z80Write(u16 addr, u8 val) {
         // This generates samples with the OLD register values up to now,
         // so the write takes effect at the correct YM operator slot.
         if (genesis) genesis->syncYMBeforeWrite();
+        if (genesis) genesis->traceZ80YMWrite(addr, val, (addr & 1) != 0);
         int port = (addr >> 1) & 1; // Port 0 or 1
         if (addr & 1) {
             ym2612->writeData(val, port);
@@ -1030,6 +1103,7 @@ void Bus::z80Write(u16 addr, u8 val) {
     
     // PSG: $7F00-$7FFF
     if (addr >= 0x7F00 && addr < 0x8000) {
+        if (genesis) genesis->traceZ80PSGWrite(val);
         if (psg) psg->write(val);
         return;
     }

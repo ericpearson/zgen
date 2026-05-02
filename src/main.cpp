@@ -4,6 +4,7 @@
 #include "genesis.h"
 #include "config_dir.h"
 #include "debug_flags.h"
+#include "audio/audio_queue.h"
 #include "cheats/cheat_format.h"
 #include "cheats/cheat_types.h"
 #include "ui/app_ui.h"
@@ -571,6 +572,16 @@ int main(int argc, char* argv[]) {
 
     // ---------- SDL init ----------
 
+#if defined(USE_VULKAN) && defined(_WIN32)
+    // The Windows Vulkan build is linked as a GUI subsystem app, so stdout
+    // and stderr go to closed handles. Redirect both to a log file next to
+    // the exe so any startup error message is recoverable.
+    freopen("vk_diag.log", "w", stdout);
+    freopen("vk_diag.log", "a", stderr);
+    setvbuf(stdout, nullptr, _IONBF, 0);
+    setvbuf(stderr, nullptr, _IONBF, 0);
+#endif
+
     if (!SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_GAMEPAD)) {
         printf("SDL could not initialize: %s\n", SDL_GetError());
         return 1;
@@ -688,14 +699,13 @@ int main(int argc, char* argv[]) {
 
     // ---------- UI + Renderer init ----------
 
-    GameRenderer gameRenderer;
-    gameRenderer.init(genesis.getScreenWidth(), genesis.getScreenHeight());
-
     AppUI ui;
 #ifdef USE_VULKAN
+    // ImGui context + Vulkan backend must be ready BEFORE GameRenderer::init,
+    // because the Vulkan game renderer registers its texture via
+    // ImGui_ImplVulkan_AddTexture during init.
     ui.init(window, nullptr);
 
-    // Complete Vulkan ImGui init
     ImGui_ImplVulkan_InitInfo vkInitInfo{};
     vkInitInfo.ApiVersion = VK_API_VERSION_1_0;
     vkInitInfo.Instance = g_vkCtx.instance();
@@ -708,7 +718,12 @@ int main(int argc, char* argv[]) {
     vkInitInfo.ImageCount = g_vkCtx.imageCount();
     vkInitInfo.PipelineInfoMain.RenderPass = g_vkCtx.renderPass();
     ImGui_ImplVulkan_Init(&vkInitInfo);
+
+    GameRenderer gameRenderer;
+    gameRenderer.init(genesis.getScreenWidth(), genesis.getScreenHeight());
 #else
+    GameRenderer gameRenderer;
+    gameRenderer.init(genesis.getScreenWidth(), genesis.getScreenHeight());
     ui.init(window, glContext);
 #endif
 
@@ -1707,9 +1722,9 @@ int main(int argc, char* argv[]) {
         if (!ui.isVisible() && romLoaded && audioStream &&
             genesis.getAudioSamples() > 0 && !fastForwardHeld) {
             const u64 audioStartTicks = SDL_GetPerformanceCounter();
-            const int queued = SDL_GetAudioStreamAvailable(audioStream);
-            const u32 maxQueuedBytes = (audioBytesPerSecond * static_cast<u32>(audioQueueMs)) / 1000;
-            if (queued > static_cast<int>(maxQueuedBytes)) {
+            AudioQueueSnapshot queueSnapshot{};
+            queueSnapshot.producerQueuedBytes = SDL_GetAudioStreamQueued(audioStream);
+            if (shouldClearAudioProducerQueue(queueSnapshot, audioBytesPerSecond, audioQueueMs)) {
                 SDL_ClearAudioStream(audioStream);
             }
             SDL_PutAudioStreamData(audioStream, genesis.getAudioBuffer(),

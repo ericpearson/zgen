@@ -21,6 +21,7 @@ public:
     ~PSG();
     void reset();
     void write(u8 data);
+    void clockMaster(int masterCycles);
     void clock(int cycles);
     s16 getSample();
 

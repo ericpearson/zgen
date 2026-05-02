@@ -96,21 +96,18 @@ static void testH32NtAColumnsUnique() {
     }
 }
 
-// SLOT_VSCROLL_LATCH dispatch path. The fast path (FIFO idle) reads
-// types[i] to find the latch slot; the slow path reads info[i].type.
-// H32 keeps a mid-line latch for TG2. H40 no longer needs one for
-// full-screen mode (the per-column renderer supersedes it); the
-// obsolete slot-42 placement must be gone.
-static void testH32VscrollLatchTypesSet() {
-    // Fast-path dispatch sources the latch slot from types[]. H32 TG2
-    // regression passes with this at slot 35.
-    check(kH32Active.types[35] == SLOT_VSCROLL_LATCH,
-          "H32 types[35] tagged as SLOT_VSCROLL_LATCH for fast-path dispatch");
-    // Slow-path dispatch (FIFO active) sources behavior from info[].type.
-    // This must agree with types[] or H32's latch silently disappears on
-    // the FIFO-active scanlines it was added to handle.
-    check(kH32Active.info[35].type == SLOT_VSCROLL_LATCH,
-          "H32 info[35] tagged as SLOT_VSCROLL_LATCH for slow-path dispatch");
+// H32 full-screen vscroll is sampled at the scanline boundary before
+// same-line H-int work can rewrite VSRAM for future lines. The old
+// active-display latch slot must stay absent.
+static void testH32HasNoActiveDisplayVscrollLatch() {
+    int latchSlots = 0;
+    for (int i = 0; i < kH32Active.count; i++) {
+        if (kH32Active.types[i] == SLOT_VSCROLL_LATCH ||
+            kH32Active.info[i].type == SLOT_VSCROLL_LATCH) {
+            latchSlots++;
+        }
+    }
+    check(latchSlots == 0, "H32 active table has no mid-line vscroll latch slots");
 }
 
 static void testH40NoLegacyLatchAtSlot42() {
@@ -129,7 +126,7 @@ int main() {
     testH32NtAIsDispatchable();
     testH40NtAColumnsUnique();
     testH32NtAColumnsUnique();
-    testH32VscrollLatchTypesSet();
+    testH32HasNoActiveDisplayVscrollLatch();
     testH40NoLegacyLatchAtSlot42();
 
     if (failedTests == 0) {

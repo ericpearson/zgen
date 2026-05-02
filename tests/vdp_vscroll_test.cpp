@@ -24,6 +24,7 @@
 // dispatch is correct.
 
 #include "video/vdp.h"
+#include "memory/bus.h"
 
 #include <cstdio>
 #include <cstdint>
@@ -94,6 +95,23 @@ public:
 
     static void setScanline(VDP& vdp, int line) {
         vdp.scanline = line;
+    }
+
+    static void setActiveHeight(VDP& vdp, int height) {
+        vdp.activeHeight = height;
+    }
+
+    static void setDisplayEnabledState(VDP& vdp, bool value) {
+        vdp.displayEnabled = value;
+        vdp.displayEnabledLatch = value;
+    }
+
+    static void setLineIsBlank(VDP& vdp, bool value) {
+        vdp.lineIsBlank = value;
+    }
+
+    static void setRenderedPixels(VDP& vdp, int pixels) {
+        vdp.renderedPixels = pixels;
     }
 
     static int getRenderedPixels(const VDP& vdp) {
@@ -184,8 +202,28 @@ public:
         return vdp.hblankIRQ;
     }
 
-    static void configureHIntLine(VDP& vdp) {
+    static bool displayEnabled(const VDP& vdp) {
+        return vdp.displayEnabled;
+    }
+
+    static bool lineIsBlank(const VDP& vdp) {
+        return vdp.lineIsBlank;
+    }
+
+    static int displayEnableEventCount(const VDP& vdp) {
+        return vdp.displayEnableEventCount;
+    }
+
+    static void scheduleDisplayEnable(VDP& vdp, bool value) {
+        vdp.scheduleDisplayEnableChange(value);
+    }
+
+    static void configureHIntLine(VDP& vdp, bool h40 = true) {
         configureH40FullScreen(vdp);
+        if (!h40) {
+            vdp.regs[0x0C] = 0x00;   // H32
+            vdp.decodeRegister(0x0C);
+        }
         vdp.regs[0x00] = 0x14;   // H-int enabled
         vdp.regs[0x0A] = 0x00;   // Reload to zero: every active line asserts
         vdp.decodeRegister(0x00);
@@ -202,6 +240,22 @@ public:
 
     static int vblankIRQAssertCycle(const VDP& vdp) {
         return vdp.vblankIRQAssertCycle;
+    }
+
+    static int fifoCount(const VDP& vdp) {
+        return vdp.fifoCount;
+    }
+
+    static void setReg(VDP& vdp, int reg, uint8_t value) {
+        vdp.regs[reg & 0x1F] = value;
+        vdp.decodeRegister(reg & 0x1F);
+    }
+
+    static void moveToH32Cycle(VDP& vdp, int cycle) {
+        vdp.lineCycles = cycle;
+        const int slot = kH32Active.slotAtM68kCycle[cycle];
+        vdp.currentSlotIndex = slot;
+        vdp.hcounter = kH32Active.hcounterAtSlot[slot];
     }
 };
 
@@ -380,6 +434,30 @@ static void testH40CurrentLineVsramWriteDoesNotChangeFullScreenSample() {
     endGroup();
 }
 
+static void testH32CurrentLineVsramWriteDoesNotChangeFullScreenSample() {
+    beginGroup("H32 current-line VSRAM writes do not change full-screen line sample");
+    VDP vdp;
+    vdp.reset();
+    vdp.setVideoStandard(VideoStandard::NTSC);
+    VdpVscrollTest::configureH40FullScreen(vdp);
+    VdpVscrollTest::setReg(vdp, 0x0C, 0x00); // H32
+    VdpVscrollTest::setScanline(vdp, 22);
+    VdpVscrollTest::setDisplayEnabledState(vdp, true);
+    VdpVscrollTest::setLineIsBlank(vdp, false);
+    VdpVscrollTest::setVscrollLatch(vdp, 0, 0x040);
+    VdpVscrollTest::setVscrollLatch(vdp, 1, 0x041);
+
+    VdpVscrollTest::applyVsramWord(vdp, 0, 0x140);
+    VdpVscrollTest::applyVsramWord(vdp, 1, 0x141);
+    vdp.clockM68K(140);
+
+    check(VdpVscrollTest::getVscrollLatch(vdp, 0) == 0x040,
+          "current-line VSRAM[0] write does not mutate current H32 line latch");
+    check(VdpVscrollTest::getVscrollLatch(vdp, 1) == 0x041,
+          "current-line VSRAM[1] write does not mutate current H32 line latch");
+    endGroup();
+}
+
 static void testH40NextLineUsesBoundaryLatchedVscroll() {
     beginGroup("H40 next line uses VSRAM captured before boundary H-int work");
     VDP vdp;
@@ -446,6 +524,145 @@ static void testH40HIntSourceAssertsAtLineBoundary() {
     endGroup();
 }
 
+static void testH32HIntSourceAssertsAtLineBoundary() {
+    beginGroup("H32 H-int source asserts at the V-counter line boundary");
+    VDP vdp;
+    vdp.reset();
+    vdp.setVideoStandard(VideoStandard::NTSC);
+    VdpVscrollTest::configureHIntLine(vdp, false);
+
+    vdp.beginScanline();
+    check(!VdpVscrollTest::rawHBlankIRQ(vdp),
+          "H-int is not pending before the line boundary is clocked");
+
+    vdp.clockM68K(1);
+    check(VdpVscrollTest::rawHBlankIRQ(vdp),
+          "H32 H-int source asserts immediately after crossing the line boundary");
+    check(vdp.hblankIRQAsserted(),
+          "enabled H32 H-int source is visible to the 68K after the boundary");
+    endGroup();
+}
+
+static void testH32EarlyDisplayDisableAppliesToWholeLine() {
+    beginGroup("H32 early display-disable applies to the whole current line");
+    VDP vdp;
+    vdp.reset();
+    vdp.setVideoStandard(VideoStandard::PAL);
+    VdpVscrollTest::configureH40FullScreen(vdp);
+    VdpVscrollTest::setReg(vdp, 0x0C, 0x00); // H32
+    VdpVscrollTest::setScanline(vdp, 200);
+    VdpVscrollTest::setActiveHeight(vdp, 224);
+    VdpVscrollTest::setDisplayEnabledState(vdp, true);
+    VdpVscrollTest::setLineIsBlank(vdp, false);
+    VdpVscrollTest::setRenderedPixels(vdp, 42);
+    VdpVscrollTest::moveToH32Cycle(vdp, 159);
+
+    VdpVscrollTest::scheduleDisplayEnable(vdp, false);
+
+    check(!VdpVscrollTest::displayEnabled(vdp),
+          "H32 display-disable is applied immediately at this left-edge phase");
+    check(VdpVscrollTest::lineIsBlank(vdp),
+          "H32 display-disable marks the current line blank");
+    check(vdp.getLastDisplayEnableApplyScanline() == 200,
+          "H32 display-disable records the current scanline");
+    check(vdp.getLastDisplayEnableApplyPixel() == 0,
+          "H32 display-disable records a pixel-0 apply point");
+    check(VdpVscrollTest::displayEnableEventCount(vdp) == 0,
+          "H32 display-disable does not queue a mid-line event for this phase");
+    endGroup();
+}
+
+static void testInvalidDataWritesOccupyFifoWithoutMemorySideEffects() {
+    beginGroup("invalid VDP data writes occupy FIFO without memory side effects");
+    VDP vdp;
+    vdp.reset();
+    vdp.setVideoStandard(VideoStandard::NTSC);
+
+    vdp.writeControl(0x0000);  // VRAM read target: data writes have no memory side effect.
+    vdp.writeControl(0x0000);
+    for (int i = 0; i < 4; i++) {
+        vdp.writeData(0xCAFE);
+    }
+
+    check(vdp.isVDPFIFOFull(),
+          "invalid data-port writes fill the FIFO and stall like normal writes");
+    check(VdpVscrollTest::fifoCount(vdp) == 4,
+          "four invalid data-port writes are retained in the FIFO");
+
+    vdp.clockM68K(VDP_MAX_M68K_CYCLES * 4);
+    check(VdpVscrollTest::fifoCount(vdp) == 0,
+          "invalid FIFO entries drain through normal VDP slots");
+    check(vdp.readVRAM(0x0000) == 0x00 && vdp.readVRAM(0x0001) == 0x00,
+          "invalid data-port writes do not modify VRAM");
+    endGroup();
+}
+
+static void testRegisterWritePreservesDataPortTarget() {
+    beginGroup("VDP register write preserves data-port target");
+    VDP vdp;
+    vdp.reset();
+    vdp.setVideoStandard(VideoStandard::NTSC);
+
+    vdp.writeControl(0x4000); // VRAM write address $0000
+    vdp.writeControl(0x0000);
+    vdp.writeData(0x1234);
+    vdp.writeControl(0x8144); // Reg #1 write during a data stream.
+    vdp.writeData(0xABCD);
+
+    vdp.clockM68K(VDP_MAX_M68K_CYCLES * 4);
+    check(vdp.readVRAM(0x0000) == 0x12 && vdp.readVRAM(0x0001) == 0x34,
+          "data before the register write reaches the original VRAM target");
+    check(vdp.readVRAM(0x0002) == 0xAB && vdp.readVRAM(0x0003) == 0xCD,
+          "data after the register write continues at the auto-incremented target");
+
+    endGroup();
+}
+
+static void test68kDMAVRAMWritesCompleteThroughFifo() {
+    beginGroup("68K to VDP DMA writes complete through FIFO");
+
+    Bus bus;
+    VDP vdp;
+    bus.reset();
+    vdp.reset();
+    bus.connectVDP(&vdp);
+    vdp.connectBus(&bus);
+    vdp.setVideoStandard(VideoStandard::NTSC);
+
+    bus.write16(0xFF0000, 0xABCD);
+
+    VdpVscrollTest::setReg(vdp, 0x01, 0x10); // DMA enabled, display disabled
+    VdpVscrollTest::setReg(vdp, 0x0C, 0x81); // H40 slot cadence
+    VdpVscrollTest::setReg(vdp, 0x0F, 0x02); // auto-increment
+    VdpVscrollTest::setReg(vdp, 0x13, 0x01); // DMA length low
+    VdpVscrollTest::setReg(vdp, 0x14, 0x00); // DMA length high
+    VdpVscrollTest::setReg(vdp, 0x15, 0x00); // source low: $FF0000 >> 1
+    VdpVscrollTest::setReg(vdp, 0x16, 0x80); // source mid
+    VdpVscrollTest::setReg(vdp, 0x17, 0x7F); // source high, 68K->VDP mode
+
+    vdp.writeControl(0x4000); // VRAM write address $0000
+    vdp.writeControl(0x0080); // DMA bit set
+
+    int guard = 128;
+    while (vdp.is68kDMABusy() && guard-- > 0) {
+        int wait = vdp.dmaWaitCycles();
+        if (wait <= 0) wait = 1;
+        vdp.clockM68K(wait);
+    }
+
+    check(!vdp.is68kDMABusy(), "one-word 68K DMA completes");
+    check(VdpVscrollTest::fifoCount(vdp) > 0,
+          "completed 68K DMA leaves the write queued in FIFO");
+    check(vdp.readVRAM(0) == 0x00 && vdp.readVRAM(1) == 0x00,
+          "DMA write is not visible before FIFO latency/drain");
+
+    vdp.clockM68K(VDP_MAX_M68K_CYCLES);
+    check(vdp.readVRAM(0) == 0xAB && vdp.readVRAM(1) == 0xCD,
+          "queued DMA FIFO entry eventually updates VRAM");
+
+    endGroup();
+}
+
 
 int main() {
     std::printf("VDP vscroll rendering tests\n");
@@ -453,9 +670,15 @@ int main() {
     testRendererUsesLineWideVscrollLatchForH40FullScreen();
     testH40EarlyVsramDrainUpdatesFullScreenLineSample();
     testH40CurrentLineVsramWriteDoesNotChangeFullScreenSample();
+    testH32CurrentLineVsramWriteDoesNotChangeFullScreenSample();
     testH40NextLineUsesBoundaryLatchedVscroll();
     testVIntSourceLatchesWhileDisabled();
     testH40HIntSourceAssertsAtLineBoundary();
+    testH32HIntSourceAssertsAtLineBoundary();
+    testH32EarlyDisplayDisableAppliesToWholeLine();
+    testInvalidDataWritesOccupyFifoWithoutMemorySideEffects();
+    testRegisterWritePreservesDataPortTarget();
+    test68kDMAVRAMWritesCompleteThroughFifo();
 
     if (failedTests == 0) {
         std::printf("\nAll %d tests passed\n", totalTests);
